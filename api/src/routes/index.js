@@ -6,8 +6,8 @@ const pokeController = new PokemonController()
 
 
 // Pokemons
-router.get('/pokemons', (req, res) => pokeController.getAllPokemons(req, res))
-
+router.get('/pokemons', (req, res) => pokeController.getAllPokemons(req, res));
+router.get('/pokemons/:id', (req, res) => pokeController.getPokemonById(req, res));
 
 
 

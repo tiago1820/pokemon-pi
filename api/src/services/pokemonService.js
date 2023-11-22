@@ -36,6 +36,28 @@ class PokemonService {
             throw error;
         }
     }
+
+    getPokemonById = async (id) => {
+        try {
+            const response = await axios(`${this.URL}/${id}`);
+            const infoFromApi = response.data;
+
+            const pokemonInfo = {
+                id: infoFromApi.id,
+                name: infoFromApi.name,
+                types: infoFromApi.types.map((t) => t.type.name),
+                img: infoFromApi.sprites.other['official-artwork'].front_default,
+                weight: infoFromApi.weight,
+                height: infoFromApi.height,
+            };
+
+            console.log(pokemonInfo);
+            return pokemonInfo;
+
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 module.exports = PokemonService;
