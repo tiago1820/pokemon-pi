@@ -29,7 +29,7 @@ class PokemonService {
                 pokemonList.push(pokemonInfo);
             }
 
-            console.log(pokemonList)
+
             return pokemonList;
 
         } catch (error) {
@@ -51,7 +51,28 @@ class PokemonService {
                 height: infoFromApi.height,
             };
 
-            console.log(pokemonInfo);
+            return pokemonInfo;
+
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    getPokemonByName = async (name) => {
+        try {
+            
+            const response = await axios(`${this.URL}${name}`);
+            const infoFromApi = response.data;
+
+            const pokemonInfo = {
+                id: infoFromApi.id,
+                name: infoFromApi.name,
+                types: infoFromApi.types.map((t) => t.type.name),
+                img: infoFromApi.sprites.other['official-artwork'].front_default,
+                weight: infoFromApi.weight,
+                height: infoFromApi.height,
+            };
+
             return pokemonInfo;
 
         } catch (error) {

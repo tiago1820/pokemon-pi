@@ -27,6 +27,25 @@ class PokemonController {
         }
     }
 
+    getPokemonByName = async (req, res) => {
+        try {
+            const { name } = req.query;
+
+            if (!name) {
+                return res.status(400).send('Pokemon name is required.');
+            }
+
+            const pokemon = await this.pokeService.getPokemonByName(name);
+
+            return pokemon.name
+                ? res.json(pokemon)
+                : res.status(404).send('Pokemon not found.');
+
+        } catch (error) {
+            return res.status(500).send(error.message);
+        }
+    }
+
 }
 
 module.exports = PokemonController;
