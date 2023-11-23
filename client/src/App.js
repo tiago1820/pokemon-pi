@@ -1,11 +1,9 @@
 import './App.css';
+import { SearchBar } from './app/components/SearchBar/SearchBar';
 
-function App() {
+
+export const App = () => {
   return (
-    <div className="App">
-      <h1>Henry Pokemon</h1>
-    </div>
+    <SearchBar />
   );
 }
-
-export default App;
