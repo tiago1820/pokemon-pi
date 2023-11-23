@@ -24,7 +24,8 @@ class PokemonController {
     getPokemonById = async (req, res) => {
         try {
             const { id } = req.params;
-            const pokemon = await this.pokeService.getPokemonById(id);
+            const source = isNaN(id) ? 'bdd' : 'api';
+            const pokemon = await this.pokeService.getPokemonById(id, source);
 
             return pokemon.name
                 ? res.json(pokemon)
@@ -47,11 +48,11 @@ class PokemonController {
             return pokemon.name
                 ? res.json(pokemon)
                 : res.status(404).send('Pokemon not found.');
-
         } catch (error) {
             return res.status(500).send(error.message);
         }
     }
+
 
     postPokemon = async (req, res) => {
         try {
