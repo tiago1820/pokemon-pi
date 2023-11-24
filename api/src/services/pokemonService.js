@@ -6,37 +6,66 @@ class PokemonService {
         this.URL = URL;
     }
 
-    getAllPokemons = async () => {
-
+    getAllPokemons = async (limite) => {
         try {
-            const response = await axios(`${this.URL}/?limit=12`);
-            const results = response.data.results;
+            const respuesta = await axios(`${this.URL}/?limit=${limite}`);
+            const resultados = respuesta.data.results;
 
-            const pokemonList = [];
+            const listaDePokemon = [];
 
-            for (const pokemon of results) {
-                const pokemonResponse = await axios(pokemon.url);
-                const infoFromApi = pokemonResponse.data;
+            for (const pokemon of resultados) {
+                const respuestaPokemon = await axios(pokemon.url);
+                const infoDesdeApi = respuestaPokemon.data;
 
-                const pokemonInfo = {
-                    id: infoFromApi.id,
-                    name: infoFromApi.name,
-                    types: infoFromApi.types.map((t) => t.type.name),
-                    img: infoFromApi.sprites.other['official-artwork'].front_default,
-                    weight: infoFromApi.weight,
-                    height: infoFromApi.height,
+                const infoPokemon = {
+                    id: infoDesdeApi.id,
+                    name: infoDesdeApi.name,
+                    types: infoDesdeApi.types.map((t) => t.type.name),
+                    img: infoDesdeApi.sprites.other['official-artwork'].front_default,
+                    weight: infoDesdeApi.weight,
+                    height: infoDesdeApi.height,
                 };
 
-                pokemonList.push(pokemonInfo);
+                listaDePokemon.push(infoPokemon);
             }
 
-
-            return pokemonList;
-
+            return listaDePokemon;
         } catch (error) {
             throw error;
         }
     }
+
+    // getAllPokemons = async () => {
+
+    //     try {
+    //         const response = await axios(`${this.URL}/?limit=12`);
+    //         const results = response.data.results;
+
+    //         const pokemonList = [];
+
+    //         for (const pokemon of results) {
+    //             const pokemonResponse = await axios(pokemon.url);
+    //             const infoFromApi = pokemonResponse.data;
+
+    //             const pokemonInfo = {
+    //                 id: infoFromApi.id,
+    //                 name: infoFromApi.name,
+    //                 types: infoFromApi.types.map((t) => t.type.name),
+    //                 img: infoFromApi.sprites.other['official-artwork'].front_default,
+    //                 weight: infoFromApi.weight,
+    //                 height: infoFromApi.height,
+    //             };
+
+    //             pokemonList.push(pokemonInfo);
+    //         }
+
+
+    //         return pokemonList;
+
+    //     } catch (error) {
+    //         throw error;
+    //     }
+    // }
 
     getPokemonById = async (id, source) => {
         try {

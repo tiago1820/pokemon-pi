@@ -3,8 +3,6 @@
 
 const { Pokemon, Type } = require('../db.js');
 
-
-
 const PokemonService = require('../services/pokemonService');
 
 class PokemonController {
@@ -14,12 +12,29 @@ class PokemonController {
 
     getAllPokemons = async (req, res) => {
         try {
-            const pokemons = await this.pokeService.getAllPokemons();
-            return res.json(pokemons);
+            // Obtén Pokémon de la API externa (limitado a 60)
+            const pokemonExternos = await this.pokeService.getAllPokemons(5);
+
+            // Obtén Pokémon de la base de datos
+            const pokemonDB = await Pokemon.findAll();
+
+            // Combina los dos conjuntos de Pokémon
+            const todosLosPokemons = [...pokemonExternos, ...pokemonDB];
+
+            return res.json(todosLosPokemons);
         } catch (error) {
             return res.status(500).send(error.message);
         }
     }
+
+    // getAllPokemons = async (req, res) => {
+    //     try {
+    //         const pokemons = await this.pokeService.getAllPokemons();
+    //         return res.json(pokemons);
+    //     } catch (error) {
+    //         return res.status(500).send(error.message);
+    //     }
+    // }
 
     getPokemonById = async (req, res) => {
         try {
