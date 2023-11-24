@@ -1,27 +1,35 @@
 import styles from './Card.module.css';
+import { Link } from 'react-router-dom';
 
 export const Card = props => {
 
     const { name, image, types } = props;
 
-
     return (
         <div className={styles.container}>
-            <div className={styles.card}>
-                <img className={styles.img} src={image} alt="" />
+            <Link to={`/app/detail/${id}`}>
+                <div className={styles.card}>
+                    <img className={styles.img} src={image} alt="" />
 
-                <div className={styles.cardContent}>
-                    <div className={styles.name}>{name}</div>
-                </div>
+                    <div className={styles.cardContent}>
+                        <div className={styles.name}>{name}</div>
+                    </div>
 
-                <div className={styles.types}>
-                    {types.map((type, index) => (
-                        <span key={index} className={styles.type}>
-                            {type}
-                        </span>
-                    ))}
+                    {
+                        types && types.length > 0 && (
+                            <div className={styles.types}>
+                                {types.map((type, index) => (
+                                    <span key={index} className={styles.type}>
+                                        {type}
+                                    </span>
+                                ))}
+                            </div>
+                        )
+                    }
                 </div>
-            </div>
+            </Link>
+
+
         </div>
     )
 }

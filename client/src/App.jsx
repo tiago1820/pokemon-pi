@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPokemons } from './app/redux/actions';
 import './App.css';
-import { SearchBar, Cards, Pagination } from './app/components';
+import { SearchBar, Cards, Pagination, Detail } from './app/components';
+import { Routes, Route, useLocation, useNavigation } from 'react-router-dom';
 // import { getPokemonsByPage } from './app/services/pokemonService'
 
 export const App = () => {
     const dispatch = useDispatch();
-    
+
     const allPokemons = useSelector(state => state.allPokemons);
     const [currentPage, setCurrentPage] = useState(1);
     const pokemonsPerPage = 12;
@@ -27,12 +28,21 @@ export const App = () => {
     return (
         <>
             <SearchBar />
+            <Pagination
+                currentPage={currentPage}
+                totalPages={Math.ceil(allPokemons.length / pokemonsPerPage)}
+                onPageChange={handlePageChange}
+            />
             <Cards allPokemons={currentPokemons} />
             <Pagination
                 currentPage={currentPage}
                 totalPages={Math.ceil(allPokemons.length / pokemonsPerPage)}
                 onPageChange={handlePageChange}
             />
+
+            <Routes>
+                <Route path={'/app/detail/:id'} element={<Detail />}/>
+            </Routes>
         </>
     );
 }
