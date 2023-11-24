@@ -1,32 +1,50 @@
+/* Card.module.css */
 .container {
-    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    margin: 10px; /* Ajusta según sea necesario para el espacio alrededor de las tarjetas */
 }
 
 .card {
-    position: relative;
-    width: 250px;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 10px;
-    margin: 10px;
-    background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding-bottom: 50px;
+    transition: transform 0.3s ease-in-out;
+    overflow: hidden;
+    width: 200px;
+}
+
+.card:hover {
+    transform: scale(1.05); /* Efecto de escala al pasar el ratón sobre la tarjeta */
 }
 
 .img {
     width: 100%;
-    border-radius: 4px;
+    height: auto;
+    border-bottom: 1px solid #ddd;
 }
 
 .cardContent {
-    margin-top: 10px;
+    padding: 10px;
+    text-align: center;
 }
 
-.cardContent .name {
+.name {
+    font-size: 1.2em;
     font-weight: bold;
-    font-size: 1.2rem;
-    margin-bottom: 5px;
-    text-align: center;
-    color: #363062;
+}
+
+.types {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.type {
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 0 5px;
+    padding: 5px 10px;
+    font-size: 0.9em;
 }

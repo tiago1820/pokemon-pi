@@ -2,7 +2,7 @@ import styles from './Card.module.css';
 
 export const Card = props => {
 
-    const { name, image } = props;
+    const { name, image, types } = props;
 
 
     return (
@@ -14,8 +14,13 @@ export const Card = props => {
                     <div className={styles.name}>{name}</div>
                 </div>
 
-
-
+                <div className={styles.types}>
+                    {types.map((type, index) => (
+                        <span key={index} className={styles.type}>
+                            {type}
+                        </span>
+                    ))}
+                </div>
             </div>
         </div>
     )

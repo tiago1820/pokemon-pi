@@ -4,12 +4,15 @@
     margin-top: 20px;
 }
 
+.button {
+    margin: 0 5px; 
+}
+
 .active {
     font-weight: bold;
 }
 
-.button {
-    margin: 0 5px;
+.pagination button {
     margin-bottom: 2rem;
     font-size: 1.5rem;
 }
