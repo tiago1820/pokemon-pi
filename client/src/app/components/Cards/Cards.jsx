@@ -2,13 +2,13 @@ import { Card } from '../../components';
 import styles from './Cards.module.css';
 
 export const Cards = props => {
-    const { pokemons } = props;
-    console.log(pokemons);
+    const { allPokemons } = props;
+    console.log(allPokemons);
     return (
         <div className={styles.container}>
             <div className={styles.column}>
                 <div className={styles.row}>
-                    {pokemons.map((poke => {
+                    {allPokemons.map((poke => {
                         return (
                             <Card
                                 key={poke.id}

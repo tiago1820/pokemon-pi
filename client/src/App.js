@@ -1,28 +1,38 @@
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllPokemons } from './app/redux/actions';
 import './App.css';
-import { SearchBar, Cards } from './app/components';
-import { getPokemonsByPage } from './app/services/pokemonService'
+import { SearchBar, Cards, Pagination } from './app/components';
+// import { getPokemonsByPage } from './app/services/pokemonService'
 
 export const App = () => {
-    const [pokemons, setPokemons] = useState([]);
+    const dispatch = useDispatch();
+    
+    const allPokemons = useSelector(state => state.allPokemons);
+    const [currentPage, setCurrentPage] = useState(1);
+    const pokemonsPerPage = 12;
 
     useEffect(() => {
-        const getAllPokemons = async () => {
-            try {
-                const pokeData = await getPokemonsByPage();
-                setPokemons(pokeData);
-            } catch (error) {
-                throw error;
-            }
-        };
-        getAllPokemons();
+        dispatch(getAllPokemons());
     }, []);
 
+    const indexOfLastPokemon = currentPage * pokemonsPerPage;
+    const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
+    const currentPokemons = allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
+
+    const handlePageChange = pageNumber => {
+        setCurrentPage(pageNumber);
+    }
 
     return (
         <>
             <SearchBar />
-            <Cards pokemons={pokemons} />
+            <Cards allPokemons={currentPokemons} />
+            <Pagination
+                currentPage={currentPage}
+                totalPages={Math.ceil(allPokemons.length / pokemonsPerPage)}
+                onPageChange={handlePageChange}
+            />
         </>
     );
 }
