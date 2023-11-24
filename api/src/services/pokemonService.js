@@ -9,7 +9,7 @@ class PokemonService {
     getAllPokemons = async () => {
 
         try {
-            const response = await axios(`${this.URL}/?limit=10`);
+            const response = await axios(`${this.URL}/?limit=12`);
             const results = response.data.results;
 
             const pokemonList = [];
