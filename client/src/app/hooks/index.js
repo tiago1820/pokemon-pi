@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { cleanDetail, getPokemonDetail } from '../redux/actions';
 
 export const usePokemon = () => {
     const dispatch = useDispatch();

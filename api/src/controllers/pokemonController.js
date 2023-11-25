@@ -13,7 +13,7 @@ class PokemonController {
     getAllPokemons = async (req, res) => {
         try {
             // Obtén Pokémon de la API externa (limitado a 60)
-            const pokemonExternos = await this.pokeService.getAllPokemons(60);
+            const pokemonExternos = await this.pokeService.getAllPokemons(12);
 
             // Obtén Pokémon de la base de datos
             const pokemonDB = await Pokemon.findAll();

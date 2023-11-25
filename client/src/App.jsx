@@ -8,6 +8,7 @@ import { Routes, Route, useLocation, useNavigation } from 'react-router-dom';
 
 export const App = () => {
     const dispatch = useDispatch();
+    const location = useLocation();
 
     const allPokemons = useSelector(state => state.allPokemons);
     const [currentPage, setCurrentPage] = useState(1);
@@ -25,24 +26,27 @@ export const App = () => {
         setCurrentPage(pageNumber);
     }
 
+    const isHomeRoute = location.pathname === '/app';
+
     return (
         <>
-            <SearchBar />
-            <Pagination
+            {isHomeRoute && (<SearchBar />)}
+            {isHomeRoute && (<Pagination
                 currentPage={currentPage}
                 totalPages={Math.ceil(allPokemons.length / pokemonsPerPage)}
                 onPageChange={handlePageChange}
-            />
-            <Cards allPokemons={currentPokemons} />
-            <Pagination
-                currentPage={currentPage}
-                totalPages={Math.ceil(allPokemons.length / pokemonsPerPage)}
-                onPageChange={handlePageChange}
-            />
+            />)}
 
             <Routes>
-                <Route path={'/app/detail/:id'} element={<Detail />}/>
+                <Route path='/app' element={<Cards allPokemons={currentPokemons} />} />
+                <Route path='/app/detail/:id' element={<Detail />} />
             </Routes>
+
+            {isHomeRoute && (<Pagination
+                currentPage={currentPage}
+                totalPages={Math.ceil(allPokemons.length / pokemonsPerPage)}
+                onPageChange={handlePageChange}
+            />)}
         </>
     );
 }

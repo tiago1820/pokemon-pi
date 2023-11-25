@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const Card = props => {
 
-    const { name, image, types } = props;
+    const { id, name, image, types } = props;
 
     return (
         <div className={styles.container}>
