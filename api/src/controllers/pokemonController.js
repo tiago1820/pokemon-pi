@@ -1,8 +1,4 @@
-// const Pokemon = require('../models/Pokemon');
-// const Type = require('../models/Type');
-
 const { Pokemon, Type } = require('../db.js');
-
 const PokemonService = require('../services/pokemonService');
 
 class PokemonController {
@@ -57,7 +53,6 @@ class PokemonController {
             return res.status(500).send(error.message);
         }
     }
-
 
     postPokemon = async (req, res) => {
         try {
