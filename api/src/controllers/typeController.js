@@ -1,4 +1,3 @@
-
 const TypeService = require('../services/typeService.js');
 
 class TypeController {
