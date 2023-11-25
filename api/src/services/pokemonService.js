@@ -15,15 +15,19 @@ class PokemonService {
 
             for (const pokemon of resultados) {
                 const respuestaPokemon = await axios(pokemon.url);
-                const infoDesdeApi = respuestaPokemon.data;
+                const infoFromApi = respuestaPokemon.data;
 
                 const infoPokemon = {
-                    id: infoDesdeApi.id,
-                    name: infoDesdeApi.name,
-                    types: infoDesdeApi.types.map((t) => t.type.name),
-                    img: infoDesdeApi.sprites.other['official-artwork'].front_default,
-                    weight: infoDesdeApi.weight,
-                    height: infoDesdeApi.height,
+                    id: infoFromApi.id,
+                    name: infoFromApi.name,
+                    types: infoFromApi.types.map((t) => t.type.name),
+                    img: infoFromApi.sprites.other['official-artwork'].front_default,
+                    hp: infoFromApi.hp,
+                    attack: infoFromApi.attack,
+                    defense: infoFromApi.defense,
+                    speed: infoFromApi.speed,
+                    weight: infoFromApi.weight,
+                    height: infoFromApi.height,
                 };
 
                 listaDePokemon.push(infoPokemon);
@@ -34,38 +38,6 @@ class PokemonService {
             throw error;
         }
     }
-
-    // getAllPokemons = async () => {
-
-    //     try {
-    //         const response = await axios(`${this.URL}/?limit=12`);
-    //         const results = response.data.results;
-
-    //         const pokemonList = [];
-
-    //         for (const pokemon of results) {
-    //             const pokemonResponse = await axios(pokemon.url);
-    //             const infoFromApi = pokemonResponse.data;
-
-    //             const pokemonInfo = {
-    //                 id: infoFromApi.id,
-    //                 name: infoFromApi.name,
-    //                 types: infoFromApi.types.map((t) => t.type.name),
-    //                 img: infoFromApi.sprites.other['official-artwork'].front_default,
-    //                 weight: infoFromApi.weight,
-    //                 height: infoFromApi.height,
-    //             };
-
-    //             pokemonList.push(pokemonInfo);
-    //         }
-
-
-    //         return pokemonList;
-
-    //     } catch (error) {
-    //         throw error;
-    //     }
-    // }
 
     getPokemonById = async (id, source) => {
         try {
@@ -78,6 +50,10 @@ class PokemonService {
                     name: infoFromApi.name,
                     types: infoFromApi.types.map((t) => t.type.name),
                     img: infoFromApi.sprites.other['official-artwork'].front_default,
+                    hp: infoFromApi.stats[0].base_stat,
+                    attack: infoFromApi.stats[1].base_stat,
+                    defense: infoFromApi.stats[2].base_stat,
+                    speed: infoFromApi.stats[5].base_stat,
                     weight: infoFromApi.weight,
                     height: infoFromApi.height,
                 };
@@ -118,6 +94,10 @@ class PokemonService {
                 name: infoFromApi.name,
                 types: infoFromApi.types.map((t) => t.type.name),
                 img: infoFromApi.sprites.other['official-artwork'].front_default,
+                hp: infoFromApi.hp,
+                attack: infoFromApi.attack,
+                defense: infoFromApi.defense,
+                speed: infoFromApi.speed,
                 weight: infoFromApi.weight,
                 height: infoFromApi.height,
             };
