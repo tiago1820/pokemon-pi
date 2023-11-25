@@ -17,7 +17,7 @@ export const getAllPokemons = () => {
     }
 }
 
-export const getCharacterDetail = id => {
+export const getPokemonDetail = id => {
     const endpoint = `http://localhost:3001/pokemons/${id}`;
     return async (dispatch) => {
         try {
