@@ -5,7 +5,7 @@ export const Detail = () => {
     const pokemon = usePokemon();
 
     console.log("DETAIL", pokemon);
-    const { id, name, img, hp, attack, defense, speed, height, weight, created, types } = pokemon;
+    const { name, img, hp, attack, defense, speed, height, weight, created, types } = pokemon;
 
     return (
         <div className={styles.container}>
