@@ -12,14 +12,11 @@ class PokemonController {
 
     getAllPokemons = async (req, res) => {
         try {
-            // Obtén Pokémon de la API externa (limitado a 60)
             const pokemonExternos = await this.pokeService.getAllPokemons(12);
-
-            // Obtén Pokémon de la base de datos
             const pokemonDB = await Pokemon.findAll();
-
-            // Combina los dos conjuntos de Pokémon
             const todosLosPokemons = [...pokemonExternos, ...pokemonDB];
+
+            console.log("TODOS", todosLosPokemons);
 
             return res.json(todosLosPokemons);
         } catch (error) {
@@ -27,20 +24,13 @@ class PokemonController {
         }
     }
 
-    // getAllPokemons = async (req, res) => {
-    //     try {
-    //         const pokemons = await this.pokeService.getAllPokemons();
-    //         return res.json(pokemons);
-    //     } catch (error) {
-    //         return res.status(500).send(error.message);
-    //     }
-    // }
-
     getPokemonById = async (req, res) => {
         try {
             const { id } = req.params;
             const source = isNaN(id) ? 'bdd' : 'api';
             const pokemon = await this.pokeService.getPokemonById(id, source);
+
+            console.log("AQUI", pokemon);
 
             return pokemon.name
                 ? res.json(pokemon)
