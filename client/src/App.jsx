@@ -61,8 +61,8 @@ export const App = () => {
 
             <div className={styles.selectContainer}>
                 <select className={styles.select} onChange={handleOrder}>
-                    <option value="A">Ascendente</option>
-                    <option value="D">Descendente</option>
+                    <option value="A">A - Z</option>
+                    <option value="D">Z - A</option>
                 </select>
             </div>
 

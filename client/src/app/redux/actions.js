@@ -36,6 +36,13 @@ export const cleanDetail = () => {
     return { type: CLEAN_DETAIL };
 }
 
+// export const orderCards = order => {
+//     return { 
+//         type: ORDER,
+//         payload: order,
+//     }
+// }
+
 export const orderCards = order => {
     return { 
         type: ORDER,
