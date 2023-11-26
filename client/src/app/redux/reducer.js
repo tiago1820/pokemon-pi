@@ -1,4 +1,4 @@
-import { CLEAN_DETAIL, GET_ALL_POKEMONS, GET_POKEMON_DETAIL } from "./action-types";
+import { CLEAN_DETAIL, GET_ALL_POKEMONS, GET_POKEMON_DETAIL, ORDER } from "./action-types";
 
 const initialState = {
     allPokemons: [],
@@ -23,6 +23,22 @@ const rootReducer = (state = initialState, { type, payload }) => {
                 ...state,
                 pokemonDetail: {},
             };
+
+        case ORDER:
+            let copy = [...state.allPokemons].sort((a, b) => {
+                if (payload === 'A') {
+                    return a.id - b.id
+                } else if (payload === 'D') {
+                    return b.id - a.id
+                } else {
+                    return 0;
+                }
+            })
+            return {
+                ...state,
+                allPokemons: copy
+            }
+
 
         default:
             return {
