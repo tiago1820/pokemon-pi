@@ -26,18 +26,37 @@ const rootReducer = (state = initialState, { type, payload }) => {
 
         case ORDER:
             let copy = [...state.allPokemons].sort((a, b) => {
+                const nameA = a.name.toUpperCase();
+                const nameB = b.name.toUpperCase();
+
                 if (payload === 'A') {
-                    return a.id - b.id
+                    return nameA.localeCompare(nameB);
                 } else if (payload === 'D') {
-                    return b.id - a.id
+                    return nameB.localeCompare(nameA);
                 } else {
                     return 0;
                 }
+
             })
             return {
                 ...state,
                 allPokemons: copy
             }
+
+        // case ORDER:
+        //     let copy = [...state.allPokemons].sort((a, b) => {
+        //         if (payload === 'A') {
+        //             return a.id - b.id
+        //         } else if (payload === 'D') {
+        //             return b.id - a.id
+        //         } else {
+        //             return 0;
+        //         }
+        //     })
+        //     return {
+        //         ...state,
+        //         allPokemons: copy
+        //     }
 
 
         default:
