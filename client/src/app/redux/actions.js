@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { CLEAN_DETAIL, GET_ALL_POKEMONS, GET_POKEMON_DETAIL } from "./action-types";
+import { CLEAN_DETAIL, GET_ALL_POKEMONS, GET_POKEMON_DETAIL, ORDER } from "./action-types";
 
 export const getAllPokemons = () => {
     const endpoint = 'http://localhost:3001/pokemons';
@@ -35,4 +35,18 @@ export const getPokemonDetail = id => {
 export const cleanDetail = () => {
     return { type: CLEAN_DETAIL };
 }
+
+export const orderCards = order => {
+    return { 
+        type: ORDER,
+        payload: order,
+    }
+}
+
+
+
+
+
+
+
 

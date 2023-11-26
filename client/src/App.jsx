@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllPokemons } from './app/redux/actions';
-import './App.css';
+import { getAllPokemons, orderCards } from './app/redux/actions';
+import styles from './App.module.css';
 import { SearchBar, Cards, Pagination, Detail } from './app/components';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import axios from 'axios';
-// import { getPokemonsByPage } from './app/services/pokemonService'
 
 export const App = () => {
     const dispatch = useDispatch();
@@ -15,6 +14,7 @@ export const App = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const pokemonsPerPage = 12;
     const [pokemons, setPokemons] = useState([]);
+    const [aux, setAux] = useState(false);
 
     const onSearch = async name => {
         try {
@@ -27,6 +27,11 @@ export const App = () => {
         } catch (error) {
             throw error;
         }
+    }
+
+    const handleOrder = (e) => {
+        dispatch(orderCards(e.target.value));
+        setAux(!aux);
     }
 
 
@@ -48,11 +53,20 @@ export const App = () => {
     return (
         <>
             {isHomeRoute && (<SearchBar onSearch={onSearch} />)}
-            {isHomeRoute && (<Pagination
+            {/* {isHomeRoute && (<Pagination
                 currentPage={currentPage}
                 totalPages={Math.ceil(allPokemons.length / pokemonsPerPage)}
                 onPageChange={handlePageChange}
-            />)}
+            />)} */}
+
+            <div className={styles.selectContainer}>
+                <select className={styles.select} onChange={handleOrder}>
+                    <option value="A">Ascendente</option>
+                    <option value="D">Descendente</option>
+                </select>
+            </div>
+
+
 
             <Routes>
                 <Route path='/app' element={<Cards allPokemons={currentPokemons} pokemons={pokemons} />} />
