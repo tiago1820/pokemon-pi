@@ -6,6 +6,15 @@ class TypeService {
         this.URL = URL;
     }
 
+    getAllTypesDB = async () => {
+        try {
+            const typesFromDB = await Type.findAll();
+            return typesFromDB;
+        } catch (error) {
+            throw error;
+        }
+    }
+
     getAllTypes = async () => {
         try {
             const response = await axios(this.URL);

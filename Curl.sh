@@ -7,7 +7,11 @@ curl http://localhost:3001/pokemons/1
 # Para buscar un pokemon por UUID
 curl http://localhost:3001/pokemons/94d0bc53-5ea6-4f0b-9268-3db7532158a4
 
+# Para cargar la tabla types:
+curl http://localhost:3001/types/load
 
+#Para buscar todos los types en la base de datos:
+ curl http://localhost:3001/types
 
 # Para buscar un pokemon por name:
 curl 'http://localhost:3001/pokemons/name?name=pikachu'
