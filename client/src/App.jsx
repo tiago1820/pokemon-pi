@@ -63,6 +63,8 @@ export const App = () => {
                 <select className={styles.select} onChange={handleOrder}>
                     <option value="A">A - Z</option>
                     <option value="D">Z - A</option>
+                    <option value="hight">Attack mas alto</option>
+                    <option value="low">Attack mas bajo</option>
                 </select>
             </div>
 
