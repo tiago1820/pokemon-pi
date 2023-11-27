@@ -12,8 +12,6 @@ class PokemonController {
             const pokemonDB = await Pokemon.findAll();
             const todosLosPokemons = [...pokemonExternos, ...pokemonDB];
 
-            console.log("TODOS", todosLosPokemons);
-
             return res.json(todosLosPokemons);
         } catch (error) {
             return res.status(500).send(error.message);
