@@ -30,11 +30,16 @@ export const App = () => {
     }
 
     const handleOrder = (e) => {
-        dispatch(orderCards(e.target.value));
-        setAux(!aux);
+        const selectedValue = e.target.value;
+
+        if (selectedValue === 'all') {
+            dispatch(getAllPokemons());
+        } else {
+            dispatch(orderCards(e.target.value));
+            setAux(!aux);
+        }
+
     }
-
-
 
     useEffect(() => {
         dispatch(getAllPokemons());
@@ -61,6 +66,7 @@ export const App = () => {
 
             <div className={styles.selectContainer}>
                 <select className={styles.select} onChange={handleOrder}>
+                    <option value="all">All</option>
                     <option value="A">A - Z</option>
                     <option value="D">Z - A</option>
                     <option value="hight">Attack mas alto</option>

@@ -8,7 +8,7 @@ class PokemonController {
 
     getAllPokemons = async (req, res) => {
         try {
-            const pokemonExternos = await this.pokeService.getAllPokemons(12);
+            const pokemonExternos = await this.pokeService.getAllPokemons(60);
             const pokemonDB = await Pokemon.findAll();
             const todosLosPokemons = [...pokemonExternos, ...pokemonDB];
 
