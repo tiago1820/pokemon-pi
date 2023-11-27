@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllPokemons, orderCards } from './app/redux/actions';
+import { getAllPokemons, getAllTypes, orderCards } from './app/redux/actions';
 import styles from './App.module.css';
 import { SearchBar, Cards, Pagination, Detail } from './app/components';
 import { Routes, Route, useLocation } from 'react-router-dom';
@@ -11,6 +11,8 @@ export const App = () => {
     const location = useLocation();
 
     const allPokemons = useSelector(state => state.allPokemons);
+    const allTypes = useSelector(state => state.allTypes);
+
     const [currentPage, setCurrentPage] = useState(1);
     const pokemonsPerPage = 12;
     const [pokemons, setPokemons] = useState([]);
@@ -43,6 +45,7 @@ export const App = () => {
 
     useEffect(() => {
         dispatch(getAllPokemons());
+        dispatch(getAllTypes());
     }, []);
 
     const indexOfLastPokemon = currentPage * pokemonsPerPage;
@@ -71,6 +74,17 @@ export const App = () => {
                     <option value="D">Z - A</option>
                     <option value="hight">Attack mas alto</option>
                     <option value="low">Attack mas bajo</option>
+                </select>
+            </div>
+
+            <div className={styles.selectContainer}>
+                <select className={styles.select} onChange={handleOrder}>
+                    <option value="all">All</option>
+                    {allTypes.map(type => (
+                        <option key={type.id} value={type.name}>
+                            {type.name}
+                        </option>
+                    ))}
                 </select>
             </div>
 

@@ -1,7 +1,8 @@
-import { CLEAN_DETAIL, GET_ALL_POKEMONS, GET_POKEMON_DETAIL, ORDER } from "./action-types";
+import { CLEAN_DETAIL, GET_ALL_POKEMONS, GET_POKEMON_DETAIL, ORDER, GET_ALL_TYPES } from "./action-types";
 
 const initialState = {
     allPokemons: [],
+    allTypes: [],
     pokemonDetail: [],
 }
 
@@ -10,6 +11,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
         case GET_ALL_POKEMONS:
             return {
                 ...state, allPokemons: payload
+            };
+
+        case GET_ALL_TYPES:
+            return {
+                ...state, allTypes: payload
             };
 
         case GET_POKEMON_DETAIL:

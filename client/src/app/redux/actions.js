@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { CLEAN_DETAIL, GET_ALL_POKEMONS, GET_POKEMON_DETAIL, ORDER } from "./action-types";
+import { CLEAN_DETAIL, GET_ALL_POKEMONS, GET_POKEMON_DETAIL, ORDER, GET_ALL_TYPES } from "./action-types";
 
 export const getAllPokemons = () => {
     const endpoint = 'http://localhost:3001/pokemons';
@@ -9,6 +9,21 @@ export const getAllPokemons = () => {
             const { data } = await axios.get(endpoint);
             return dispatch({
                 type: GET_ALL_POKEMONS,
+                payload: data,
+            });
+        } catch (error) {
+            throw error;
+        }
+    }
+}
+
+export const getAllTypes = () => {
+    const endpoint = 'http://localhost:3001/types';
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(endpoint);
+            return dispatch({
+                type: GET_ALL_TYPES,
                 payload: data,
             });
         } catch (error) {
@@ -37,7 +52,7 @@ export const cleanDetail = () => {
 }
 
 export const orderCards = order => {
-    return { 
+    return {
         type: ORDER,
         payload: order,
     };
