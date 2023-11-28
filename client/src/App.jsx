@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllPokemons, getAllTypes, orderCards } from './app/redux/actions';
+import { getAllPokemons, getAllTypes, orderCards, filterCards } from './app/redux/actions';
 import styles from './App.module.css';
 import { SearchBar, Cards, Pagination, Detail } from './app/components';
 import { Routes, Route, useLocation } from 'react-router-dom';
@@ -10,7 +10,7 @@ export const App = () => {
     const dispatch = useDispatch();
     const location = useLocation();
 
-    const allPokemons = useSelector(state => state.allPokemons);
+    const alteredList = useSelector(state => state.alteredList);
     const allTypes = useSelector(state => state.allTypes);
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -40,8 +40,19 @@ export const App = () => {
             dispatch(orderCards(e.target.value));
             setAux(!aux);
         }
-
     }
+
+    const handleFilter = (e) => {
+        const selectedValue = e.target.value;
+    
+        if (selectedValue === 'all') {
+            dispatch(getAllPokemons());
+        } else {
+            dispatch(filterCards(selectedValue)); // Dispatch de la acción FILTER con el tipo seleccionado
+            setAux(!aux);
+        }
+    }
+    
 
     useEffect(() => {
         dispatch(getAllPokemons());
@@ -50,7 +61,7 @@ export const App = () => {
 
     const indexOfLastPokemon = currentPage * pokemonsPerPage;
     const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
-    const currentPokemons = allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
+    const currentPokemons = alteredList.slice(indexOfFirstPokemon, indexOfLastPokemon);
 
     const handlePageChange = pageNumber => {
         setCurrentPage(pageNumber);
@@ -78,7 +89,7 @@ export const App = () => {
             </div>
 
             <div className={styles.selectContainer}>
-                <select className={styles.select} onChange={handleOrder}>
+                <select className={styles.select} onChange={handleFilter}>
                     <option value="all">All</option>
                     {allTypes.map(type => (
                         <option key={type.id} value={type.name}>
@@ -88,8 +99,6 @@ export const App = () => {
                 </select>
             </div>
 
-
-
             <Routes>
                 <Route path='/app' element={<Cards allPokemons={currentPokemons} pokemons={pokemons} />} />
                 <Route path='/app/detail/:id' element={<Detail />} />
@@ -97,7 +106,7 @@ export const App = () => {
 
             {isHomeRoute && (<Pagination
                 currentPage={currentPage}
-                totalPages={Math.ceil(allPokemons.length / pokemonsPerPage)}
+                totalPages={Math.ceil(alteredList.length / pokemonsPerPage)}
                 onPageChange={handlePageChange}
             />)}
         </>
