@@ -1,4 +1,4 @@
-import { CLEAN_DETAIL, GET_ALL_POKEMONS, GET_POKEMON_DETAIL, ORDER, GET_ALL_TYPES, FILTER } from "./action-types";
+import { CLEAN_DETAIL, GET_ALL_POKEMONS, GET_POKEMON_DETAIL, ORDER, GET_ALL_TYPES, FILTER, ORIGIN } from "./action-types";
 
 const initialState = {
     allPokemons: [],
@@ -70,14 +70,27 @@ const rootReducer = (state = initialState, { type, payload }) => {
                     pokemon.types && pokemon.types.includes(payload)
                 );
 
-
                 return {
                     ...state,
                     alteredList: filteredList,
                 };
             }
 
+        case ORIGIN:
+            let filteredList;
 
+            if (payload === 'db') {
+                filteredList = state.allPokemons.filter(pokemon => 'created' in pokemon);
+            } else if (payload === 'api') {
+                filteredList = state.allPokemons.filter(pokemon => !('created' in pokemon));
+            } else {
+                filteredList = [...state.allPokemons];
+            }
+
+            return {
+                ...state,
+                alteredList: filteredList,
+            };
 
         default:
             return {

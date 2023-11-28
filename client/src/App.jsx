@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllPokemons, getAllTypes, orderCards, filterCards } from './app/redux/actions';
+import { getAllPokemons, getAllTypes, orderCards, filterCards, filterOrigin } from './app/redux/actions';
 import styles from './App.module.css';
 import { SearchBar, Cards, Pagination, Detail } from './app/components';
 import { Routes, Route, useLocation } from 'react-router-dom';
@@ -12,6 +12,8 @@ export const App = () => {
 
     const alteredList = useSelector(state => state.alteredList);
     const allTypes = useSelector(state => state.allTypes);
+
+    console.log("ASASASA", alteredList);
 
     const [currentPage, setCurrentPage] = useState(1);
     const pokemonsPerPage = 12;
@@ -32,7 +34,6 @@ export const App = () => {
     }
 
     const handleOrder = (e) => {
-
         dispatch(orderCards(e.target.value));
         setAux(!aux);
     }
@@ -42,6 +43,10 @@ export const App = () => {
         setAux(!aux);
     }
 
+    const handleOrigin = (e) => {
+        dispatch(filterOrigin(e.target.value));
+        setAux(!aux);
+    }
 
     useEffect(() => {
         dispatch(getAllPokemons());
@@ -90,6 +95,13 @@ export const App = () => {
                             {type.name}
                         </option>
                     ))}
+                </select>
+            </div>
+
+            <div className={styles.selectContainer}>
+                <select className={styles.select} onChange={handleOrigin}>
+                    <option value="api">API</option>
+                    <option value="db">Data base</option>
                 </select>
             </div>
 
