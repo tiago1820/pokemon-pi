@@ -32,27 +32,16 @@ export const App = () => {
     }
 
     const handleOrder = (e) => {
-        const selectedValue = e.target.value;
 
-        if (selectedValue === 'all') {
-            dispatch(getAllPokemons());
-        } else {
-            dispatch(orderCards(e.target.value));
-            setAux(!aux);
-        }
+        dispatch(orderCards(e.target.value));
+        setAux(!aux);
     }
 
     const handleFilter = (e) => {
-        const selectedValue = e.target.value;
-    
-        if (selectedValue === 'all') {
-            dispatch(getAllPokemons());
-        } else {
-            dispatch(filterCards(selectedValue)); // Dispatch de la acción FILTER con el tipo seleccionado
-            setAux(!aux);
-        }
+        dispatch(filterCards(e.target.value));
+        setAux(!aux);
     }
-    
+
 
     useEffect(() => {
         dispatch(getAllPokemons());
@@ -72,11 +61,11 @@ export const App = () => {
     return (
         <>
             {isHomeRoute && (<SearchBar onSearch={onSearch} />)}
-            {/* {isHomeRoute && (<Pagination
+            {isHomeRoute && (<Pagination
                 currentPage={currentPage}
-                totalPages={Math.ceil(allPokemons.length / pokemonsPerPage)}
+                totalPages={Math.ceil(alteredList.length / pokemonsPerPage)}
                 onPageChange={handlePageChange}
-            />)} */}
+            />)}
 
             <div className={styles.selectContainer}>
                 <select className={styles.select} onChange={handleOrder}>

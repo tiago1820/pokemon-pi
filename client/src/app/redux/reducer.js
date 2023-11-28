@@ -32,19 +32,27 @@ const rootReducer = (state = initialState, { type, payload }) => {
             };
 
         case ORDER:
-            let copy = [...state.allPokemons].sort((a, b) => {
-                if (payload === 'A') {
-                    return a.name.localeCompare(b.name);
-                } else if (payload === 'D') {
-                    return b.name.localeCompare(a.name);
-                } else if (payload === 'hight') {
-                    return b.attack - a.attack;
-                } else if (payload === 'low') {
-                    return a.attack - b.attack
-                } else {
-                    return 0;
-                }
-            });
+            let copy;
+            if (payload === 'all') {
+                return {
+                    ...state,
+                    alteredList: [...state.allPokemons],
+                };
+            } else {
+                copy = [...state.allPokemons].sort((a, b) => {
+                    if (payload === 'A') {
+                        return a.name.localeCompare(b.name);
+                    } else if (payload === 'D') {
+                        return b.name.localeCompare(a.name);
+                    } else if (payload === 'hight') {
+                        return b.attack - a.attack;
+                    } else if (payload === 'low') {
+                        return a.attack - b.attack
+                    } else {
+                        return 0;
+                    }
+                });
+            }
 
             return {
                 ...state,
@@ -55,13 +63,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
             if (payload === 'all') {
                 return {
                     ...state,
-                    alteredList: state.allPokemons,
+                    alteredList: [...state.allPokemons],
                 };
             } else {
                 const filteredList = state.allPokemons.filter(pokemon =>
                     pokemon.types && pokemon.types.includes(payload)
                 );
-                
+
 
                 return {
                     ...state,
