@@ -69,40 +69,41 @@ export const App = () => {
     const isHomeRoute = location.pathname === '/app';
 
     return (
-        <>
+        <div className={styles.appContainer}>
             {isHomeRoute && (<SearchBar onSearch={onSearch} />)}
             {isHomeRoute && (<Pagination
                 currentPage={currentPage}
                 totalPages={Math.ceil(alteredList.length / pokemonsPerPage)}
                 onPageChange={handlePageChange}
             />)}
-
             <div className={styles.selectContainer}>
-                <select className={styles.select} onChange={handleOrder}>
-                    <option value="all">All</option>
-                    <option value="A">A - Z</option>
-                    <option value="D">Z - A</option>
-                    <option value="hight">Attack mas alto</option>
-                    <option value="low">Attack mas bajo</option>
-                </select>
-            </div>
+                <div>
+                    <select className={styles.select} onChange={handleOrder}>
+                        <option value="all">All</option>
+                        <option value="A">A - Z</option>
+                        <option value="D">Z - A</option>
+                        <option value="hight">Attack mas alto</option>
+                        <option value="low">Attack mas bajo</option>
+                    </select>
+                </div>
 
-            <div className={styles.selectContainer}>
-                <select className={styles.select} onChange={handleFilter}>
-                    <option value="all">All</option>
-                    {allTypes.map(type => (
-                        <option key={type.id} value={type.name}>
-                            {type.name}
-                        </option>
-                    ))}
-                </select>
-            </div>
+                <div>
+                    <select className={styles.select} onChange={handleFilter}>
+                        <option value="all">All</option>
+                        {allTypes.map(type => (
+                            <option key={type.id} value={type.name}>
+                                {type.name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
 
-            <div className={styles.selectContainer}>
-                <select className={styles.select} onChange={handleOrigin}>
-                    <option value="api">API</option>
-                    <option value="db">Data base</option>
-                </select>
+                <div>
+                    <select className={styles.select} onChange={handleOrigin}>
+                        <option value="api">API</option>
+                        <option value="db">Data base</option>
+                    </select>
+                </div>
             </div>
 
             <Routes>
@@ -115,6 +116,6 @@ export const App = () => {
                 totalPages={Math.ceil(alteredList.length / pokemonsPerPage)}
                 onPageChange={handlePageChange}
             />)}
-        </>
+        </div>
     );
 }
