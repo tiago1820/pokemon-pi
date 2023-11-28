@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPokemons, getAllTypes, orderCards, filterCards, filterOrigin } from './app/redux/actions';
 import styles from './App.module.css';
-import { SearchBar, Cards, Pagination, Detail } from './app/components';
+import { SearchBar, Cards, Pagination, Detail, Nav } from './app/components';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { Create } from './app/components/Create/Create';
 
 export const App = () => {
     const dispatch = useDispatch();
@@ -13,7 +14,6 @@ export const App = () => {
     const alteredList = useSelector(state => state.alteredList);
     const allTypes = useSelector(state => state.allTypes);
 
-    console.log("ASASASA", alteredList);
 
     const [currentPage, setCurrentPage] = useState(1);
     const pokemonsPerPage = 12;
@@ -70,12 +70,9 @@ export const App = () => {
 
     return (
         <div className={styles.appContainer}>
-            {isHomeRoute && (<SearchBar onSearch={onSearch} />)}
-            {isHomeRoute && (<Pagination
-                currentPage={currentPage}
-                totalPages={Math.ceil(alteredList.length / pokemonsPerPage)}
-                onPageChange={handlePageChange}
-            />)}
+
+            {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (<Nav onSearch={onSearch} />)}
+
             <div className={styles.selectContainer}>
                 <div>
                     <select className={styles.select} onChange={handleOrder}>
@@ -106,9 +103,16 @@ export const App = () => {
                 </div>
             </div>
 
+            {isHomeRoute && (<Pagination
+                currentPage={currentPage}
+                totalPages={Math.ceil(alteredList.length / pokemonsPerPage)}
+                onPageChange={handlePageChange}
+            />)}
+
             <Routes>
                 <Route path='/app' element={<Cards allPokemons={currentPokemons} pokemons={pokemons} />} />
                 <Route path='/app/detail/:id' element={<Detail />} />
+                <Route path='/app/create' element={<Create />} />
             </Routes>
 
             {isHomeRoute && (<Pagination
