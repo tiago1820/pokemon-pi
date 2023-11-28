@@ -1,16 +1,17 @@
-import { CLEAN_DETAIL, GET_ALL_POKEMONS, GET_POKEMON_DETAIL, ORDER, GET_ALL_TYPES } from "./action-types";
+import { CLEAN_DETAIL, GET_ALL_POKEMONS, GET_POKEMON_DETAIL, ORDER, GET_ALL_TYPES, FILTER } from "./action-types";
 
 const initialState = {
     allPokemons: [],
     allTypes: [],
     pokemonDetail: [],
+    alteredList: [],
 }
 
 const rootReducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case GET_ALL_POKEMONS:
             return {
-                ...state, allPokemons: payload
+                ...state, allPokemons: payload, alteredList: payload,
             };
 
         case GET_ALL_TYPES:
@@ -47,8 +48,28 @@ const rootReducer = (state = initialState, { type, payload }) => {
 
             return {
                 ...state,
-                allPokemons: copy,
+                alteredList: copy,
             }
+
+        case FILTER:
+            if (payload === 'all') {
+                return {
+                    ...state,
+                    alteredList: state.allPokemons,
+                };
+            } else {
+                const filteredList = state.allPokemons.filter(pokemon =>
+                    pokemon.types && pokemon.types.includes(payload)
+                );
+                
+
+                return {
+                    ...state,
+                    alteredList: filteredList,
+                };
+            }
+
+
 
         default:
             return {
