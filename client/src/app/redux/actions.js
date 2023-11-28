@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { CLEAN_DETAIL, GET_ALL_POKEMONS, GET_POKEMON_DETAIL, ORDER, GET_ALL_TYPES, FILTER } from "./action-types";
+import { CLEAN_DETAIL, GET_ALL_POKEMONS, GET_POKEMON_DETAIL, ORDER, GET_ALL_TYPES, FILTER, ORIGIN } from "./action-types";
 
 export const getAllPokemons = () => {
     const endpoint = 'http://localhost:3001/pokemons';
@@ -62,5 +62,12 @@ export const filterCards = filter => {
     return {
         type: FILTER,
         payload: filter,
+    };
+};
+
+export const filterOrigin = origin => {
+    return {
+        type: ORIGIN,
+        payload: origin,
     };
 };
