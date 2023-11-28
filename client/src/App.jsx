@@ -48,6 +48,11 @@ export const App = () => {
         dispatch(getAllTypes());
     }, []);
 
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [alteredList]);
+
+
     const indexOfLastPokemon = currentPage * pokemonsPerPage;
     const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
     const currentPokemons = alteredList.slice(indexOfFirstPokemon, indexOfLastPokemon);
