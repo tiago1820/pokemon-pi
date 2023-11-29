@@ -14,11 +14,43 @@ export const App = () => {
     const alteredList = useSelector(state => state.alteredList);
     const allTypes = useSelector(state => state.allTypes);
 
-
     const [currentPage, setCurrentPage] = useState(1);
     const pokemonsPerPage = 12;
     const [pokemons, setPokemons] = useState([]);
     const [aux, setAux] = useState(false);
+
+    const createPokemon = async pokeData => {
+        try {
+            const {
+                name,
+                hp,
+                attack,
+                defense,
+                speed,
+                weight,
+                height,
+                types,
+            } = pokeData;
+
+            const URL = 'http://localhost:3001/pokemons';
+
+            const response = await axios.post(URL, {
+                name,
+                hp,
+                attack,
+                defense,
+                speed,
+                weight,
+                height,
+                types,
+            });
+
+            console.log('Pokemon creado:', response.data);
+        } catch (error) {
+            console.error('Error al crear el Pokémon:', error);
+            throw error;
+        }
+    }
 
     const onSearch = async name => {
         try {
@@ -112,7 +144,7 @@ export const App = () => {
             <Routes>
                 <Route path='/app' element={<Cards allPokemons={currentPokemons} pokemons={pokemons} />} />
                 <Route path='/app/detail/:id' element={<Detail />} />
-                <Route path='/app/create' element={<Create />} />
+                <Route path='/app/create' element={<Create createPokemon={createPokemon} />} />
             </Routes>
 
             {isHomeRoute && (<Pagination

@@ -4,17 +4,37 @@ const PokemonService = require('../services/pokemonService');
 class PokemonController {
     constructor() {
         this.pokeService = new PokemonService('https://pokeapi.co/api/v2/pokemon/');
+
     }
 
     getAllPokemons = async (req, res) => {
         try {
-            const pokemonExternos = await this.pokeService.getAllPokemons(5);
-            const pokemonDB = await Pokemon.findAll();
-            const todosLosPokemons = [...pokemonExternos, ...pokemonDB];
+            const pokemonExternos = await this.pokeService.getAllPokemons(1);
+            const pokemonDB = await Pokemon.findAll({
+                include: [{ model: Type, through: 'pokemon_type' }],
+            });
 
-            return res.json(todosLosPokemons);
+            const formattedData = pokemonDB.map(pokemon => ({
+                id: pokemon.id,
+                name: pokemon.name,
+                types: pokemon.types ? pokemon.types.map(typeArr => typeArr.name) : [],
+                img: pokemon.img,
+                hp: pokemon.hp,
+                attack: pokemon.attack,
+                defense: pokemon.defense,
+                speed: pokemon.speed,
+                weight: pokemon.weight,
+                height: pokemon.height,
+                created: pokemon.created
+            }));
+
+
+            return res.json([...pokemonExternos, ...formattedData]);
+
+
         } catch (error) {
-            return res.status(500).send(error.message);
+            console.error(error);
+            return res.status(500).send('Internal Server Error');
         }
     }
 
@@ -24,7 +44,6 @@ class PokemonController {
             const source = isNaN(id) ? 'bdd' : 'api';
             const pokemon = await this.pokeService.getPokemonById(id, source);
 
-            console.log("AQUI", pokemon);
 
             return pokemon.name
                 ? res.json(pokemon)
@@ -53,6 +72,7 @@ class PokemonController {
     }
 
     postPokemon = async (req, res) => {
+
         try {
             const {
                 name,
@@ -69,6 +89,7 @@ class PokemonController {
 
             const newPokemon = await Pokemon.create({
                 name,
+                types,
                 image: img,
                 hp,
                 attack,
