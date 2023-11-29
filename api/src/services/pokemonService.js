@@ -62,27 +62,48 @@ class PokemonService {
                 return pokemonInfo;
             } else {
                 const pokemonFromDB = await this.getFromDataBaseById(id);
-                return pokemonFromDB;
-            }
 
+                const formattedPokemon = {
+                    id: pokemonFromDB.id,
+                    name: pokemonFromDB.name,
+                    types: pokemonFromDB.types ? pokemonFromDB.types.map(typeArr => typeArr.name) : [],
+                    img: pokemonFromDB.img,
+                    hp: pokemonFromDB.hp,
+                    attack: pokemonFromDB.attack,
+                    defense: pokemonFromDB.defense,
+                    speed: pokemonFromDB.speed,
+                    weight: pokemonFromDB.weight,
+                    height: pokemonFromDB.height,
+                };
+
+
+
+                return formattedPokemon;
+            }
         } catch (error) {
+            console.error("Error en getPokemonById:", error);
             throw error;
         }
     }
 
     getFromDataBaseById = async (id) => {
         try {
-            const pokemonFromDB = await Pokemon.findByPk(id);
+            const pokemonFromDB = await Pokemon.findByPk(id, {
+                include: [{ model: Type, through: 'pokemon_type' }],
+            });
 
             if (!pokemonFromDB) {
                 throw new Error('Pokemon not found in the database');
             }
 
+            console.log("JOSUE", pokemonFromDB);
             return pokemonFromDB;
         } catch (error) {
             throw error;
         }
     }
+
+
 
     getPokemonByName = async (name) => {
         try {

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 export const Create = props => {
+    const { createPokemon } = props;
     const allTypes = useSelector(state => state.allTypes);
     const [currentStep, setCurrentStep] = useState(1);
 
@@ -14,8 +15,41 @@ export const Create = props => {
         setCurrentStep(currentStep - 1);
     };
 
-    const handleSubmit = () => {
-        console.log('Formulario enviado');
+    const [pokeData, setPokeData] = useState({
+        name: '',
+        hp: '',
+        attack: '',
+        defense: '',
+        speed: '',
+        weight: '',
+        height: '',
+        types: [],
+
+    });
+
+
+    const handleChange = (e) => {
+        if (e.target.type === 'checkbox') {
+            const isChecked = e.target.checked;
+            const typeValue = e.target.value;
+
+            setPokeData((prevData) => {
+                const updatedTypes = isChecked
+                    ? [...prevData.types, typeValue]
+                    : prevData.types.filter((type) => type !== typeValue);
+
+                return { ...prevData, types: updatedTypes };
+            });
+        } else {
+            setPokeData({ ...pokeData, [e.target.name]: e.target.value });
+        }
+    };
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        createPokemon(pokeData);
+
     };
 
     return (
@@ -23,38 +57,38 @@ export const Create = props => {
             <div>
                 <h2>Create your pokemon</h2>
             </div>
-            <form>
+            <form onSubmit={handleSubmit}>
                 {
                     currentStep === 1 && (
                         <section className={styles.formSection}>
                             <div className={styles.wrapper}>
                                 <label htmlFor="" className={styles.label}>Name</label>
-                                <input type="text" />
+                                <input onChange={handleChange} name='name' type="text" />
                             </div>
 
                             <div className={styles.wrapper}>
                                 <label htmlFor="" className={styles.label}>HP</label>
-                                <input type="number" />
+                                <input onChange={handleChange} name='hp' type="number" />
                             </div>
                             <div className={styles.wrapper}>
                                 <label htmlFor="" className={styles.label}>Attack</label>
-                                <input type="number" />
+                                <input onChange={handleChange} name='attack' type="number" />
                             </div>
                             <div className={styles.wrapper}>
                                 <label htmlFor="" className={styles.label}>Defense</label>
-                                <input type="number" />
+                                <input onChange={handleChange} name='defense' type="number" />
                             </div>
                             <div className={styles.wrapper}>
                                 <label htmlFor="" className={styles.label}>Speed</label>
-                                <input type="number" />
+                                <input onChange={handleChange} name='speed' type="number" />
                             </div>
                             <div className={styles.wrapper}>
                                 <label htmlFor="" className={styles.label}>Weight</label>
-                                <input type="number" />
+                                <input onChange={handleChange} name='weight' type="number" />
                             </div>
                             <div className={styles.wrapper}>
                                 <label htmlFor="" className={styles.label}>Height</label>
-                                <input type="number" />
+                                <input onChange={handleChange} name='height' type="number" />
                             </div>
                             <button type='button' onClick={handleNext}>Next</button>
                         </section>
@@ -68,7 +102,13 @@ export const Create = props => {
                             <div className={styles.checkboxContainer}>
                                 {allTypes.map((type) => (
                                     <div key={type.id} className={styles.checkboxItem}>
-                                        <input type="checkbox" id={type.id} name={type.name} value={type.name} />
+                                        <input
+                                            type="checkbox"
+                                            id={type.id}
+                                            name={type.name}
+                                            value={type.name}
+                                            onChange={handleChange}
+                                        />
                                         <label htmlFor={type.id}>{type.name}</label>
                                     </div>
                                 ))}
