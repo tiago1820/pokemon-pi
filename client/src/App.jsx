@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPokemons, getAllTypes, orderCards, filterCards, filterOrigin } from './app/redux/actions';
 import styles from './App.module.css';
-import { SearchBar, Cards, Pagination, Detail, Nav } from './app/components';
+import { Cards, Pagination, Detail, Nav } from './app/components';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { Create } from './app/components/Create/Create';

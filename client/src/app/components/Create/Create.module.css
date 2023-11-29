@@ -1,0 +1,52 @@
+/* Create.module.css */
+.container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.formSection {
+    margin-bottom: 20px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.label {
+    margin-bottom: 8px;
+}
+
+.checkboxContainer {
+  column-count: 2;
+  column-gap: 20px; 
+}
+
+.checkboxItem {
+  margin-bottom: 8px;
+  break-inside: avoid;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.wrapper input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Estilos para los checkboxes */
+input[type="checkbox"] {
+    margin-right: 8px;
+}
