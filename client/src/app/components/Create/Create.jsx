@@ -48,12 +48,31 @@ export const Create = props => {
     const handleCheckboxChange = (e) => {
         const { name, checked } = e.target;
 
+        const updatedTypes = checked
+            ? [...pokeData.types, name]
+            : pokeData.types.filter((type) => type !== name);
+
         setPokeData((prevData) => ({
             ...prevData,
-            types: checked
-                ? [...prevData.types, name]
-                : prevData.types.filter((type) => type !== name),
+            types: updatedTypes,
         }));
+
+        if (updatedTypes.length === 0) {
+            setErrors((prevErrors) => ({
+                ...prevErrors,
+                types: 'Selecciona al menos un tipo.',
+            }));
+        } else if (updatedTypes.length > 2) {
+            setErrors((prevErrors) => ({
+                ...prevErrors,
+                types: 'Selecciona como máximo dos tipos.',
+            }));
+        } else {
+            setErrors((prevErrors) => ({
+                ...prevErrors,
+                types: '',
+            }));
+        }
     };
 
     const handleSubmit = (e) => {
