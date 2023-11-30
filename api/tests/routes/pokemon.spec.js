@@ -10,7 +10,7 @@ const agent = session(app);
 describe('Pokemon routes', () => {
     before(() => conn.authenticate()
         .catch((err) => {
-            console.error('Unable to connect to the database:', err);
+            console.error('No se pudo conectar a la base de datos:', err);
         }));
 
     beforeEach(() => Pokemon.sync({ force: true })
@@ -24,21 +24,21 @@ describe('Pokemon routes', () => {
             weight: 6,
         })));
 
-
     describe('GET /pokemons', () => {
-        it('should get 200', () =>
+        it('debería obtener un código 200', () =>
             agent.get('/pokemons').expect(200)
         );
     });
 
     describe('GET /pokemons/name', () => {
-        it('should get 400 if name is not provided', () =>
+        it('debería obtener un código 400 si no se proporciona el nombre', () =>
             agent.get('/pokemons/name').expect(400)
         );
 
-        it('should get 200 with valid name', () =>
+        it('debería obtener un código 200 con un nombre válido', () =>
             agent.get('/pokemons/name?name=Pikachu').expect(200)
         );
     });
+
 
 });
