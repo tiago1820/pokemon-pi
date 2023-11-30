@@ -20,6 +20,8 @@ export const App = () => {
     const [aux, setAux] = useState(false);
 
     const createPokemon = async pokeData => {
+
+        console.log("POKEDATA", pokeData);
         try {
             const {
                 name,
