@@ -4,7 +4,6 @@ import styles from './Cards.module.css';
 export const Cards = props => {
     const { allPokemons, pokemons } = props;
 
-    console.log("Cards", allPokemons);
     return (
         <div className={styles.container}>
             <div className={styles.column}>
