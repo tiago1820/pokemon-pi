@@ -10,7 +10,8 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
     overflow: hidden;
-    width: 300px;
+    width: 18rem;
+    border: 2px solid #0b5ed7;
 }
 
 .card a {
