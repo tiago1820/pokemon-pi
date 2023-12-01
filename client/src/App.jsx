@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPokemons, getAllTypes, orderCards, filterCards, filterOrigin } from './app/redux/actions';
 import styles from './App.module.css';
-import { Cards, Pagination, Detail, Nav } from './app/components';
+import { Cards, Pagination, Detail, Nav, Loader } from './app/components';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { Create } from './app/components/Create/Create';
@@ -18,6 +18,7 @@ export const App = () => {
     const pokemonsPerPage = 12;
     const [pokemons, setPokemons] = useState([]);
     const [aux, setAux] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const createPokemon = async pokeData => {
 
@@ -80,15 +81,30 @@ export const App = () => {
         setAux(!aux);
     }
 
+    // useEffect(() => {
+    //     dispatch(getAllPokemons());
+    //     dispatch(getAllTypes());
+    // }, []);
+
     useEffect(() => {
-        dispatch(getAllPokemons());
-        dispatch(getAllTypes());
-    }, []);
+        const fetchData = async () => {
+          try {
+            setLoading(true);
+            await dispatch(getAllPokemons());
+            await dispatch(getAllTypes());
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          } finally {
+            setLoading(false);
+          }
+        };
+    
+        fetchData();
+      }, [dispatch]);
 
     useEffect(() => {
         setCurrentPage(1);
     }, [alteredList]);
-
 
     const indexOfLastPokemon = currentPage * pokemonsPerPage;
     const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
@@ -102,10 +118,9 @@ export const App = () => {
 
     return (
         <div className={styles.appContainer}>
+            {loading && <Loader />}
 
             {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (<Nav onSearch={onSearch} />)}
-
-
 
             {isHomeRoute && (<Pagination
                 currentPage={currentPage}
@@ -119,7 +134,7 @@ export const App = () => {
                     {/* <Accordion /> */}
                     <div>
                         <select className={styles.select} onChange={handleOrder}>
-                            <option value="" disabled selected>Select Order By</option>
+                            <option value="" disabled selected>Order By...</option>
                             <option value="all">All</option>
                             <option value="A">A - Z</option>
                             <option value="D">Z - A</option>
@@ -130,7 +145,7 @@ export const App = () => {
 
                     <div>
                         <select className={styles.select} onChange={handleFilter}>
-                            <option value="" disabled selected>Select Filter by types</option>
+                            <option value="" disabled selected>Filter by types</option>
                             <option value="all">All</option>
                             {allTypes.map(type => (
                                 <option key={type.id} value={type.name}>
@@ -142,7 +157,7 @@ export const App = () => {
 
                     <div>
                         <select className={styles.select} onChange={handleOrigin}>
-                            <option value="" disabled selected>Select Filter by origin</option>
+                            <option value="" disabled selected>Filter by origin</option>
                             <option value="all">All</option>
                             <option value="api">API</option>
                             <option value="db">Data base</option>

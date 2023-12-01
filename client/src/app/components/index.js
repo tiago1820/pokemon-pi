@@ -4,6 +4,7 @@ import { Card } from "./Card/Card";
 import { Pagination } from "./Pagination/Pagination";
 import { Detail } from "./Detail/Detail";
 import { Nav } from "./Nav/Nav";
+import { Loader } from "./Loader/Loader";
 
 export {
     SearchBar,
@@ -11,5 +12,6 @@ export {
     Card,
     Pagination,
     Detail,
-    Nav
+    Nav,
+    Loader
 }
