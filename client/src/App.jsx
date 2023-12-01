@@ -105,35 +105,7 @@ export const App = () => {
 
             {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (<Nav onSearch={onSearch} />)}
 
-            <div className={styles.selectContainer}>
-                <div>
-                    <select className={styles.select} onChange={handleOrder}>
-                        <option value="all">All</option>
-                        <option value="A">A - Z</option>
-                        <option value="D">Z - A</option>
-                        <option value="hight">Attack mas alto</option>
-                        <option value="low">Attack mas bajo</option>
-                    </select>
-                </div>
 
-                <div>
-                    <select className={styles.select} onChange={handleFilter}>
-                        <option value="all">All</option>
-                        {allTypes.map(type => (
-                            <option key={type.id} value={type.name}>
-                                {type.name}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-
-                <div>
-                    <select className={styles.select} onChange={handleOrigin}>
-                        <option value="api">API</option>
-                        <option value="db">Data base</option>
-                    </select>
-                </div>
-            </div>
 
             {isHomeRoute && (<Pagination
                 currentPage={currentPage}
@@ -141,11 +113,42 @@ export const App = () => {
                 onPageChange={handlePageChange}
             />)}
 
-            <Routes>
-                <Route path='/app' element={<Cards allPokemons={currentPokemons} pokemons={pokemons} />} />
-                <Route path='/app/detail/:id' element={<Detail />} />
-                <Route path='/app/create' element={<Create createPokemon={createPokemon} />} />
-            </Routes>
+            <div className={styles.container}>
+                <div className={styles.selectContainer}>
+                    <div>
+                        <select className={styles.select} onChange={handleOrder}>
+                            <option value="all">All</option>
+                            <option value="A">A - Z</option>
+                            <option value="D">Z - A</option>
+                            <option value="hight">Attack mas alto</option>
+                            <option value="low">Attack mas bajo</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <select className={styles.select} onChange={handleFilter}>
+                            <option value="all">All</option>
+                            {allTypes.map(type => (
+                                <option key={type.id} value={type.name}>
+                                    {type.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <div>
+                        <select className={styles.select} onChange={handleOrigin}>
+                            <option value="api">API</option>
+                            <option value="db">Data base</option>
+                        </select>
+                    </div>
+                </div>
+                <Routes>
+                    <Route path='/app' element={<Cards allPokemons={currentPokemons} pokemons={pokemons} />} />
+                    <Route path='/app/detail/:id' element={<Detail />} />
+                    <Route path='/app/create' element={<Create createPokemon={createPokemon} />} />
+                </Routes>
+            </div>
 
             {isHomeRoute && (<Pagination
                 currentPage={currentPage}
