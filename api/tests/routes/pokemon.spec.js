@@ -13,7 +13,7 @@ describe('Pokemon routes', () => {
             console.error('No se pudo conectar a la base de datos:', err);
         }));
 
-    beforeEach(() => Pokemon.sync({ force: true })
+    beforeEach(() => Pokemon.sync({ force: false })
         .then(() => Pokemon.create({
             name: 'Pikachu',
             hp: 50,

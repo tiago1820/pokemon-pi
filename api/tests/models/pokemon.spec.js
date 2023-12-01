@@ -7,7 +7,7 @@ describe('Pokemon model', () => {
             console.error('No se pudo conectar a la base de datos:', err);
         }));
     describe('Validadores', () => {
-        beforeEach(() => Pokemon.sync({ force: true }));
+        beforeEach(() => Pokemon.sync({ force: false }));
         describe('name', () => {
             it('debería lanzar un error si el nombre es nulo', (done) => {
                 Pokemon.create({})
