@@ -1,5 +1,6 @@
 import styles from './Detail.module.css';
 import { usePokemon } from '../../hooks/usePokemon';
+import  pokemonImages  from '../../../images/sprites/index';
 
 export const Detail = () => {
     const pokemon = usePokemon();
@@ -14,7 +15,8 @@ export const Detail = () => {
     return (
         <div className={styles.container}>
             <div className={styles.card}>
-                <img className={styles.img} src={pokemon.img} alt="" />
+                {/* id de la imagen */}
+                <img className={styles.img} src={pokemonImages[pokemon.id]} alt="" />
 
                 <div className={styles.cardContent}>
                     <div className={styles.name}>{capitalizeFirstLetter(pokemon.name)}</div>
