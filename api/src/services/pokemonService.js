@@ -103,8 +103,6 @@ class PokemonService {
         }
     }
 
-
-
     getPokemonByName = async (name) => {
         try {
 
@@ -151,7 +149,6 @@ class PokemonService {
             throw error;
         }
     }
-
 }
 
 module.exports = PokemonService;
