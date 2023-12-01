@@ -30,7 +30,6 @@ class PokemonService {
                     height: infoFromApi.height,
                 };
 
-                console.log("BOM DIA!!!", listaDePokemon);
                 listaDePokemon.push(infoPokemon);
             }
 

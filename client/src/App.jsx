@@ -21,7 +21,6 @@ export const App = () => {
 
     const createPokemon = async pokeData => {
 
-        console.log("POKEDATA", pokeData);
         try {
             const {
                 name,
@@ -47,7 +46,6 @@ export const App = () => {
                 types,
             });
 
-            console.log('Pokemon creado:', response.data);
         } catch (error) {
             console.error('Error al crear el Pokémon:', error);
             throw error;
