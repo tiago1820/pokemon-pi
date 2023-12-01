@@ -114,9 +114,12 @@ export const App = () => {
             />)}
 
             <div className={styles.container}>
-                <div className={styles.selectContainer}>
+                {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (
+                    <div className={styles.selectContainer}>
+                    {/* <Accordion /> */}
                     <div>
                         <select className={styles.select} onChange={handleOrder}>
+                            <option value="" disabled selected>Select Order By</option>
                             <option value="all">All</option>
                             <option value="A">A - Z</option>
                             <option value="D">Z - A</option>
@@ -127,6 +130,7 @@ export const App = () => {
 
                     <div>
                         <select className={styles.select} onChange={handleFilter}>
+                            <option value="" disabled selected>Select Filter by types</option>
                             <option value="all">All</option>
                             {allTypes.map(type => (
                                 <option key={type.id} value={type.name}>
@@ -138,11 +142,16 @@ export const App = () => {
 
                     <div>
                         <select className={styles.select} onChange={handleOrigin}>
+                            <option value="" disabled selected>Select Filter by origin</option>
+                            <option value="all">All</option>
                             <option value="api">API</option>
                             <option value="db">Data base</option>
                         </select>
                     </div>
                 </div>
+                )
+
+                }
                 <Routes>
                     <Route path='/app' element={<Cards allPokemons={currentPokemons} pokemons={pokemons} />} />
                     <Route path='/app/detail/:id' element={<Detail />} />
