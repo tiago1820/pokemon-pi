@@ -5,31 +5,37 @@ export const Card = props => {
 
     const { id, name, image, types } = props;
 
+    const capitalizeFirstLetter = word => {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+    };
+
     return (
         <div className={styles.container}>
-            <Link to={`/app/detail/${id}`}>
-                <div className={styles.card}>
+
+            <div className={styles.card}>
+                <Link to={`/app/detail/${id}`} className={styles.cardLink}>
                     <img className={styles.img} src={image} alt="" />
 
                     <div className={styles.cardContent}>
-                        <div className={styles.name}>{name}</div>
+                        <div className={styles.name}>{capitalizeFirstLetter(name)}</div>
                     </div>
 
                     {
                         types && types.length > 0 && (
                             <div className={styles.types}>
                                 {types.map((type, index) => (
-                                    <span key={index} className={styles.type}>
+                                    <span
+                                        key={index}
+                                        className={`${styles.type} ${styles[type.toLowerCase()]}`}
+                                    >
                                         {type}
                                     </span>
                                 ))}
                             </div>
                         )
                     }
-                </div>
-            </Link>
-
-
+                </Link>
+            </div>
         </div>
     )
 }
