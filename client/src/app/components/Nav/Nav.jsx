@@ -16,7 +16,7 @@ export const Nav = props => {
                 </div>
 
                 <div>
-                    <SearchBar onSearch={onSearch} />
+                    {/* <SearchBar onSearch={onSearch} /> */}
                 </div>
 
                 <div className={styles.buttonContainer}>
