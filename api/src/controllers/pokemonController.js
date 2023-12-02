@@ -87,8 +87,10 @@ class PokemonController {
                 created
             } = req.body;
 
+            const lowercaseName = name.toLowerCase();
+
             const newPokemon = await Pokemon.create({
-                name,
+                name: lowercaseName,
                 types,
                 image: img,
                 hp,
