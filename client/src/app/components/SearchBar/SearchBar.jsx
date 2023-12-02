@@ -12,16 +12,15 @@ export const SearchBar = props => {
     return (
         <div className={styles.form}>
             <div className={styles.column}>
+            <h2>Pokemons</h2>
                 <div className={styles.row}>
-                    <div>
-                        <h2>Pokemons</h2>
-                        <input
-                            className={styles.searchInput}
-                            type="search"
-                            onChange={handleChange}
-                            value={name}
-                        />
-                    </div>
+                    
+                    <input
+                        className={styles.searchInput}
+                        type="search"
+                        onChange={handleChange}
+                        value={name}
+                    />
                     <button
                         className={styles.button}
                         onClick={() => onSearch(name)}
