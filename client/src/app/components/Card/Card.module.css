@@ -44,6 +44,11 @@
     color: #313131;
 }
 
+.name:hover {
+    color: rgb(251, 172, 12);
+    font-weight: bold;
+}
+
 .types {
     display: flex;
     justify-content: center;
@@ -55,7 +60,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     margin: 0 5px;
-    padding: 5px 10px;
+    padding: 5px 13px;
     font-size: 1.4em;
     text-align: center;
     line-height: 1.2;
@@ -64,6 +69,15 @@
 span {
     width: 55px;
     height: 30px;
+}
+
+.btnClose {
+    position: absolute;
+    background-color: #C56B7A;
+}
+
+.btnClose:hover {
+    background-color: #bf324a;
 }
 
 /* types colors */

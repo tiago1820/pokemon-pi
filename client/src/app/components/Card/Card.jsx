@@ -17,16 +17,15 @@ export const Card = props => {
                 {/* <Link to={`/app/detail/${id}`} className={styles.cardLink}> */}
 
                 {onClose && (
-                    <button onClick={() => onClose(id)}>X</button>
+                    <button className={styles.btnClose} onClick={() => onClose(id)}>X</button>
                 )}
+                <Link to={`/app/detail/${id}`} className={styles.cardLink}>
+                    <img className={styles.img} src={image || defaultImg} alt="" />
 
-                <img className={styles.img} src={image || defaultImg} alt="" />
-
-                <div className={styles.cardContent}>
-                    <Link to={`/app/detail/${id}`} className={styles.cardLink}>
+                    <div className={styles.cardContent}>
                         <div className={styles.name}>{capitalizeFirstLetter(name)}</div>
-                    </Link>
-                </div>
+                    </div>
+                </Link>
 
                 {
                     types && types.length > 0 && (
