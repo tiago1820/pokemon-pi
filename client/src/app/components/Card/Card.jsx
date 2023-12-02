@@ -1,5 +1,6 @@
 import styles from './Card.module.css';
 import { Link } from 'react-router-dom';
+import defaultImg from '../../../images/default-img.png';
 
 export const Card = props => {
 
@@ -14,7 +15,7 @@ export const Card = props => {
 
             <div className={styles.card}>
                 <Link to={`/app/detail/${id}`} className={styles.cardLink}>
-                    <img className={styles.img} src={image} alt="" />
+                    <img className={styles.img} src={image || defaultImg} alt="" />
 
                     <div className={styles.cardContent}>
                         <div className={styles.name}>{capitalizeFirstLetter(name)}</div>
