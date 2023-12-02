@@ -74,6 +74,11 @@ span {
 .btnClose {
     position: absolute;
     background-color: #C56B7A;
+    padding: 10px 15px;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 .btnClose:hover {
