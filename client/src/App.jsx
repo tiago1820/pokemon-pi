@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPokemons, getAllTypes, orderCards, filterCards, filterOrigin } from './app/redux/actions';
 import styles from './App.module.css';
-import { Cards, Pagination, Detail, Nav, Loader } from './app/components';
+import { Cards, Pagination, Detail, Nav, Loader, SearchBar } from './app/components';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { Create } from './app/components/Create/Create';
@@ -88,19 +88,19 @@ export const App = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-          try {
-            setLoading(true);
-            await dispatch(getAllPokemons());
-            await dispatch(getAllTypes());
-          } catch (error) {
-            console.error('Error fetching data:', error);
-          } finally {
-            setLoading(false);
-          }
+            try {
+                setLoading(true);
+                await dispatch(getAllPokemons());
+                await dispatch(getAllTypes());
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            } finally {
+                setLoading(false);
+            }
         };
-    
+
         fetchData();
-      }, [dispatch]);
+    }, [dispatch]);
 
     useEffect(() => {
         setCurrentPage(1);
@@ -120,7 +120,9 @@ export const App = () => {
         <div className={styles.appContainer}>
             {loading && <Loader />}
 
-            {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (<Nav onSearch={onSearch} />)}
+            <Nav onSearch={onSearch} />
+            {/* {isHomeRoute && (<Nav onSearch={onSearch} />)} */}
+            {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (<SearchBar onSearch={onSearch} />)}
 
             {isHomeRoute && (<Pagination
                 currentPage={currentPage}
@@ -131,39 +133,39 @@ export const App = () => {
             <div className={styles.container}>
                 {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (
                     <div className={styles.selectContainer}>
-                    {/* <Accordion /> */}
-                    <div>
-                        <select className={styles.select} onChange={handleOrder}>
-                            <option value="" disabled selected>Order By...</option>
-                            <option value="all">All</option>
-                            <option value="A">A - Z</option>
-                            <option value="D">Z - A</option>
-                            <option value="hight">Attack mas alto</option>
-                            <option value="low">Attack mas bajo</option>
-                        </select>
-                    </div>
+                        {/* <Accordion /> */}
+                        <div>
+                            <select className={styles.select} onChange={handleOrder}>
+                                <option value="" disabled selected>Order By...</option>
+                                <option value="all">All</option>
+                                <option value="A">A - Z</option>
+                                <option value="D">Z - A</option>
+                                <option value="hight">Attack mas alto</option>
+                                <option value="low">Attack mas bajo</option>
+                            </select>
+                        </div>
 
-                    <div>
-                        <select className={styles.select} onChange={handleFilter}>
-                            <option value="" disabled selected>Filter by types</option>
-                            <option value="all">All</option>
-                            {allTypes.map(type => (
-                                <option key={type.id} value={type.name}>
-                                    {type.name}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
+                        <div>
+                            <select className={styles.select} onChange={handleFilter}>
+                                <option value="" disabled selected>Filter by types</option>
+                                <option value="all">All</option>
+                                {allTypes.map(type => (
+                                    <option key={type.id} value={type.name}>
+                                        {type.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
 
-                    <div>
-                        <select className={styles.select} onChange={handleOrigin}>
-                            <option value="" disabled selected>Filter by origin</option>
-                            <option value="all">All</option>
-                            <option value="api">API</option>
-                            <option value="db">Data base</option>
-                        </select>
+                        <div>
+                            <select className={styles.select} onChange={handleOrigin}>
+                                <option value="" disabled selected>Filter by origin</option>
+                                <option value="all">All</option>
+                                <option value="api">API</option>
+                                <option value="db">Data base</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
                 )
 
                 }
