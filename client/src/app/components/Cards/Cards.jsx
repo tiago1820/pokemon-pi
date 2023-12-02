@@ -2,7 +2,7 @@ import { Card } from '../../components';
 import styles from './Cards.module.css';
 
 export const Cards = props => {
-    const { allPokemons, pokemons } = props;
+    const { allPokemons, pokemons, onClose } = props;
 
     return (
         <div className={styles.container}>
@@ -22,6 +22,7 @@ export const Cards = props => {
                                 speed={poke.speed}
                                 height={poke.height}
                                 weight={poke.weight}
+                                onClose={onClose}
                             />
                         ))
                     ) : (
