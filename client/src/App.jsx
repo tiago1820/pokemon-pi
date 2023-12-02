@@ -57,7 +57,13 @@ export const App = () => {
         try {
             const { data } = await axios(`http://localhost:3001/pokemons/name?name=${name}`);
             if (data.name) {
-                setPokemons(oldPokemons => [...oldPokemons, data]);
+                const isDuplicate = pokemons.some(pokemon => pokemon.name === data.name);
+                if (isDuplicate) {
+                    window.alert('¡No puedes buscar Pokémon repetido!');
+                } else {
+                    setPokemons(oldPokemons => [...oldPokemons, data]);
+                }
+
             }
         } catch (error) {
             console.log(error.response.data);
@@ -166,8 +172,8 @@ export const App = () => {
                             <select className={styles.select} onChange={handleOrigin}>
                                 <option value="" disabled selected>Filter by origin</option>
                                 <option value="all">All</option>
-                                <option value="api">API</option>
-                                <option value="db">Data base</option>
+                                <option value="api">Originals</option>
+                                <option value="db">Creados</option>
                             </select>
                         </div>
                     </div>
