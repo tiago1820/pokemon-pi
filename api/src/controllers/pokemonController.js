@@ -9,7 +9,7 @@ class PokemonController {
 
     getAllPokemons = async (req, res) => {
         try {
-            const pokemonExternos = await this.pokeService.getAllPokemons(100);
+            const pokemonExternos = await this.pokeService.getAllPokemons(5);
             const pokemonDB = await Pokemon.findAll({
                 include: [{ model: Type, through: 'pokemon_type' }],
             });
