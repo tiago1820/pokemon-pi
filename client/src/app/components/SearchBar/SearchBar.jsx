@@ -20,6 +20,7 @@ export const SearchBar = props => {
                         type="search"
                         onChange={handleChange}
                         value={name}
+                        placeholder='Busqueda por nombre'
                     />
                     <button
                         className={styles.button}
