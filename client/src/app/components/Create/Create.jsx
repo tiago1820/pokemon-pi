@@ -145,7 +145,7 @@ export const Create = props => {
                                 <input onInput={handleInput} name='height' type="number" value={pokeData.height} />
                                 {errors.height && <p>{errors.height}</p>}
                             </div>
-                            <button type='button' onClick={handleNext}>Next</button>
+                            <button className={styles.btnNext} type='button' onClick={handleNext}>Next</button>
                         </section>
                     )}
                 {
@@ -172,8 +172,8 @@ export const Create = props => {
                                 ))}
                             </div>
                             <div className={styles.buttonContainer}>
-                                <button type='button' onClick={handlePrevious}>previous</button>
-                                <button type="button" onClick={handleSubmit}>Create</button>
+                                <button className={styles.btnPrev} type='button' onClick={handlePrevious}>previous</button>
+                                <button className={styles.btnSub} type="button" onClick={handleSubmit}>Create</button>
                             </div>
                         </section>
                     )
