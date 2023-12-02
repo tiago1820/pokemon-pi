@@ -71,7 +71,7 @@ p {
 }
 
 
-button {
+.btnNext .btnPrev .btnSub {
     padding: 10px 15px;
     background-color: #4caf50;
     color: #fff;
@@ -80,6 +80,6 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+.btnNext:hover {
     background-color: #45a049;
 }
