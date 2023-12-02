@@ -100,7 +100,7 @@ export const App = () => {
         };
 
         fetchData();
-    }, [dispatch]);
+    }, []); //dispatch
 
     useEffect(() => {
         setCurrentPage(1);
