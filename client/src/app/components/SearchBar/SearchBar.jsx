@@ -9,16 +9,23 @@ export const SearchBar = props => {
         setName(e.target.value);
     }
 
+    const handleKeyPress = e => {
+        if(e.key === 'Enter'){
+            onSearch(name);
+        }
+    }
+
     return (
         <div className={styles.form}>
             <div className={styles.column}>
-            <h2>Pokemons</h2>
+                <h2>Pokemons</h2>
                 <div className={styles.row}>
-                    
+
                     <input
                         className={styles.searchInput}
                         type="search"
                         onChange={handleChange}
+                        onKeyPress={handleKeyPress}
                         value={name}
                         placeholder='Busqueda por nombre'
                     />

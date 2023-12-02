@@ -58,11 +58,10 @@ export const App = () => {
             const { data } = await axios(`http://localhost:3001/pokemons/name?name=${name}`);
             if (data.name) {
                 setPokemons(oldPokemons => [...oldPokemons, data]);
-            } else {
-                window.alert('¡No hay pokemons con este nombre!');
-            }
+            } 
         } catch (error) {
-            throw error;
+            console.log(error.response.data);
+            window.alert('¡No hay pokemons con este nombre!');
         }
     }
 
