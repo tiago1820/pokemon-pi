@@ -58,11 +58,17 @@ export const App = () => {
             const { data } = await axios(`http://localhost:3001/pokemons/name?name=${name}`);
             if (data.name) {
                 setPokemons(oldPokemons => [...oldPokemons, data]);
-            } 
+            }
         } catch (error) {
             console.log(error.response.data);
             window.alert('¡No hay pokemons con este nombre!');
         }
+    }
+
+    const onClose = id => {
+        setPokemons(pokemons.filter(poke => {
+            return poke.id !== id;
+        }));
     }
 
     const handleOrder = (e) => {
@@ -169,7 +175,7 @@ export const App = () => {
 
                 }
                 <Routes>
-                    <Route path='/app' element={<Cards allPokemons={currentPokemons} pokemons={pokemons} />} />
+                    <Route path='/app' element={<Cards allPokemons={currentPokemons} pokemons={pokemons} onClose={onClose} />} />
                     <Route path='/app/detail/:id' element={<Detail />} />
                     <Route path='/app/create' element={<Create createPokemon={createPokemon} />} />
                 </Routes>
