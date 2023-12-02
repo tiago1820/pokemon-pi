@@ -2,9 +2,15 @@ import styles from './Create.module.css';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import validator from './validator';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { getAllPokemons } from '../../redux/actions';
+
 
 export const Create = props => {
     const { createPokemon } = props;
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const allTypes = useSelector(state => state.allTypes);
     const [currentStep, setCurrentStep] = useState(1);
     const [pokeData, setPokeData] = useState({
@@ -82,6 +88,9 @@ export const Create = props => {
 
         if (allFieldsHaveData) {
             createPokemon(pokeData);
+            navigate('/app');
+            dispatch(getAllPokemons());
+
         } else {
             window.alert('Por favor, completa todos los campos antes de crear el Pokémon.');
         }
@@ -159,8 +168,6 @@ export const Create = props => {
 
                                         />
                                         <label htmlFor={type.id}>{type.name}</label>
-
-
                                     </div>
                                 ))}
                             </div>
