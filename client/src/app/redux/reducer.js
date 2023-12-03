@@ -65,14 +65,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
             }
 
         case FILTER:
-            if (payload === 'all') {
-                return {
-                    ...state,
-                    alteredList: [...state.allPokemons],
-                };
-            } else {
-                const filteredList = state.alteredList.filter(pokemon =>
-                    pokemon.types && pokemon.types.includes(payload)
+            const { type, origin } = payload;
+
+            if (type && origin) {
+                const filteredList = state.allPokemons.filter(pokemon =>
+                    pokemon.types && pokemon.types.includes(type) &&
+                    (origin === 'api' ? !pokemon.created : pokemon.created)
                 );
 
                 return {
@@ -81,23 +79,27 @@ const rootReducer = (state = initialState, { type, payload }) => {
                 };
             }
 
-        case ORIGIN:
-            let filteredList;
+            if (type) {
+                const filteredList = state.allPokemons.filter(pokemon =>
+                    pokemon.types && pokemon.types.includes(type)
+                );
 
-            if (payload === 'db') {
-                filteredList = state.alteredList.filter(pokemon => 'created' in pokemon);
-            } else if (payload === 'api') {
-                filteredList = state.alteredList.filter(pokemon => !('created' in pokemon));
-            } else {
-                filteredList = [...state.allPokemons];
+                return {
+                    ...state,
+                    alteredList: filteredList,
+                };
             }
 
-            return {
-                ...state,
-                alteredList: filteredList,
-            };
+            if (origin) {
+                const filteredList = state.allPokemons.filter(pokemon =>
+                    (origin === 'API' ? !pokemon.created : pokemon.created)
+                );
 
-
+                return {
+                    ...state,
+                    alteredList: filteredList,
+                };
+            }
 
 
         default:
