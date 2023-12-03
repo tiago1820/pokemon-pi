@@ -6,10 +6,13 @@ import { Cards, Pagination, Detail, Nav, Loader, SearchBar } from './app/compone
 import { Routes, Route, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { Create } from './app/components/Create/Create';
+const IP = process.env.REACT_APP_IP;
 
 export const App = () => {
     const dispatch = useDispatch();
     const location = useLocation();
+
+    console.log("AQUI", IP);
 
     const alteredList = useSelector(state => state.alteredList);
     const allTypes = useSelector(state => state.allTypes);
@@ -34,7 +37,7 @@ export const App = () => {
                 types,
             } = pokeData;
 
-            const URL = 'http://localhost:3001/pokemons';
+            const URL = `${IP}:3001/pokemons`;
 
             const response = await axios.post(URL, {
                 name,
@@ -55,7 +58,7 @@ export const App = () => {
 
     const onSearch = async name => {
         try {
-            const { data } = await axios(`http://localhost:3001/pokemons/name?name=${name}`);
+            const { data } = await axios(`${IP}:3001/pokemons/name?name=${name}`);
             if (data.name) {
                 const isDuplicate = pokemons.some(pokemon => pokemon.name === data.name);
                 if (isDuplicate) {

@@ -1,9 +1,11 @@
 import axios from 'axios';
 
 import { CLEAN_DETAIL, GET_ALL_POKEMONS, GET_POKEMON_DETAIL, ORDER, GET_ALL_TYPES, FILTER, ORIGIN } from "./action-types";
+const IP = process.env.REACT_APP_IP;
+
 
 export const getAllPokemons = () => {
-    const endpoint = 'http://localhost:3001/pokemons';
+    const endpoint = `${IP}:3001/pokemons`;
     return async (dispatch) => {
         try {
             const { data } = await axios.get(endpoint);
@@ -18,7 +20,7 @@ export const getAllPokemons = () => {
 }
 
 export const getAllTypes = () => {
-    const endpoint = 'http://localhost:3001/types';
+    const endpoint = `${IP}:3001/types`;
     return async (dispatch) => {
         try {
             const { data } = await axios.get(endpoint);
@@ -33,7 +35,7 @@ export const getAllTypes = () => {
 }
 
 export const getPokemonDetail = id => {
-    const endpoint = `http://localhost:3001/pokemons/${id}`;
+    const endpoint = `${IP}:3001/pokemons/${id}`;
     return async (dispatch) => {
         try {
             const { data } = await axios.get(endpoint);
