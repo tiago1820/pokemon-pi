@@ -1,4 +1,4 @@
-import { CLEAN_DETAIL, GET_ALL_POKEMONS, GET_POKEMON_DETAIL, ORDER, GET_ALL_TYPES, FILTER, ORIGIN } from "./action-types";
+import { CLEAN_DETAIL, GET_ALL_POKEMONS, GET_POKEMON_DETAIL, ORDER, GET_ALL_TYPES, FILTER, ORIGIN, CLEAN_FILTERS } from "./action-types";
 
 const initialState = {
     allPokemons: [],
@@ -13,6 +13,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
             return {
                 ...state, allPokemons: payload, alteredList: payload,
             };
+
+        case CLEAN_FILTERS:
+            return {
+                ...state, alteredList: [...state.allPokemons],
+            }
 
         case GET_ALL_TYPES:
             return {
@@ -39,7 +44,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
                     alteredList: [...state.allPokemons],
                 };
             } else {
-                copy = [...state.allPokemons].sort((a, b) => {
+                copy = [...state.alteredList].sort((a, b) => {
                     if (payload === 'A') {
                         return a.name.localeCompare(b.name);
                     } else if (payload === 'D') {
@@ -66,7 +71,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
                     alteredList: [...state.allPokemons],
                 };
             } else {
-                const filteredList = state.allPokemons.filter(pokemon =>
+                const filteredList = state.alteredList.filter(pokemon =>
                     pokemon.types && pokemon.types.includes(payload)
                 );
 
@@ -80,9 +85,9 @@ const rootReducer = (state = initialState, { type, payload }) => {
             let filteredList;
 
             if (payload === 'db') {
-                filteredList = state.allPokemons.filter(pokemon => 'created' in pokemon);
+                filteredList = state.alteredList.filter(pokemon => 'created' in pokemon);
             } else if (payload === 'api') {
-                filteredList = state.allPokemons.filter(pokemon => !('created' in pokemon));
+                filteredList = state.alteredList.filter(pokemon => !('created' in pokemon));
             } else {
                 filteredList = [...state.allPokemons];
             }
@@ -91,6 +96,9 @@ const rootReducer = (state = initialState, { type, payload }) => {
                 ...state,
                 alteredList: filteredList,
             };
+
+
+
 
         default:
             return {

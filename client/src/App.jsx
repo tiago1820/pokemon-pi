@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllPokemons, getAllTypes, orderCards, filterCards, filterOrigin } from './app/redux/actions';
+import { getAllPokemons, getAllTypes, orderCards, filterCards, filterOrigin, cleanFilters } from './app/redux/actions';
 import styles from './App.module.css';
 import { Cards, Pagination, Detail, Nav, Loader, SearchBar } from './app/components';
 import { Routes, Route, useLocation } from 'react-router-dom';
@@ -22,6 +22,13 @@ export const App = () => {
     const [pokemons, setPokemons] = useState([]);
     const [aux, setAux] = useState(false);
     const [loading, setLoading] = useState(true);
+
+    const [selectedOrder, setSelectedOrder] = useState("");
+    const [selectedType, setSelectedType] = useState("");
+    const [selectedOrigin, setSelectedOrigin] = useState("");
+
+
+
 
     const createPokemon = async pokeData => {
 
@@ -82,18 +89,29 @@ export const App = () => {
 
     const handleOrder = (e) => {
         dispatch(orderCards(e.target.value));
+        setSelectedOrder(e.target.value);
         setAux(!aux);
     }
 
     const handleFilter = (e) => {
         dispatch(filterCards(e.target.value));
+        setSelectedType(e.target.value);
         setAux(!aux);
     }
 
     const handleOrigin = (e) => {
         dispatch(filterOrigin(e.target.value));
+        setSelectedOrigin(e.target.value);
         setAux(!aux);
     }
+
+    const clearFilters = () => {
+        dispatch(cleanFilters());
+        setSelectedOrder("");
+        setSelectedType("");
+        setSelectedOrigin("");
+    };
+
 
     // useEffect(() => {
     //     dispatch(getAllPokemons());
@@ -147,38 +165,35 @@ export const App = () => {
             <div className={styles.container}>
                 {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (
                     <div className={styles.selectContainer}>
-                        {/* <Accordion /> */}
                         <div>
-                            <select className={styles.select} onChange={handleOrder}>
-                                <option value="" disabled selected>Order By...</option>
-                                <option value="all">All</option>
-                                <option value="A">A - Z</option>
-                                <option value="D">Z - A</option>
-                                <option value="hight">Attack mas alto</option>
-                                <option value="low">Attack mas bajo</option>
-                            </select>
+                            {/* <button className={styles.clearButton} onClick={clearFilters}> */}
+                            <button onClick={clearFilters}>
+                                Limpiar Filtros
+                            </button>
                         </div>
 
-                        <div>
-                            <select className={styles.select} onChange={handleFilter}>
-                                <option value="" disabled selected>Filter by types</option>
-                                <option value="all">All</option>
-                                {allTypes.map(type => (
-                                    <option key={type.id} value={type.name}>
-                                        {type.name}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
+                        <select className={styles.select} onChange={handleOrder} value={selectedOrder}>
+                            <option value="" disabled>Order By...</option>
+                            <option value="A">A - Z</option>
+                            <option value="D">Z - A</option>
+                            <option value="hight">Attack mas alto</option>
+                            <option value="low">Attack mas bajo</option>
+                        </select>
 
-                        <div>
-                            <select className={styles.select} onChange={handleOrigin}>
-                                <option value="" disabled selected>Filter by origin</option>
-                                <option value="all">All</option>
-                                <option value="api">Originals</option>
-                                <option value="db">Creados</option>
-                            </select>
-                        </div>
+                        <select className={styles.select} onChange={handleFilter} value={selectedType}>
+                            <option value="" disabled>Filter by types</option>
+                            {allTypes.map(type => (
+                                <option key={type.id} value={type.name}>
+                                    {type.name}
+                                </option>
+                            ))}
+                        </select>
+
+                        <select className={styles.select} onChange={handleOrigin} value={selectedOrigin} >
+                            <option value="" disabled>Filter by origin</option>
+                            <option value="api">Originals</option>
+                            <option value="db">Creados</option>
+                        </select>
                     </div>
                 )
 
