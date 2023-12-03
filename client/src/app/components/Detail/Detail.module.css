@@ -11,16 +11,30 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
     overflow: hidden;
-    width: 300px;
+    width: 100%;
 }
 
 .card:hover {
     transform: scale(1.05);
 }
 
+.row {
+    display: flex;
+    width: 100%; 
+}
+
+.left {
+    flex: 1;
+}
+
+.right {
+    flex: 2;
+}
+
+
 .img {
     width: 100%;
-    height: auto;
+    height: 80%;
     border-bottom: 1px solid #ddd;
     background-color: #F2F2F2;
 }
@@ -39,7 +53,6 @@
 .types {
     display: flex;
     justify-content: center;
-    padding: 10px;
 }
 
 .type {
@@ -94,6 +107,8 @@ span {
     transform: translate(-50%, -50%);
     color: #fff;
 }
+
+
 
 
 /* types colors */
