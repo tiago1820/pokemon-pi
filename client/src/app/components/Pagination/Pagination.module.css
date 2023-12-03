@@ -5,11 +5,27 @@
 }
 
 .button {
-    margin: 0 5px; 
+    margin: 0 5px;
+    padding: 8px 12px;
+    border: 1px solid #3498db;
+    background-color: #3498db;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.button:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+    color: #fff;
 }
 
 .active {
     font-weight: bold;
+    background-color: #2980b9;
+    border-color: #2980b9;
+    color: #fff;
 }
 
 .pagination button {
