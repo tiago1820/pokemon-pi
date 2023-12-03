@@ -12,8 +12,6 @@ export const App = () => {
     const dispatch = useDispatch();
     const location = useLocation();
 
-    console.log("AQUI", IP);
-
     const alteredList = useSelector(state => state.alteredList);
     const allTypes = useSelector(state => state.allTypes);
 
@@ -25,7 +23,10 @@ export const App = () => {
 
     const [selectedOrder, setSelectedOrder] = useState("");
     const [selectedType, setSelectedType] = useState("");
-    const [selectedOrigin, setSelectedOrigin] = useState("");
+    const [selectedOrigin, setSelectedOrigin] = useState("api");
+
+    console.log("APP", selectedType, selectedOrigin);
+    console.log(alteredList);
 
 
 
@@ -94,13 +95,13 @@ export const App = () => {
     }
 
     const handleFilter = (e) => {
-        dispatch(filterCards(e.target.value));
+        dispatch(filterCards(e.target.value, selectedOrigin));
         setSelectedType(e.target.value);
         setAux(!aux);
     }
 
     const handleOrigin = (e) => {
-        dispatch(filterOrigin(e.target.value));
+        dispatch(filterCards(selectedType, e.target.value));
         setSelectedOrigin(e.target.value);
         setAux(!aux);
     }

@@ -66,10 +66,12 @@ export const orderCards = order => {
     };
 };
 
-export const filterCards = filter => {
+export const filterCards = (type, origin) => {
+
+    console.log("ACTION", type, origin);
     return {
         type: FILTER,
-        payload: filter,
+        payload: { type, origin },
     };
 };
 
