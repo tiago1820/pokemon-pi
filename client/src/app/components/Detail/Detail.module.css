@@ -3,24 +3,27 @@
     justify-content: center;
     align-items: center;
     margin: 10px auto;
+    width: 70%;
 }
 
 .card {
+    position: relative;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
+    /* transition: transform 0.3s ease-in-out; */
     overflow: hidden;
     width: 100%;
+    padding: 0.5rem;
 }
 
-.card:hover {
+/* .card:hover {
     transform: scale(1.05);
-}
+} */
 
 .row {
     display: flex;
-    width: 100%; 
+    width: 100%;
 }
 
 .left {
@@ -29,6 +32,7 @@
 
 .right {
     flex: 2;
+    margin-left: 0.5rem;
 }
 
 
@@ -72,6 +76,7 @@ span {
 }
 
 .attributes {
+    
     margin-top: 10px;
     text-align: center;
 }
@@ -105,9 +110,26 @@ span {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #fff;
+    color: rgb(226, 193, 6);
+    font-weight: bold;
 }
 
+.btnEdit, .btnDel {
+    position: absolute;
+    background-color: #C56B7A;
+    padding: 10px 15px;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    right: 5px;
+    bottom: 5px;
+}
+
+.btnEdit {
+    background-color: #2980B9;
+    right: 43px;
+}
 
 
 

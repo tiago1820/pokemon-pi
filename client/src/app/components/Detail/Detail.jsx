@@ -58,6 +58,8 @@ export const Detail = () => {
     {renderBar('Weight', pokemon.weight)} */}
                             <div>Height: {pokemon.height}</div>
                             <div>Weight: {pokemon.weight}</div>
+                            <button className={styles.btnEdit}>E</button>
+                            <button className={styles.btnDel}>X</button>
                         </div>
 
                     </div>
