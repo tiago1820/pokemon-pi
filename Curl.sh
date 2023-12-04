@@ -4,6 +4,9 @@ curl "http://localhost:3001/pokemons"
 # Para buscar un pokemon por id
 curl http://localhost:3001/pokemons/1
 
+# Para eliminar un pokemon por id
+curl -X DELETE http://localhost:3000/pokemons/1
+
 # Para buscar un pokemon por UUID
 curl http://localhost:3001/pokemons/94d0bc53-5ea6-4f0b-9268-3db7532158a4
 

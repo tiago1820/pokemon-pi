@@ -44,12 +44,37 @@ class PokemonController {
             const source = isNaN(id) ? 'bdd' : 'api';
             const pokemon = await this.pokeService.getPokemonById(id, source);
 
-
             return pokemon.name
                 ? res.json(pokemon)
                 : res.status(404).send('Pokemon not found.');
         } catch (error) {
             return res.status(500).send(error.message);
+        }
+    }
+
+    removePokemonById = async (req, res) => {
+        try {
+            const { id } = req.params;
+            console.log('Intentando eliminar el Pokémon con ID:', id);
+
+
+            const pokemonToDelete = await Pokemon.findByPk(id);
+            if (!pokemonToDelete) {
+                return res.status(404).send('Pokemon not found.');
+            }
+
+            console.log('Pokemon encontrado:', pokemonToDelete);
+
+            await Pokemon.destroy({
+                where: {
+                    id: id
+                }
+            });
+
+            return res.status(200).send('Pokemon successfully removed.');
+        } catch (error) {
+            console.error(error);
+            return res.status(500).send('Internal Server Error');
         }
     }
 

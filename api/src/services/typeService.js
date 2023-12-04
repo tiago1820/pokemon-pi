@@ -34,7 +34,6 @@ class TypeService {
             return types;
 
         } catch (error) {
-            console.log('Error en getAllPokemons:', error);
             throw error;
         }
     }

@@ -2,10 +2,15 @@ import styles from './Detail.module.css';
 import { usePokemon } from '../../hooks/usePokemon';
 import pokemonImages from '../../../images/sprites/index';
 import defaultImg from '../../../images/default-img.png';
-
+import { useDispatch } from 'react-redux';
+import { removePokemon } from '../../redux/actions';
+import { useNavigate } from 'react-router-dom';
+import { getAllPokemons } from '../../redux/actions';
 
 export const Detail = () => {
     const pokemon = usePokemon();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const capitalizeFirstLetter = (word) => {
         if (typeof word === 'string' && word.length > 0) {
@@ -26,6 +31,13 @@ export const Detail = () => {
             </div>
         );
     };
+
+    const handleDelete = () => {
+        dispatch(removePokemon(pokemon.id));
+        navigate('/app');
+        dispatch(getAllPokemons());
+
+    }
 
     return (
         <div className={styles.container}>
@@ -58,8 +70,16 @@ export const Detail = () => {
     {renderBar('Weight', pokemon.weight)} */}
                             <div>Height: {pokemon.height}</div>
                             <div>Weight: {pokemon.weight}</div>
-                            <button className={styles.btnEdit}>E</button>
-                            <button className={styles.btnDel}>X</button>
+
+                            {pokemon.created && (
+                                <>
+                                    <button className={styles.btnEdit}>E</button>
+                                    <button className={styles.btnDel} onClick={handleDelete}>X</button>
+                                </>
+                            )
+
+                            }
+
                         </div>
 
                     </div>

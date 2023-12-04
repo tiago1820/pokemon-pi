@@ -1,4 +1,14 @@
-import { CLEAN_DETAIL, GET_ALL_POKEMONS, GET_POKEMON_DETAIL, ORDER, GET_ALL_TYPES, FILTER, ORIGIN, CLEAN_FILTERS } from "./action-types";
+import {
+    CLEAN_DETAIL,
+    GET_ALL_POKEMONS,
+    GET_POKEMON_DETAIL,
+    ORDER,
+    GET_ALL_TYPES,
+    FILTER,
+    ORIGIN,
+    CLEAN_FILTERS,
+    DELETE_POKEMON
+} from "./action-types";
 
 const initialState = {
     allPokemons: [],
@@ -9,11 +19,14 @@ const initialState = {
 
 const rootReducer = (state = initialState, { type, payload }) => {
     switch (type) {
+        case DELETE_POKEMON:
+            return {
+                ...state, allPokemons: payload
+            };
         case GET_ALL_POKEMONS:
             return {
                 ...state, allPokemons: payload, alteredList: payload,
             };
-
         case CLEAN_FILTERS:
             return {
                 ...state, alteredList: [...state.allPokemons],
