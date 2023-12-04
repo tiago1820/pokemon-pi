@@ -25,12 +25,6 @@ export const App = () => {
     const [selectedType, setSelectedType] = useState("");
     const [selectedOrigin, setSelectedOrigin] = useState("api");
 
-    console.log("APP", selectedType, selectedOrigin);
-    console.log(alteredList);
-
-
-
-
     const createPokemon = async pokeData => {
 
         try {
@@ -77,7 +71,6 @@ export const App = () => {
 
             }
         } catch (error) {
-            console.log(error.response.data);
             window.alert('¡No hay pokemons con este nombre!');
         }
     }

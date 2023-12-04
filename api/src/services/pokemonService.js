@@ -73,6 +73,7 @@ class PokemonService {
                     speed: pokemonFromDB.speed,
                     weight: pokemonFromDB.weight,
                     height: pokemonFromDB.height,
+                    created: pokemonFromDB.created,
                 };
 
 
@@ -95,7 +96,6 @@ class PokemonService {
                 throw new Error('Pokemon not found in the database');
             }
 
-            console.log("JOSUE", pokemonFromDB);
             return pokemonFromDB;
         } catch (error) {
             throw error;

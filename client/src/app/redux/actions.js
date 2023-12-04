@@ -1,8 +1,17 @@
 import axios from 'axios';
 
-import { CLEAN_DETAIL, GET_ALL_POKEMONS, GET_POKEMON_DETAIL, ORDER, GET_ALL_TYPES, FILTER, ORIGIN, CLEAN_FILTERS } from "./action-types";
-const IP = process.env.REACT_APP_IP;
+import {
+    CLEAN_DETAIL,
+    GET_ALL_POKEMONS,
+    GET_POKEMON_DETAIL,
+    ORDER, GET_ALL_TYPES,
+    FILTER,
+    ORIGIN,
+    CLEAN_FILTERS,
+    DELETE_POKEMON
+} from "./action-types";
 
+const IP = process.env.REACT_APP_IP;
 
 export const getAllPokemons = () => {
     const endpoint = `${IP}:3001/pokemons`;
@@ -34,6 +43,23 @@ export const getAllTypes = () => {
         }
     }
 }
+
+export const removePokemon = (id) => {
+    const endpoint = `${IP}:3001/pokemons/${id}`;
+    return async (dispatch) => {
+        try {
+            await axios.delete(endpoint);
+
+            return dispatch({
+                type: DELETE_POKEMON,
+                payload: id,
+            });
+        } catch (error) {
+            throw error;
+        }
+    }
+}
+
 
 export const getPokemonDetail = id => {
     const endpoint = `${IP}:3001/pokemons/${id}`;
@@ -67,8 +93,6 @@ export const orderCards = order => {
 };
 
 export const filterCards = (type, origin) => {
-
-    console.log("ACTION", type, origin);
     return {
         type: FILTER,
         payload: { type, origin },

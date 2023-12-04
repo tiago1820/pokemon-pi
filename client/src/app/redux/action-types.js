@@ -6,3 +6,4 @@ export const FILTER = 'FILTER';
 export const ORIGIN = 'ORIGIN';
 export const GET_ALL_TYPES = 'GET_ALL_TYPES';
 export const CLEAN_FILTERS = 'CLEAN_FILTERS';
+export const DELETE_POKEMON = 'DELETE_POKEMON   ';
