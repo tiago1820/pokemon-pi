@@ -1,6 +1,6 @@
-import styles from './FormComponent.module.css';
+import styles from './CreateForm.module.css';
 
-export const FormComponent = ({
+export const CreateForm = ({
     currentStep,
     pokeData,
     errors,
