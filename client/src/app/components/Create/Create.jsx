@@ -1,4 +1,4 @@
-import { FormComponent } from './components/FormComponent/FormComponent';
+import { CreateForm } from './components/CreateForm/CreateForm';
 import { Services } from '../../../services';
 import styles from './Create.module.css';
 import { useState } from 'react';
@@ -104,8 +104,7 @@ export const Create = props => {
             <div>
                 <h2>Create your pokemon</h2>
             </div>
-            {/* Renderiza el nuevo componente FormComponent */}
-            <FormComponent
+            <CreateForm
                 currentStep={currentStep}
                 pokeData={pokeData}
                 errors={errors}
