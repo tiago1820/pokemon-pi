@@ -23,7 +23,7 @@ export const App = () => {
 
     const [selectedOrder, setSelectedOrder] = useState("");
     const [selectedType, setSelectedType] = useState("");
-    const [selectedOrigin, setSelectedOrigin] = useState("api");
+    const [selectedOrigin, setSelectedOrigin] = useState("");
 
     const createPokemon = async pokeData => {
 
@@ -127,14 +127,14 @@ export const App = () => {
     }
 
     const handleFilter = (e) => {
-        dispatch(filterCards(e.target.value, selectedOrigin));
         setSelectedType(e.target.value);
+        dispatch(filterCards(e.target.value, selectedOrigin));
         setAux(!aux);
     }
 
     const handleOrigin = (e) => {
-        dispatch(filterCards(selectedType, e.target.value));
         setSelectedOrigin(e.target.value);
+        dispatch(filterCards(selectedType, e.target.value));
         setAux(!aux);
     }
 
@@ -155,8 +155,7 @@ export const App = () => {
         const fetchData = async () => {
             try {
                 setLoading(true);
-                await dispatch(getAllPokemons());
-                await dispatch(getAllTypes());
+                await Promise.all([dispatch(getAllPokemons()), dispatch(getAllTypes())]);
             } catch (error) {
                 console.error('Error fetching data:', error);
             } finally {
@@ -165,7 +164,8 @@ export const App = () => {
         };
 
         fetchData();
-    }, []); //dispatch
+    }, []);
+
 
     useEffect(() => {
         setCurrentPage(1);

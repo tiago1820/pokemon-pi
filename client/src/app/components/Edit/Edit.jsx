@@ -179,7 +179,7 @@ export const Edit = props => {
                             </div>
                             <div className={styles.buttonContainer}>
                                 <button className={styles.btnPrev} type='button' onClick={handlePrevious}>previous</button>
-                                <button className={styles.btnSub} type="button" onClick={handleSubmit}>Create</button>
+                                <button className={styles.btnSub} type="button" onClick={handleSubmit}>Update</button>
                             </div>
                         </section>
                     )

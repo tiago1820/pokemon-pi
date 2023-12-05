@@ -7,10 +7,12 @@ class TypeController {
     }
 
     updatePokemonTypes = async (pokemon, types) => {
-        const typeInstances = [];
         const t = await Type.sequelize.transaction();
 
         try {
+            await pokemon.setTypes([], { transaction: t });
+
+            const typeInstances = [];
             for (const typeName of types) {
                 const [type, created] = await Type.findOrCreate({
                     where: { name: typeName },
