@@ -33,3 +33,18 @@ curl -X POST -H "Content-Type: application/json" -d '{
   "created": true
 }' http://localhost:3001/pokemons
 
+# Para editar un pokemon:
+curl -X PUT -H "Content-Type: application/json" -d '{
+  "name": "Charizard",
+  "types": ["Fire", "Flying"],
+  "hp": 78,
+  "attack": 84,
+  "defense": 78,
+  "speed": 100,
+  "height": 50,
+  "weight": 90,
+  "img": "https://example.com/charizard.png",
+  "created": true
+}' http://localhost:3001/pokemons/f0402aad-415f-4bff-a225-98d39583bfb9
+
+

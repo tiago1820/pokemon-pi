@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPokemons, getAllTypes, orderCards, filterCards, filterOrigin, cleanFilters } from './app/redux/actions';
 import styles from './App.module.css';
-import { Cards, Pagination, Detail, Nav, Loader, SearchBar } from './app/components';
+import { Cards, Pagination, Detail, Nav, Loader, SearchBar, Edit } from './app/components';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { Create } from './app/components/Create/Create';
@@ -57,6 +57,45 @@ export const App = () => {
             throw error;
         }
     }
+
+    const editPokemon = async (pokeData) => {
+
+        console.log("APP", pokeData);
+
+        try {
+            const {
+                id,
+                name,
+                hp,
+                attack,
+                defense,
+                speed,
+                weight,
+                height,
+                types,
+            } = pokeData;
+
+            const URL = `${IP}:3001/pokemons/${id}`;
+            console.log("URL", URL);
+
+            const response = await axios.put(URL, {
+                name,
+                hp,
+                attack,
+                defense,
+                speed,
+                weight,
+                height,
+                types,
+            });
+
+            console.log('Pokemon editado:', response.data);
+        } catch (error) {
+            console.error('Error al editar el Pokémon:', error);
+            throw error;
+        }
+    };
+
 
     const onSearch = async name => {
         try {
@@ -196,6 +235,7 @@ export const App = () => {
                     <Route path='/app' element={<Cards allPokemons={currentPokemons} pokemons={pokemons} onClose={onClose} />} />
                     <Route path='/app/detail/:id' element={<Detail />} />
                     <Route path='/app/create' element={<Create createPokemon={createPokemon} />} />
+                    <Route path='/app/edit/:id' element={<Edit editPokemon={editPokemon} />} />
                 </Routes>
             </div>
 

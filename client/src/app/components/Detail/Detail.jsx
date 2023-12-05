@@ -6,11 +6,15 @@ import { useDispatch } from 'react-redux';
 import { removePokemon } from '../../redux/actions';
 import { useNavigate } from 'react-router-dom';
 import { getAllPokemons } from '../../redux/actions';
+import { Link } from 'react-router-dom';
+
 
 export const Detail = () => {
     const pokemon = usePokemon();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    console.log("ID", pokemon.id);
 
     const capitalizeFirstLetter = (word) => {
         if (typeof word === 'string' && word.length > 0) {
@@ -49,11 +53,12 @@ export const Detail = () => {
 
                         <div className={styles.types}>
                             {pokemon.types &&
-                                pokemon.types.map((type, index) => (
-                                    <span key={index} className={`${styles.type} ${styles[type.toLowerCase()]}`}>
+                                pokemon.types.map((type) => (
+                                    <span key={type} className={`${styles.type} ${styles[type.toLowerCase()]}`}>
                                         {type}
                                     </span>
                                 ))}
+
                         </div>
                     </div>
 
@@ -73,7 +78,9 @@ export const Detail = () => {
 
                             {pokemon.created && (
                                 <>
-                                    <button className={styles.btnEdit}>E</button>
+                                    <Link to={`/app/edit/${pokemon.id}`}>
+                                        <button className={styles.btnEdit}>E</button>
+                                    </Link>
                                     <button className={styles.btnDel} onClick={handleDelete}>X</button>
                                 </>
                             )

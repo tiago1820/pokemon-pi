@@ -1,10 +1,46 @@
 const { Pokemon, Type } = require('../db.js');
 const PokemonService = require('../services/pokemonService');
+const TypeController = require('./typeController');
 
 class PokemonController {
     constructor() {
         this.pokeService = new PokemonService('https://pokeapi.co/api/v2/pokemon/');
+        this.typeController = new TypeController();
+    }
 
+    updatePokemon = async (req, res) => {
+        try {
+            const { id } = req.params;
+            console.log("ID", id);
+
+            const { name, types, hp, attack, defense, speed, height, weight, img } = req.body;
+            const lowercaseName = name.toLowerCase();
+
+            const updatedPokemon = await Pokemon.findByPk(id);
+
+            if (!updatedPokemon) {
+                return res.status(404).send('Pokemon not found.');
+            }
+
+            updatedPokemon.name = lowercaseName;
+            updatedPokemon.types = types;
+            updatedPokemon.image = img;
+            updatedPokemon.hp = hp;
+            updatedPokemon.attack = attack;
+            updatedPokemon.defense = defense;
+            updatedPokemon.speed = speed;
+            updatedPokemon.height = height;
+            updatedPokemon.weight = weight;
+
+            await updatedPokemon.save();
+
+            await this.typeController.updatePokemonTypes(updatedPokemon, types);
+
+            return res.status(200).json(updatedPokemon);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).send(error.message);
+        }
     }
 
     getAllPokemons = async (req, res) => {
@@ -147,5 +183,7 @@ class PokemonController {
     }
 
 }
+
+
 
 module.exports = PokemonController;

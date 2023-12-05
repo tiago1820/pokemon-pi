@@ -5,6 +5,7 @@ import { Pagination } from "./Pagination/Pagination";
 import { Detail } from "./Detail/Detail";
 import { Nav } from "./Nav/Nav";
 import { Loader } from "./Loader/Loader";
+import { Edit } from "./Edit/Edit";
 
 export {
     SearchBar,
@@ -13,5 +14,6 @@ export {
     Pagination,
     Detail,
     Nav,
-    Loader
+    Loader,
+    Edit
 }
