@@ -1,3 +1,4 @@
+import { Services } from '../../../services';
 import styles from './Edit.module.css';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -8,6 +9,7 @@ import { getAllPokemons } from '../../redux/actions';
 import { usePokemon } from '../../hooks/usePokemon';
 
 export const Edit = props => {
+    const services = new Services();
     const { editPokemon } = props;
     const pokemon = usePokemon();
 
@@ -89,7 +91,7 @@ export const Edit = props => {
         const allFieldsHaveData = Object.values(pokeData).every((value) => value !== '' && value !== null && value !== undefined);
 
         if (allFieldsHaveData) {
-            editPokemon(pokeData);
+            services.editPokemon(pokeData);
             navigate('/app');
             dispatch(getAllPokemons());
 
@@ -110,7 +112,7 @@ export const Edit = props => {
                     currentStep === 1 && (
                         <section className={styles.formSection}>
                             <div className={styles.wrapper}>
-                            <input type="hidden" name="id" value={pokeData.id} />
+                                <input type="hidden" name="id" value={pokeData.id} />
                             </div>
 
                             <div className={styles.wrapper}>
@@ -189,5 +191,4 @@ export const Edit = props => {
 
         </div>
     )
-
 }

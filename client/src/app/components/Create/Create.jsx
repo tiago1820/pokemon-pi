@@ -1,3 +1,4 @@
+import { Services } from '../../../services';
 import styles from './Create.module.css';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -8,7 +9,7 @@ import { getAllPokemons } from '../../redux/actions';
 
 
 export const Create = props => {
-    const { createPokemon } = props;
+    const services = new Services();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const allTypes = useSelector(state => state.allTypes);
@@ -87,7 +88,7 @@ export const Create = props => {
         const allFieldsHaveData = Object.values(pokeData).every((value) => value !== '' && value !== null && value !== undefined);
 
         if (allFieldsHaveData) {
-            createPokemon(pokeData);
+            services.createPokemon(pokeData);
             navigate('/app');
             dispatch(getAllPokemons());
 

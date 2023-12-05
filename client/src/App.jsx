@@ -1,3 +1,5 @@
+import { Utils } from './utils';
+
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPokemons, getAllTypes, orderCards, filterCards, filterOrigin, cleanFilters } from './app/redux/actions';
@@ -9,6 +11,8 @@ import { Create } from './app/components/Create/Create';
 const IP = process.env.REACT_APP_IP;
 
 export const App = () => {
+    const utils = new Utils();
+
     const dispatch = useDispatch();
     const location = useLocation();
 
@@ -24,77 +28,6 @@ export const App = () => {
     const [selectedOrder, setSelectedOrder] = useState("");
     const [selectedType, setSelectedType] = useState("");
     const [selectedOrigin, setSelectedOrigin] = useState("");
-
-    const createPokemon = async pokeData => {
-
-        try {
-            const {
-                name,
-                hp,
-                attack,
-                defense,
-                speed,
-                weight,
-                height,
-                types,
-            } = pokeData;
-
-            const URL = `${IP}:3001/pokemons`;
-
-            const response = await axios.post(URL, {
-                name,
-                hp,
-                attack,
-                defense,
-                speed,
-                weight,
-                height,
-                types,
-            });
-
-        } catch (error) {
-            console.error('Error al crear el Pokémon:', error);
-            throw error;
-        }
-    }
-
-    const editPokemon = async (pokeData) => {
-
-        console.log("APP", pokeData);
-
-        try {
-            const {
-                id,
-                name,
-                hp,
-                attack,
-                defense,
-                speed,
-                weight,
-                height,
-                types,
-            } = pokeData;
-
-            const URL = `${IP}:3001/pokemons/${id}`;
-            console.log("URL", URL);
-
-            const response = await axios.put(URL, {
-                name,
-                hp,
-                attack,
-                defense,
-                speed,
-                weight,
-                height,
-                types,
-            });
-
-            console.log('Pokemon editado:', response.data);
-        } catch (error) {
-            console.error('Error al editar el Pokémon:', error);
-            throw error;
-        }
-    };
 
 
     const onSearch = async name => {
@@ -114,42 +47,25 @@ export const App = () => {
         }
     }
 
-    const onClose = id => {
-        setPokemons(pokemons.filter(poke => {
-            return poke.id !== id;
-        }));
-    }
-
-    const handleOrder = (e) => {
-        dispatch(orderCards(e.target.value));
-        setSelectedOrder(e.target.value);
-        setAux(!aux);
-    }
-
-    const handleFilter = (e) => {
-        setSelectedType(e.target.value);
-        dispatch(filterCards(e.target.value, selectedOrigin));
-        setAux(!aux);
-    }
-
-    const handleOrigin = (e) => {
-        setSelectedOrigin(e.target.value);
-        dispatch(filterCards(selectedType, e.target.value));
-        setAux(!aux);
-    }
-
-    const clearFilters = () => {
-        dispatch(cleanFilters());
-        setSelectedOrder("");
-        setSelectedType("");
-        setSelectedOrigin("");
+    const onClose = (id) => {
+        utils.onClose(id, setPokemons);
     };
 
+    const handleOrder = (e) => {
+        utils.handleOrder(e, dispatch, setSelectedOrder, setAux);
+    };
 
-    // useEffect(() => {
-    //     dispatch(getAllPokemons());
-    //     dispatch(getAllTypes());
-    // }, []);
+    const handleFilter = (e) => {
+        utils.handleFilter(e, setSelectedType, dispatch, selectedOrigin, setAux);
+    };
+
+    const handleOrigin = (e) => {
+        utils.handleOrigin(e, setSelectedOrigin, dispatch, selectedType, setAux);
+    };
+
+    const clearFilters = () => {
+        utils.clearFilters(dispatch, setSelectedOrder, setSelectedType, setSelectedOrigin, setAux);
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -234,8 +150,8 @@ export const App = () => {
                 <Routes>
                     <Route path='/app' element={<Cards allPokemons={currentPokemons} pokemons={pokemons} onClose={onClose} />} />
                     <Route path='/app/detail/:id' element={<Detail />} />
-                    <Route path='/app/create' element={<Create createPokemon={createPokemon} />} />
-                    <Route path='/app/edit/:id' element={<Edit editPokemon={editPokemon} />} />
+                    <Route path='/app/create' element={<Create />} />
+                    <Route path='/app/edit/:id' element={<Edit />} />
                 </Routes>
             </div>
 
