@@ -1,14 +1,13 @@
-import { Utils } from './utils';
-import { Services } from './services';
-
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllPokemons, getAllTypes, orderCards, filterCards, filterOrigin, cleanFilters } from './app/redux/actions';
+import { useLocation } from 'react-router-dom';
+
+import { Services } from './services';
+import { Utils } from './utils';
+import { getAllPokemons, getAllTypes } from './app/redux/actions';
+import { AppRoutes, Loader, Nav, Pagination, SearchBar, FilterSelects } from './app/components';
 import styles from './App.module.css';
-import { Cards, Pagination, Detail, Nav, Loader, SearchBar, Edit } from './app/components';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import axios from 'axios';
-import { Create } from './app/components/Create/Create';
+
 const IP = process.env.REACT_APP_IP;
 
 export const App = () => {
@@ -85,7 +84,6 @@ export const App = () => {
         fetchData();
     }, []);
 
-
     useEffect(() => {
         setCurrentPage(1);
     }, [alteredList]);
@@ -106,46 +104,20 @@ export const App = () => {
 
             <div className={styles.container}>
                 {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (
-                    <div className={styles.selectContainer}>
-                        <div>
-                            {/* <button className={styles.clearButton} onClick={clearFilters}> */}
-                            <button onClick={clearFilters}>
-                                Limpiar Filtros
-                            </button>
-                        </div>
-
-                        <select className={styles.select} onChange={handleOrder} value={selectedOrder}>
-                            <option value="" disabled>Order By...</option>
-                            <option value="A">A - Z</option>
-                            <option value="D">Z - A</option>
-                            <option value="hight">Attack mas alto</option>
-                            <option value="low">Attack mas bajo</option>
-                        </select>
-
-                        <select className={styles.select} onChange={handleFilter} value={selectedType}>
-                            <option value="" disabled>Filter by types</option>
-                            {allTypes.map(type => (
-                                <option key={type.id} value={type.name}>
-                                    {type.name}
-                                </option>
-                            ))}
-                        </select>
-
-                        <select className={styles.select} onChange={handleOrigin} value={selectedOrigin} >
-                            <option value="" disabled>Filter by origin</option>
-                            <option value="api">Originals</option>
-                            <option value="db">Creados</option>
-                        </select>
-                    </div>
+                    <FilterSelects
+                        clearFilters={clearFilters}
+                        handleOrder={handleOrder}
+                        handleFilter={handleFilter}
+                        handleOrigin={handleOrigin}
+                        selectedOrder={selectedOrder}
+                        selectedType={selectedType}
+                        selectedOrigin={selectedOrigin}
+                        allTypes={allTypes}
+                    />
                 )
 
                 }
-                <Routes>
-                    <Route path='/app' element={<Cards allPokemons={currentPokemons} pokemons={pokemons} onClose={onClose} />} />
-                    <Route path='/app/detail/:id' element={<Detail />} />
-                    <Route path='/app/create' element={<Create />} />
-                    <Route path='/app/edit/:id' element={<Edit />} />
-                </Routes>
+                <AppRoutes currentPokemons={currentPokemons} pokemons={pokemons} onClose={onClose} />
             </div>
 
             {isHomeRoute && (<Pagination
