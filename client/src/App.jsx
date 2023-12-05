@@ -1,4 +1,5 @@
 import { Utils } from './utils';
+import { Services } from './services';
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,44 +12,32 @@ import { Create } from './app/components/Create/Create';
 const IP = process.env.REACT_APP_IP;
 
 export const App = () => {
+    // instances
     const utils = new Utils();
+    const services = new Services();
 
-    const dispatch = useDispatch();
-    const location = useLocation();
-
-    const alteredList = useSelector(state => state.alteredList);
-    const allTypes = useSelector(state => state.allTypes);
-
+    // local states
+    const [selectedOrder, setSelectedOrder] = useState("");
+    const [selectedType, setSelectedType] = useState("");
+    const [selectedOrigin, setSelectedOrigin] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
-    const pokemonsPerPage = 12;
     const [pokemons, setPokemons] = useState([]);
     const [aux, setAux] = useState(false);
     const [loading, setLoading] = useState(true);
 
-    const [selectedOrder, setSelectedOrder] = useState("");
-    const [selectedType, setSelectedType] = useState("");
-    const [selectedOrigin, setSelectedOrigin] = useState("");
+    // global states
+    const alteredList = useSelector(state => state.alteredList);
+    const allTypes = useSelector(state => state.allTypes);
 
+    // othes
+    const dispatch = useDispatch();
+    const location = useLocation();
+    const pokemonsPerPage = 12;
+    const isHomeRoute = location.pathname === '/app';
 
-    const onSearch = async name => {
-        try {
-            const { data } = await axios(`${IP}:3001/pokemons/name?name=${name}`);
-            if (data.name) {
-                const isDuplicate = pokemons.some(pokemon => pokemon.name === data.name);
-                if (isDuplicate) {
-                    window.alert('¡No puedes buscar Pokémon repetido!');
-                } else {
-                    setPokemons(oldPokemons => [...oldPokemons, data]);
-                }
-
-            }
-        } catch (error) {
-            window.alert('¡No hay pokemons con este nombre!');
-        }
-    }
-
-    const onClose = (id) => {
-        utils.onClose(id, setPokemons);
+    // utils and services functions
+    const onSearch = (name) => {
+        services.onSearch(name, pokemons, setPokemons);
     };
 
     const handleOrder = (e) => {
@@ -67,6 +56,20 @@ export const App = () => {
         utils.clearFilters(dispatch, setSelectedOrder, setSelectedType, setSelectedOrigin, setAux);
     };
 
+    const onClose = (id) => {
+        utils.onClose(id, setPokemons);
+    };
+
+    // pagination
+    const indexOfLastPokemon = currentPage * pokemonsPerPage;
+    const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
+    const currentPokemons = alteredList.slice(indexOfFirstPokemon, indexOfLastPokemon);
+
+    const handlePageChange = pageNumber => {
+        setCurrentPage(pageNumber);
+    }
+
+    // useEffects
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -87,21 +90,11 @@ export const App = () => {
         setCurrentPage(1);
     }, [alteredList]);
 
-    const indexOfLastPokemon = currentPage * pokemonsPerPage;
-    const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
-    const currentPokemons = alteredList.slice(indexOfFirstPokemon, indexOfLastPokemon);
-
-    const handlePageChange = pageNumber => {
-        setCurrentPage(pageNumber);
-    }
-
-    const isHomeRoute = location.pathname === '/app';
-
     return (
         <div className={styles.appContainer}>
             {loading && <Loader />}
 
-            <Nav onSearch={onSearch} />
+            <Nav />
             {/* {isHomeRoute && (<Nav onSearch={onSearch} />)} */}
             {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (<SearchBar onSearch={onSearch} />)}
 

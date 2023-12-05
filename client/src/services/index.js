@@ -3,6 +3,24 @@ import axios from 'axios';
 const IP = process.env.REACT_APP_IP;
 
 export class Services {
+
+    onSearch =  async (name, pokemons, setPokemons) => {
+        try {
+            const { data } = await axios(`${IP}:3001/pokemons/name?name=${name}`);
+            if (data.name) {
+                const isDuplicate = pokemons.some(pokemon => pokemon.name === data.name);
+                if (isDuplicate) {
+                    window.alert('¡No puedes buscar Pokémon repetido!');
+                } else {
+                    setPokemons(oldPokemons => [...oldPokemons, data]);
+                }
+
+            }
+        } catch (error) {
+            window.alert('¡No hay pokemons con este nombre!');
+        }
+    }
+
     async createPokemon(pokeData) {
         try {
             const {
