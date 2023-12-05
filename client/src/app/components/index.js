@@ -6,6 +6,9 @@ import { Detail } from "./Detail/Detail";
 import { Nav } from "./Nav/Nav";
 import { Loader } from "./Loader/Loader";
 import { Edit } from "./Edit/Edit";
+import { FilterSelects } from "./FilterSelects/FilterSelects";
+import { AppRoutes } from "./Routes/AppRoutes";
+import { Create } from "./Create/Create";
 
 export {
     SearchBar,
@@ -15,5 +18,8 @@ export {
     Detail,
     Nav,
     Loader,
-    Edit
+    Edit,
+    FilterSelects,
+    AppRoutes,
+    Create
 }
