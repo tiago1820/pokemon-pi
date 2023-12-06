@@ -14,7 +14,8 @@ export const App = () => {
     // local states
     const [selectedOrder, setSelectedOrder] = useState("");
     const [selectedType, setSelectedType] = useState("");
-    const [selectedOrigin, setSelectedOrigin] = useState("");
+    const [selectedOrigin, setSelectedOrigin] = useState("api");
+
     const [currentPage, setCurrentPage] = useState(1);
     const [pokemons, setPokemons] = useState([]);
     const [aux, setAux] = useState(false);
