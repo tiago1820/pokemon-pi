@@ -39,6 +39,32 @@ class PokemonService {
         }
     }
 
+    getAllPokemonFromDB = async () => {
+        try {
+            const pokemonDB = await Pokemon.findAll({
+                include: [{ model: Type, through: 'pokemon_type' }],
+            });
+
+            const formattedData = pokemonDB.map(pokemon => ({
+                id: pokemon.id,
+                name: pokemon.name,
+                types: pokemon.types ? pokemon.types.map(typeArr => typeArr.name) : [],
+                img: pokemon.img,
+                hp: pokemon.hp,
+                attack: pokemon.attack,
+                defense: pokemon.defense,
+                speed: pokemon.speed,
+                weight: pokemon.weight,
+                height: pokemon.height,
+                created: pokemon.created
+            }));
+
+            return formattedData;
+        } catch (error) {
+            throw error;
+        }
+    }
+
     getPokemonById = async (id, source) => {
         try {
             if (source === 'api') {
