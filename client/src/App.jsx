@@ -114,9 +114,8 @@ export const App = () => {
                         selectedOrigin={selectedOrigin}
                         allTypes={allTypes}
                     />
-                )
-
-                }
+                )}
+                
                 <AppRoutes currentPokemons={currentPokemons} pokemons={pokemons} onClose={onClose} />
             </div>
 
