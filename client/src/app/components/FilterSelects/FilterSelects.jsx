@@ -37,7 +37,7 @@ export const FilterSelects = ({
 
             <select className={styles.select} onChange={handleOrigin} value={selectedOrigin}>
                 <option value="" disabled>Filter by origin</option>
-                <option value="api">Originals</option>
+                <option value="API">Originals</option>
                 <option value="db">Creados</option>
             </select>
         </div>

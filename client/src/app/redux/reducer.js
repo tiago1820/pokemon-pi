@@ -83,7 +83,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
             if (type && origin) {
                 const filteredList = state.allPokemons.filter(pokemon =>
                     pokemon.types && pokemon.types.includes(type) &&
-                    (origin === 'api' ? !pokemon.created : pokemon.created)
+                    (origin === 'API' ? !pokemon.created : pokemon.created)
                 );
 
                 return {
