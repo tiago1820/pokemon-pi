@@ -1,5 +1,5 @@
+import { Service } from '../../../services';
 import EditForm from './EditForm/EditForm';
-import { editPokemon } from '../../../services';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import validator from './validator';
@@ -9,8 +9,8 @@ import { getAllPokemons } from '../../redux/actions';
 import { usePokemon } from '../../hooks/usePokemon';
 
 export const Edit = props => {
+    const service = new Service();
     const pokemon = usePokemon();
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const allTypes = useSelector(state => state.allTypes);
@@ -89,7 +89,7 @@ export const Edit = props => {
         const allFieldsHaveData = Object.values(pokeData).every((value) => value !== '' && value !== null && value !== undefined);
 
         if (allFieldsHaveData) {
-            editPokemon(pokeData);
+            service.editPokemon(pokeData);
             navigate('/app');
             dispatch(getAllPokemons());
 

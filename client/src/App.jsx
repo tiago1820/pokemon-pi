@@ -1,15 +1,15 @@
+import { Utils } from './utils';
+import { Service } from './services/index';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { clearAllFilters, closePokemon, handleFilterChange, handleOrderChange, handleOriginChange } from './utils/index';
-import { onSearch } from './services/index';
 import { getAllPokemons, getAllTypes } from './app/redux/actions';
 import { AppRoutes, Loader, Nav, Pagination, SearchBar, FilterSelects } from './app/components';
 import styles from './App.module.css';
 
-const IP = process.env.REACT_APP_IP;
-
 export const App = () => {
+    const utils = new Utils();
+    const service = new Service();
 
     // local states
     const [selectedOrder, setSelectedOrder] = useState("");
@@ -31,32 +31,32 @@ export const App = () => {
     const isHomeRoute = location.pathname === '/app';
 
     // utils and services functions
-    const handleSearch = name => {
+    const handleSearch = async (name) => {
         try {
-            onSearch(name, pokemons, setPokemons);
+            await service.onSearch(name, pokemons, setPokemons);
         } catch (error) {
             console.error('Error al buscar el Pokémon:', error);
         }
     };
 
     const handleOrder = (e) => {
-        handleOrderChange(e, dispatch, setSelectedOrder, setAux);
+        utils.handleOrderChange(e, dispatch, setSelectedOrder, setAux);
     };
 
     const handleFilter = (e) => {
-        handleFilterChange(e, setSelectedType, dispatch, selectedOrigin, setAux);
+        utils.handleFilterChange(e, setSelectedType, dispatch, selectedOrigin, setAux);
     };
 
     const handleOrigin = (e) => {
-        handleOriginChange(e, setSelectedOrigin, dispatch, selectedType, setAux);
+        utils.handleOriginChange(e, setSelectedOrigin, dispatch, selectedType, setAux);
     };
 
     const clearFilters = () => {
-        clearAllFilters(dispatch, setSelectedOrder, setSelectedType, setSelectedOrigin, setAux);
+        utils.clearAllFilters(dispatch, setSelectedOrder, setSelectedType, setSelectedOrigin, setAux);
     };
 
     const onClose = (id) => {
-        closePokemon(id, setPokemons);
+        utils.closePokemon(id, setPokemons);
     };
 
     // pagination
