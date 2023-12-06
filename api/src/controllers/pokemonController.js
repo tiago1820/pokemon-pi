@@ -74,27 +74,31 @@ class PokemonController {
     removePokemonById = async (req, res) => {
         try {
             const { id } = req.params;
-            console.log('Intentando eliminar el Pokémon con ID:', id);
+            const pokemonToDelete = await this.findPokemonById(id);
 
-
-            const pokemonToDelete = await Pokemon.findByPk(id);
             if (!pokemonToDelete) {
                 return res.status(404).send('Pokemon not found.');
             }
 
-            console.log('Pokemon encontrado:', pokemonToDelete);
-
-            await Pokemon.destroy({
-                where: {
-                    id: id
-                }
-            });
+            await this.deletePokemonById(id);
 
             return res.status(200).send('Pokemon successfully removed.');
         } catch (error) {
             console.error(error);
             return res.status(500).send('Internal Server Error');
         }
+    }
+
+    async findPokemonById(id) {
+        return await Pokemon.findByPk(id);
+    }
+
+    async deletePokemonById(id) {
+        await Pokemon.destroy({
+            where: {
+                id: id
+            }
+        });
     }
 
     getPokemonByName = async (req, res) => {
@@ -166,7 +170,5 @@ class PokemonController {
     }
 
 }
-
-
 
 module.exports = PokemonController;
