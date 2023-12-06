@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './SearchBar.module.css';
 
 export const SearchBar = props => {
-    const { onSearch } = props;
+    const { handleSearch } = props;
     const [name, setName] = useState('');
 
     const handleChange = (e) => {
@@ -11,7 +11,7 @@ export const SearchBar = props => {
 
     const handleKeyPress = e => {
         if(e.key === 'Enter'){
-            onSearch(name);
+            handleSearch(name);
         }
     }
 
@@ -31,7 +31,7 @@ export const SearchBar = props => {
                     />
                     <button
                         className={styles.button}
-                        onClick={() => onSearch(name)}
+                        onClick={() => handleSearch(name)}
                     >Search</button>
 
                 </div>
