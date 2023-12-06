@@ -105,18 +105,38 @@ class PokemonController {
         try {
             const { name } = req.query;
 
-            if (!name) {
-                return res.status(400).send('Pokemon name is required.');
-            }
+            this.validateInput(name, res);
 
-            const pokemon = await this.pokeService.getPokemonByName(name);
+            const pokemon = await this.getPokemonByNameFromService(name);
 
-            return pokemon.name
-                ? res.json(pokemon)
-                : res.status(404).send('Pokemon not found.');
+            this.handlePokemonResponse(pokemon, res);
+
         } catch (error) {
-            return res.status(500).send(error.message);
+            this.handleErrorResponse(error, res);
         }
+    }
+
+    validateInput(name, res) {
+        if (!name) {
+            res.status(400).send('Pokemon name is required.');
+            throw new Error('Invalid input: Pokemon name is required.');
+        }
+    }
+
+    async getPokemonByNameFromService(name) {
+        return await this.pokeService.getPokemonByName(name);
+    }
+
+    handlePokemonResponse(pokemon, res) {
+        if (pokemon.name) {
+            res.json(pokemon);
+        } else {
+            res.status(404).send('Pokemon not found.');
+        }
+    }
+
+    handleErrorResponse(error, res) {
+        res.status(500).send(error.message);
     }
 
     postPokemon = async (req, res) => {
