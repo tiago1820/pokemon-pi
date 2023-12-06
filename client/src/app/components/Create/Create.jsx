@@ -1,5 +1,5 @@
 import { CreateForm } from '../../components';
-import { createPokemon } from '../../../services';
+import { Service } from '../../../services';
 
 import styles from './Create.module.css';
 import { useState } from 'react';
@@ -11,6 +11,7 @@ import { getAllPokemons } from '../../redux/actions';
 
 
 export const Create = props => {
+    const service = new Service();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const allTypes = useSelector(state => state.allTypes);
@@ -89,7 +90,7 @@ export const Create = props => {
         const allFieldsHaveData = Object.values(pokeData).every((value) => value !== '' && value !== null && value !== undefined);
 
         if (allFieldsHaveData) {
-            createPokemon(pokeData);
+            service.createPokemon(pokeData);
             navigate('/app');
             dispatch(getAllPokemons());
 
