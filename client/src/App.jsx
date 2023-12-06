@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-
-import { Services } from './services';
-import { Utils } from './utils';
+import { clearAllFilters, closePokemon, handleFilterChange, handleOrderChange, handleOriginChange } from './utils/index';
+import { onSearch } from './services/index';
 import { getAllPokemons, getAllTypes } from './app/redux/actions';
 import { AppRoutes, Loader, Nav, Pagination, SearchBar, FilterSelects } from './app/components';
 import styles from './App.module.css';
@@ -11,9 +10,6 @@ import styles from './App.module.css';
 const IP = process.env.REACT_APP_IP;
 
 export const App = () => {
-    // instances
-    const utils = new Utils();
-    const services = new Services();
 
     // local states
     const [selectedOrder, setSelectedOrder] = useState("");
@@ -35,28 +31,32 @@ export const App = () => {
     const isHomeRoute = location.pathname === '/app';
 
     // utils and services functions
-    const onSearch = (name) => {
-        services.onSearch(name, pokemons, setPokemons);
+    const handleSearch = name => {
+        try {
+            onSearch(name, pokemons, setPokemons);
+        } catch (error) {
+            console.error('Error al buscar el Pokémon:', error);
+        }
     };
 
     const handleOrder = (e) => {
-        utils.handleOrder(e, dispatch, setSelectedOrder, setAux);
+        handleOrderChange(e, dispatch, setSelectedOrder, setAux);
     };
 
     const handleFilter = (e) => {
-        utils.handleFilter(e, setSelectedType, dispatch, selectedOrigin, setAux);
+        handleFilterChange(e, setSelectedType, dispatch, selectedOrigin, setAux);
     };
 
     const handleOrigin = (e) => {
-        utils.handleOrigin(e, setSelectedOrigin, dispatch, selectedType, setAux);
+        handleOriginChange(e, setSelectedOrigin, dispatch, selectedType, setAux);
     };
 
     const clearFilters = () => {
-        utils.clearFilters(dispatch, setSelectedOrder, setSelectedType, setSelectedOrigin, setAux);
+        clearAllFilters(dispatch, setSelectedOrder, setSelectedType, setSelectedOrigin, setAux);
     };
 
     const onClose = (id) => {
-        utils.onClose(id, setPokemons);
+        closePokemon(id, setPokemons);
     };
 
     // pagination
@@ -94,7 +94,7 @@ export const App = () => {
 
             <Nav />
             {/* {isHomeRoute && (<Nav onSearch={onSearch} />)} */}
-            {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (<SearchBar onSearch={onSearch} />)}
+            {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (<SearchBar handleSearch={handleSearch} />)}
 
             {isHomeRoute && (<Pagination
                 currentPage={currentPage}

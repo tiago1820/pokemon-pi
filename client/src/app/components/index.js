@@ -9,6 +9,7 @@ import { Edit } from "./Edit/Edit";
 import { FilterSelects } from "./FilterSelects/FilterSelects";
 import { AppRoutes } from "./Routes/AppRoutes";
 import { Create } from "./Create/Create";
+import { CreateForm } from "./Create/components/CreateForm/CreateForm";
 
 export {
     SearchBar,
@@ -21,5 +22,6 @@ export {
     Edit,
     FilterSelects,
     AppRoutes,
-    Create
+    Create,
+    CreateForm
 }
