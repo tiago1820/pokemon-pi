@@ -1,10 +1,7 @@
 import { orderCards, filterCards, cleanFilters } from "../app/redux/actions";
 
 export class Utils {
-    constructor() {
-        // Puedes inicializar propiedades aquí si es necesario
-    }
-
+    
     closePokemon(id, setPokemons) {
         setPokemons((pokemons) =>
             pokemons.filter((poke) => {
@@ -37,5 +34,15 @@ export class Utils {
         setSelectedType("");
         setSelectedOrigin("");
         setAux(!setAux);
+    }
+
+    handleChange(e, setName) {
+        setName(e.target.value);
+    }
+
+    handleKeyPress(e, handleSearch, name) {
+        if (e.key === 'Enter') {
+            handleSearch(name);
+        }
     }
 }
