@@ -97,34 +97,41 @@ export const App = () => {
             {/* {isHomeRoute && (<Nav onSearch={onSearch} />)} */}
             {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (<SearchBar handleSearch={handleSearch} />)}
 
-            {isHomeRoute && (<Pagination
-                currentPage={currentPage}
-                totalPages={Math.ceil(alteredList.length / pokemonsPerPage)}
-                onPageChange={handlePageChange}
-            />)}
+
 
             <div className={styles.container}>
-                {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (
-                    <FilterSelects
-                        clearFilters={clearFilters}
-                        handleOrder={handleOrder}
-                        handleFilter={handleFilter}
-                        handleOrigin={handleOrigin}
-                        selectedOrder={selectedOrder}
-                        selectedType={selectedType}
-                        selectedOrigin={selectedOrigin}
-                        allTypes={allTypes}
-                    />
-                )}
-                
-                <AppRoutes currentPokemons={currentPokemons} pokemons={pokemons} onClose={onClose} />
+                <div className={styles.left}>
+                    {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (
+                        <FilterSelects
+                            clearFilters={clearFilters}
+                            handleOrder={handleOrder}
+                            handleFilter={handleFilter}
+                            handleOrigin={handleOrigin}
+                            selectedOrder={selectedOrder}
+                            selectedType={selectedType}
+                            selectedOrigin={selectedOrigin}
+                            allTypes={allTypes}
+                        />
+                    )}
+                </div>
+
+                <div className={styles.right}>
+                    {isHomeRoute && (<Pagination
+                        currentPage={currentPage}
+                        totalPages={Math.ceil(alteredList.length / pokemonsPerPage)}
+                        onPageChange={handlePageChange}
+                    />)}
+                    <AppRoutes currentPokemons={currentPokemons} pokemons={pokemons} onClose={onClose} />
+
+                    {isHomeRoute && (<Pagination
+                        currentPage={currentPage}
+                        totalPages={Math.ceil(alteredList.length / pokemonsPerPage)}
+                        onPageChange={handlePageChange}
+                    />)}
+                </div>
+
             </div>
 
-            {isHomeRoute && (<Pagination
-                currentPage={currentPage}
-                totalPages={Math.ceil(alteredList.length / pokemonsPerPage)}
-                onPageChange={handlePageChange}
-            />)}
         </div>
     );
 }
