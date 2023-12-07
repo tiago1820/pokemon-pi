@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import styles from './Nav.module.css';
 import logo from '../../../images/pokemon-logo.png';
 
-
 export const Nav = props => {
 
     return (
