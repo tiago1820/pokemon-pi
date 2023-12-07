@@ -1,9 +1,22 @@
 .container {
   display: flex;
   flex-direction: row;
-  margin-bottom: -1rem; /* Ajusta el espacio negativamente */
+  margin-bottom: -1rem;
   padding-left: 5rem;
   padding-right: 5rem;
-
 }
 
+@media only screen and (max-width: 991px) {
+  .container {
+    flex-direction: column;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
