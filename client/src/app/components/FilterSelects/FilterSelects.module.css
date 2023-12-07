@@ -4,9 +4,9 @@
     margin-bottom: 0.5rem;
     flex-direction: column;
     align-items: center;
-  }
-  
-  .select {
+}
+
+.select {
     width: 200px;
     margin: 0.5rem;
     padding: 8px;
@@ -15,21 +15,42 @@
     border-radius: 5px;
     background-color: #fff;
     cursor: pointer;
-  }
-  
-  .select option[disabled] {
-    color: #aaa; 
+}
+
+.select option[disabled] {
+    color: #aaa;
     font-style: italic;
-    background-color: #f5f5f5; 
-    cursor: not-allowed; 
-  }
-  
-  .select:focus {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+
+.select:focus {
     outline: none;
     border-color: #2196F3;
     box-shadow: 0 0 5px rgba(33, 150, 243, 0.7);
-  }
-  
-  .select:hover {
+}
+
+.select:hover {
     border-color: #888;
-  }
+}
+
+.buttonClear {
+    background-color: #2980B9;
+    /* Color de fondo del botón */
+    color: #ffffff;
+    /* Color del texto del botón */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    /* Efecto de transición en el cambio de color de fondo */
+
+    /* Agregar estilos adicionales según sea necesario */
+}
+
+.buttonClear:hover {
+    background-color: #0870b5;
+    /* Cambio de color de fondo al pasar el mouse sobre el botón */
+}

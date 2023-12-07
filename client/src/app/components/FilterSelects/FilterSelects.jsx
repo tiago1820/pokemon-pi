@@ -13,9 +13,11 @@ export const FilterSelects = ({
     return (
         <div className={styles.selectContainer}>
             <div>
-                <button onClick={clearFilters}>
-                    Limpiar Filtros
-                </button>
+                <div>
+                    <button className={`${styles.select} ${styles.buttonClear}`} onClick={clearFilters}>
+                        Limpiar Filtros
+                    </button>
+                </div>
             </div>
 
             <select className={styles.select} onChange={handleOrder} value={selectedOrder}>
