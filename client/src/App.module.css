@@ -16,6 +16,10 @@
     padding-left: 2rem;
     padding-right: 2rem;
   }
+
+  .left {
+    margin-top: 0;
+  }
 }
 
 @media only screen and (max-width: 767px) {
