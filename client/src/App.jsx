@@ -97,8 +97,6 @@ export const App = () => {
             {/* {isHomeRoute && (<Nav onSearch={onSearch} />)} */}
             {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (<SearchBar handleSearch={handleSearch} />)}
 
-
-
             <div className={styles.container}>
                 <div className={styles.left}>
                     {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (
@@ -115,20 +113,31 @@ export const App = () => {
                     )}
                 </div>
 
-                <div className={styles.right}>
+                {/* <div className={styles.right}>
                     {isHomeRoute && (<Pagination
                         currentPage={currentPage}
                         totalPages={Math.ceil(alteredList.length / pokemonsPerPage)}
                         onPageChange={handlePageChange}
-                    />)}
-                    <AppRoutes currentPokemons={currentPokemons} pokemons={pokemons} onClose={onClose} />
+                    />)} */}
 
-                    {isHomeRoute && (<Pagination
+                <AppRoutes
+                    currentPokemons={currentPokemons}
+                    pokemons={pokemons}
+                    onClose={onClose}
+
+                    isHomeRoute={isHomeRoute}
+                    currentPage={currentPage}
+                    totalPages={Math.ceil(alteredList.length / pokemonsPerPage)}
+                    onPageChange={handlePageChange}
+
+                />
+
+                {/* {isHomeRoute && (<Pagination
                         currentPage={currentPage}
                         totalPages={Math.ceil(alteredList.length / pokemonsPerPage)}
                         onPageChange={handlePageChange}
                     />)}
-                </div>
+                </div> */}
 
             </div>
 
