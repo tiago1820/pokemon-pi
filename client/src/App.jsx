@@ -97,8 +97,7 @@ export const App = () => {
         <div className={styles.appContainer}>
             {loading && <Loader />}
 
-            <Nav />
-            {/* {isHomeRoute && (<Nav onSearch={onSearch} />)} */}
+            {isHomeRoute && isHomeRoute !== '/' && <Nav />}
             {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (<SearchBar handleSearch={handleSearch} />)}
 
             <div className={styles.container}>

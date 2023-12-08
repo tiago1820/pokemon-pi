@@ -10,6 +10,7 @@ import { FilterSelects } from "./FilterSelects/FilterSelects";
 import { AppRoutes } from "./Routes/AppRoutes";
 import { Create } from "./Create/Create";
 import { CreateForm } from "./Create/components/CreateForm/CreateForm";
+import { Landing } from "../../Landing/Landing";
 
 export {
     SearchBar,
@@ -23,5 +24,6 @@ export {
     FilterSelects,
     AppRoutes,
     Create,
-    CreateForm
+    CreateForm,
+    Landing
 }
