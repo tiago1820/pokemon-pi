@@ -10,6 +10,7 @@ export const Pagination = ({ currentPage, totalPages, onPageChange }) => {
                     key={pageNumber}
                     onClick={() => onPageChange(pageNumber)}
                     className={`${styles.btnPage} ${pageNumber === currentPage ? styles.active : ''}`}
+                    title={`Pagina ${pageNumber}.`}
                 >
                     {pageNumber}
                 </button>

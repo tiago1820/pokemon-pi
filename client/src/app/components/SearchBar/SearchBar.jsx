@@ -31,6 +31,7 @@ export const SearchBar = props => {
                     <button
                         className={styles.button}
                         onClick={() => handleSearch(name)}
+                        title='Inicia la busqueda del pokemon por nombre.'
                     >Search</button>
 
                 </div>
