@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom';
 import { getAllPokemons } from '../../redux/actions';
 import { Link } from 'react-router-dom';
 
-
 export const Detail = () => {
     const pokemon = usePokemon();
     const dispatch = useDispatch();
@@ -41,10 +40,15 @@ export const Detail = () => {
 
     }
 
+    const closeCard = () => {
+        navigate('/app');
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.card}>
                 <div className={styles.row}>
+                
                     <div className={styles.left}>
                         <img className={styles.img} src={pokemonImages[pokemon.id] || defaultImg} alt="" />
 
@@ -60,7 +64,7 @@ export const Detail = () => {
                     </div>
 
                     <div className={styles.right}>
-                        <button className={styles.closeCard}>X</button>
+                    <button className={styles.closeCard} onClick={closeCard}>X</button>
                         <div className={styles.cardContent}>
                             <div className={styles.name}>{capitalizeFirstLetter(pokemon.name)}</div>
                         </div>

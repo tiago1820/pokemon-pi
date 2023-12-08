@@ -131,7 +131,12 @@ span {
     right: 43px;
 }
 
+.closeCard {
+    position: absolute;
+   right: 1px;
+   top: 1px;
 
+}
 
 /* types colors */
 .poison {
