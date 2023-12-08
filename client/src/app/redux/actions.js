@@ -1,44 +1,23 @@
-import axios from 'axios';
 
-import {
-    CLEAN_DETAIL,
-    GET_ALL_POKEMONS,
-    GET_POKEMON_DETAIL,
-    ORDER, GET_ALL_TYPES,
-    FILTER,
-    ORIGIN,
-    CLEAN_FILTERS,
-    DELETE_POKEMON,
-    CLEAN_APP
-} from "./action-types";
-
-const IP = process.env.REACT_APP_IP;
+import { ActionServices } from '../../services/actionServices';
+const actService = new ActionServices();
 
 export const getAllPokemons = () => {
-    const endpoint = `${IP}:3001/pokemons`;
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(endpoint);
-            return dispatch({
-                type: GET_ALL_POKEMONS,
-                payload: data,
-            });
+            const data = await actService.getAllPokemons();
+            dispatch(data);
         } catch (error) {
             throw error;
         }
     }
 }
 
-
 export const getAllTypes = () => {
-    const endpoint = `${IP}:3001/types`;
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(endpoint);
-            return dispatch({
-                type: GET_ALL_TYPES,
-                payload: data,
-            });
+            const data = await actService.getAllTypes();
+            dispatch(data);
         } catch (error) {
             throw error;
         }
@@ -46,31 +25,21 @@ export const getAllTypes = () => {
 }
 
 export const removePokemon = (id) => {
-    const endpoint = `${IP}:3001/pokemons/${id}`;
     return async (dispatch) => {
         try {
-            await axios.delete(endpoint);
-
-            return dispatch({
-                type: DELETE_POKEMON,
-                payload: id,
-            });
+            const data = await actService.removePokemon(id);
+            dispatch(data);
         } catch (error) {
             throw error;
         }
     }
 }
 
-
 export const getPokemonDetail = id => {
-    const endpoint = `${IP}:3001/pokemons/${id}`;
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(endpoint);
-            return dispatch({
-                type: GET_POKEMON_DETAIL,
-                payload: data,
-            });
+            const data = await actService.getPokemonDetail(id);
+            dispatch(data);
         } catch (error) {
             throw error;
         }
@@ -78,35 +47,26 @@ export const getPokemonDetail = id => {
 }
 
 export const cleanDetail = () => {
-    return { type: CLEAN_DETAIL };
+    actService.cleanDetail();
 }
 
 export const cleanApp = () => {
-    return { type: CLEAN_APP };
+    actService.cleanApp();
 }
 
 export const cleanFilters = () => {
-    return { type: CLEAN_FILTERS };
+    actService.cleanFilters();
 }
 
 
 export const orderCards = order => {
-    return {
-        type: ORDER,
-        payload: order,
-    };
+    actService.orderCards(order);
 };
 
 export const filterCards = (type, origin) => {
-    return {
-        type: FILTER,
-        payload: { type, origin },
-    };
+    actService.filterCards(type, origin);
 };
 
 export const filterOrigin = origin => {
-    return {
-        type: ORIGIN,
-        payload: origin,
-    };
+    actService.filterCards(origin);
 };

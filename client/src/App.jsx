@@ -121,16 +121,12 @@ export const App = () => {
                     currentPokemons={currentPokemons}
                     pokemons={pokemons}
                     onClose={onClose}
-
                     isHomeRoute={isHomeRoute}
                     currentPage={currentPage}
                     totalPages={Math.ceil(alteredList.length / pokemonsPerPage)}
                     onPageChange={handlePageChange}
-
                 />
-
             </div>
-
         </div>
     );
 }
