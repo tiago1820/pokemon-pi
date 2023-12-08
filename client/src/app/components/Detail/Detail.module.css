@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     margin: 10px auto;
-    width: 70%;
+    width: 100%;
 }
 
 .card {
@@ -11,15 +11,10 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* transition: transform 0.3s ease-in-out; */
     overflow: hidden;
     width: 100%;
     padding: 0.5rem;
 }
-
-/* .card:hover {
-    transform: scale(1.05);
-} */
 
 .row {
     display: flex;
@@ -34,7 +29,6 @@
     flex: 2;
     margin-left: 0.5rem;
 }
-
 
 .img {
     width: 100%;
@@ -75,8 +69,7 @@ span {
     height: 30px;
 }
 
-.attributes {
-    
+.attributes { 
     margin-top: 10px;
     text-align: center;
 }
@@ -124,6 +117,7 @@ span {
     cursor: pointer;
     right: 5px;
     bottom: 5px;
+    cursor: pointer;
 }
 
 .btnEdit {
@@ -136,6 +130,24 @@ span {
    right: 1px;
    top: 1px;
 
+}
+
+@media screen and (max-width: 575px) {
+    .row {
+        flex-direction: column;
+    }
+    .container {
+        width: 100%;
+    }
+    .right {
+        margin-left: 0;
+    }
+}
+
+@media screen and (min-width: 576px) and (max-width: 767px) {
+    .container {
+        width: 100%;
+    }
 }
 
 /* types colors */
