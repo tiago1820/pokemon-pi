@@ -7,7 +7,8 @@ import {
     FILTER,
     ORIGIN,
     CLEAN_FILTERS,
-    DELETE_POKEMON
+    DELETE_POKEMON,
+    CLEAN_APP
 } from "./action-types";
 
 const initialState = {
@@ -47,6 +48,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 pokemonDetail: {},
+            };
+        case CLEAN_APP:
+            return {
+                ...state,
+                allPokemons: [],
+                alteredList: [],
+                allTypes: []
             };
 
         case ORDER:

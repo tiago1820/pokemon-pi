@@ -3,8 +3,8 @@ import { Service } from './services/index';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { getAllPokemons, getAllTypes } from './app/redux/actions';
-import { AppRoutes, Loader, Nav, Pagination, SearchBar, FilterSelects } from './app/components';
+import { getAllPokemons, getAllTypes, cleanApp } from './app/redux/actions';
+import { AppRoutes, Loader, Nav, SearchBar, FilterSelects } from './app/components';
 import styles from './App.module.css';
 
 export const App = () => {
@@ -83,6 +83,10 @@ export const App = () => {
         };
 
         fetchData();
+
+        return () => {
+            dispatch(cleanApp());
+        };
     }, []);
 
     useEffect(() => {
@@ -113,13 +117,6 @@ export const App = () => {
                     )}
                 </div>
 
-                {/* <div className={styles.right}>
-                    {isHomeRoute && (<Pagination
-                        currentPage={currentPage}
-                        totalPages={Math.ceil(alteredList.length / pokemonsPerPage)}
-                        onPageChange={handlePageChange}
-                    />)} */}
-
                 <AppRoutes
                     currentPokemons={currentPokemons}
                     pokemons={pokemons}
@@ -131,13 +128,6 @@ export const App = () => {
                     onPageChange={handlePageChange}
 
                 />
-
-                {/* {isHomeRoute && (<Pagination
-                        currentPage={currentPage}
-                        totalPages={Math.ceil(alteredList.length / pokemonsPerPage)}
-                        onPageChange={handlePageChange}
-                    />)}
-                </div> */}
 
             </div>
 

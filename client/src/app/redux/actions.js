@@ -8,7 +8,8 @@ import {
     FILTER,
     ORIGIN,
     CLEAN_FILTERS,
-    DELETE_POKEMON
+    DELETE_POKEMON,
+    CLEAN_APP
 } from "./action-types";
 
 const IP = process.env.REACT_APP_IP;
@@ -78,6 +79,10 @@ export const getPokemonDetail = id => {
 
 export const cleanDetail = () => {
     return { type: CLEAN_DETAIL };
+}
+
+export const cleanApp = () => {
+    return { type: CLEAN_APP };
 }
 
 export const cleanFilters = () => {
