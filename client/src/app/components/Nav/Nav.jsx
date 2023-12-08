@@ -8,13 +8,21 @@ export const Nav = props => {
         <nav className={styles.navbar}>
             <div className={styles.left}>
                 <Link to={'/app'}>
-                    <img src={logo} alt="Pokemon logo" className={styles.logo} />
+                    <img
+                        src={logo}
+                        alt="Pokemon logo"
+                        className={styles.logo}
+                        title='Vuelve al inicio.'
+                    />
                 </Link>
             </div>
 
             <div className={styles.buttonContainer}>
                 <Link to={'/app/create'}>
-                    <button className={styles.createButton}>Crear</button>
+                    <button
+                        className={styles.createButton}
+                        title='Crea un nuevo pokemon.'
+                    >Crear</button>
                 </Link>
             </div>
         </nav>
