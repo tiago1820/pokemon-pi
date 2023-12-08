@@ -14,8 +14,6 @@ export const Detail = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    console.log("ID", pokemon.id);
-
     const capitalizeFirstLetter = (word) => {
         if (typeof word === 'string' && word.length > 0) {
             return word.charAt(0).toUpperCase() + word.slice(1);
@@ -46,7 +44,6 @@ export const Detail = () => {
     return (
         <div className={styles.container}>
             <div className={styles.card}>
-                {/* id de la imagen */}
                 <div className={styles.row}>
                     <div className={styles.left}>
                         <img className={styles.img} src={pokemonImages[pokemon.id] || defaultImg} alt="" />
@@ -63,16 +60,15 @@ export const Detail = () => {
                     </div>
 
                     <div className={styles.right}>
-                        {/* <div className={styles.cardContent}>
-    <div className={styles.name}>{capitalizeFirstLetter(pokemon.name)}</div>
-</div> */}
+                        <button className={styles.closeCard}>X</button>
+                        <div className={styles.cardContent}>
+                            <div className={styles.name}>{capitalizeFirstLetter(pokemon.name)}</div>
+                        </div>
                         <div className={styles.attributes}>
                             {renderBar('HP', pokemon.hp)}
                             {renderBar('Attack', pokemon.attack)}
                             {renderBar('Defense', pokemon.defense)}
                             {renderBar('Speed', pokemon.speed)}
-                            {/* {renderBar('Height', pokemon.height)}
-    {renderBar('Weight', pokemon.weight)} */}
                             <div>Height: {pokemon.height}</div>
                             <div>Weight: {pokemon.weight}</div>
 
