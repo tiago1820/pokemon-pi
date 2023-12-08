@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { Cards, Detail, Create, Edit } from '../../components';
+import { Cards, Detail, Create, Edit, Landing } from '../../components';
 
 export const AppRoutes = ({
     currentPokemons,
@@ -25,6 +25,7 @@ export const AppRoutes = ({
                     onPageChange={onPageChange}
 
                 />} />
+            <Route path='/' element={<Landing />} />
             <Route path='/app/detail/:id' element={<Detail />} />
             <Route path='/app/create' element={<Create />} />
             <Route path='/app/edit/:id' element={<Edit />} />

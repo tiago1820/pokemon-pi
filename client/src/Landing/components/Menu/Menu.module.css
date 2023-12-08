@@ -1,0 +1,102 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #0d6efd;
+    padding: 10px 20px;
+    background-color: chocolate;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.right {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.right li {
+    list-style-type: none;
+}
+
+.appName {
+    text-decoration: none;
+    font-size: 1.5rem;
+    outline: none;
+    color: black;
+}
+
+/* .appName img {
+    height: 150px;
+    width: 250px;
+} */
+
+.navLink {
+    text-decoration: none;
+    color: #4a4a4b;
+    margin-left: 20px;
+    outline: none;
+    font-size: 1.3rem;
+    color: #fff;
+}
+
+.navbar .navBtn {
+    padding: 5px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #051e34;
+    visibility: hidden;
+    opacity: 0;
+    font-size: 1.8rem;
+}
+
+@media only screen and (max-width: 1024px) {
+    .navbar .navBtn {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .navbar a {
+        color: #4A4A4B;
+    }
+
+    .navbar nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+        background-color: #FFF;
+        transition: 1s;
+        transform: translateY(-100vh);
+    }
+
+    .navbar .responsiveNav {
+        transform: none;
+        z-index: 10;
+    }
+
+    nav .navCloseBtn {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+    }
+
+    nav a {
+        font-size: 1.5rem;
+    }
+
+}
