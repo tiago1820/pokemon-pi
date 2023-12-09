@@ -9,13 +9,16 @@ export const Menu = () => {
             <div className={styles.column}>
                 <nav className={styles.right}>
                     <li>
-                        <a className={styles.navLink} href="#">link</a>
+                        <a className={styles.navLink} href="#">Home</a>
                     </li>
                     <li>
-                        <a className={styles.navLink} href="#">link</a>
+                        <a className={styles.navLink} href="#">Feature 1</a>
                     </li>
                     <li>
-                        <a className={styles.navLink} href="#">link</a>
+                        <a className={styles.navLink} href="#">Feature 2</a>
+                    </li>
+                    <li>
+                        <a className={styles.navLink} href="#">Feature 3</a>
                     </li>
                     <button className={styles.navBtn}>
                         &#9776;
