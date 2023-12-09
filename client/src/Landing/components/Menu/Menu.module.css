@@ -2,9 +2,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #0d6efd;
-    padding: 10px 20px;
-    background-color: chocolate;
+    background-color: #b31312;
+    padding: 0 5rem;
+    height: 8rem;
 }
 
 .column {
@@ -23,6 +23,7 @@
 
 .right li {
     list-style-type: none;
+    margin-top: 2rem;
 }
 
 .appName {
@@ -42,7 +43,7 @@
     color: #4a4a4b;
     margin-left: 20px;
     outline: none;
-    font-size: 1.3rem;
+    font-size: 2rem;
     color: #fff;
 }
 
@@ -59,13 +60,18 @@
 }
 
 @media only screen and (max-width: 1024px) {
+    .navbar {
+        padding: 0 5rem;
+        color: #fff;
+        height: 8rem;
+    }
+
+    .navbar .responsiveNav {
+        background-color: #b31312;
+    }
     .navbar .navBtn {
         visibility: visible;
         opacity: 1;
-    }
-
-    .navbar a {
-        color: #4A4A4B;
     }
 
     .navbar nav {
