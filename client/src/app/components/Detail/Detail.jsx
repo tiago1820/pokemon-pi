@@ -7,6 +7,9 @@ import { removePokemon } from '../../redux/actions';
 import { useNavigate } from 'react-router-dom';
 import { getAllPokemons } from '../../redux/actions';
 import { Link } from 'react-router-dom';
+import editIcon from '../../../images/edit.png';
+import garbageIcon from '../../../images/garbageIcon.png';
+import deleteIcon from '../../../images/delete.png';
 
 export const Detail = () => {
     const pokemon = usePokemon();
@@ -48,7 +51,7 @@ export const Detail = () => {
         <div className={styles.container}>
             <div className={styles.card}>
                 <div className={styles.row}>
-                
+
                     <div className={styles.left}>
                         <img className={styles.img} src={pokemonImages[pokemon.id] || defaultImg} alt="" />
 
@@ -64,7 +67,9 @@ export const Detail = () => {
                     </div>
 
                     <div className={styles.right}>
-                    <button className={styles.closeCard} onClick={closeCard}>X</button>
+                        <button className={styles.closeCard} onClick={closeCard}>
+                            <img className={styles.deleteIcon} src={deleteIcon} />
+                        </button>
                         <div className={styles.cardContent}>
                             <div className={styles.name}>{capitalizeFirstLetter(pokemon.name)}</div>
                         </div>
@@ -79,9 +84,13 @@ export const Detail = () => {
                             {pokemon.created && (
                                 <>
                                     <Link to={`/app/edit/${pokemon.id}`}>
-                                        <button className={styles.btnEdit}>E</button>
+                                        <button className={styles.btnEdit}>
+                                            <img className={styles.editIcon} src={editIcon} />
+                                        </button>
                                     </Link>
-                                    <button className={styles.btnDel} onClick={handleDelete}>X</button>
+                                    <button className={styles.btnDel} onClick={handleDelete}>
+                                        <img className={styles.garbageIcon} src={garbageIcon} />
+                                    </button>
                                 </>
                             )
 
