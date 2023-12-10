@@ -99,22 +99,19 @@ export const App = () => {
 
             {isHomeRoute && isHomeRoute !== '/' && <Nav />}
             {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (<SearchBar handleSearch={handleSearch} />)}
-
-            <div className={styles.container}>
-                <div className={styles.left}>
-                    {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (
-                        <FilterSelects
-                            clearFilters={clearFilters}
-                            handleOrder={handleOrder}
-                            handleFilter={handleFilter}
-                            handleOrigin={handleOrigin}
-                            selectedOrder={selectedOrder}
-                            selectedType={selectedType}
-                            selectedOrigin={selectedOrigin}
-                            allTypes={allTypes}
-                        />
-                    )}
-                </div>
+            <div className={styles.row}>
+                {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (
+                    <FilterSelects
+                        clearFilters={clearFilters}
+                        handleOrder={handleOrder}
+                        handleFilter={handleFilter}
+                        handleOrigin={handleOrigin}
+                        selectedOrder={selectedOrder}
+                        selectedType={selectedType}
+                        selectedOrigin={selectedOrigin}
+                        allTypes={allTypes}
+                    />
+                )}
 
                 <AppRoutes
                     currentPokemons={currentPokemons}
@@ -125,9 +122,7 @@ export const App = () => {
                     currentPage={currentPage}
                     totalPages={Math.ceil(alteredList.length / pokemonsPerPage)}
                     onPageChange={handlePageChange}
-
                 />
-
             </div>
 
         </div>

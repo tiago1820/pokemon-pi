@@ -1,9 +1,8 @@
 .selectContainer {
     display: flex;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
     flex-direction: column;
     align-items: center;
+    margin-top: 5.5rem;
 }
 
 .select {
@@ -11,7 +10,7 @@
     margin: 0.5rem;
     padding: 8px;
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid hsl(0, 0%, 80%);
     border-radius: 5px;
     background-color: #fff;
     cursor: pointer;

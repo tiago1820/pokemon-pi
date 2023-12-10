@@ -10,7 +10,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
     overflow: hidden;
-    width: 18rem;
+    width: 13rem;
     border: 2px solid #0b5ed7;
 }
 
@@ -89,11 +89,24 @@ span {
     .card {
         width: 100%;
     }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+    .card {
+        width: 100%;
+    }
 
     .createButtonContainer {
         margin-top: 10px;
     }
 }
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .card {
+        width: 18rem;
+    }
+  
+  }
 
 /* types colors */
 .poison {
