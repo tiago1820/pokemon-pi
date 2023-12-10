@@ -40,10 +40,16 @@ h2 {
     border: #fff;
     border-radius: 4px;
     cursor: pointer;
+    padding-bottom: 0.3rem;
 }
 
 .button:hover {
     background-color: #DA471B;
+}
+
+.searchIcon {
+    width: 20px;
+    height: 20px;
 }
 
 @media (max-width: 768px){

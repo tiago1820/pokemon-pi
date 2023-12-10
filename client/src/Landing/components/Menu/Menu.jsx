@@ -1,5 +1,6 @@
 import styles from './Menu.module.css';
 import { useRef } from 'react';
+import logo from '../../../images/pokemon-logo.png';
 
 export const Menu = () => {
     const navRef = useRef();
@@ -11,7 +12,11 @@ export const Menu = () => {
     return (
         <nav className={styles.navbar}>
             <div className={styles.left}>
-                <a className={styles.appName} href="#">logo</a>
+                <a className={styles.appName} href="#">
+                    <img src={logo}
+                    alt='Pokemon logo'
+                    className={styles.logo}/>
+                    </a>
             </div>
             <div className={styles.column}>
                 <nav ref={navRef} className={styles.right}>

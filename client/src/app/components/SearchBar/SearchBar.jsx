@@ -1,6 +1,7 @@
 import { Utils } from '../../../utils';
 import { useState } from 'react';
 import styles from './SearchBar.module.css';
+import searchIcon from '../../../images/searchIcon.png';
 
 export const SearchBar = props => {
     const utils = new Utils();
@@ -32,7 +33,7 @@ export const SearchBar = props => {
                         className={styles.button}
                         onClick={() => handleSearch(name)}
                         title='Inicia la busqueda del pokemon por nombre.'
-                    >Search</button>
+                    ><img className={styles.searchIcon} src={searchIcon} /></button>
 
                 </div>
             </div>
