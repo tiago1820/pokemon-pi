@@ -1,5 +1,7 @@
 import styles from './Feature.module.css';
-import image from '../../../images/pokemon3.jpg';
+import feature1 from '../../../images/feature1.png';
+import feature2 from '../../../images/feature2.png';
+
 
 export const Feature = () => {
     return <>
@@ -11,7 +13,7 @@ export const Feature = () => {
                         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem non quisquam iste, assumenda eos ratione accusamus quidem, quam, molestias consectetur ducimus quibusdam id. Facilis, aspernatur.</p>
                     </div>
                     <div className={styles.column}>
-                        <img src={image} alt="" />
+                        <img src={feature1} alt="" />
                     </div>
                 </div>
             </div>
@@ -20,7 +22,7 @@ export const Feature = () => {
             <div className={styles.middleContainer}>
                 <div className={styles.row}>
                     <div className={styles.column}>
-                        <img src={image} alt="" />
+                        <img src={feature2} alt="" />
                     </div>
                     <div className={styles.column}>
                         <h1>Hola</h1>
@@ -37,7 +39,7 @@ export const Feature = () => {
                         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem non quisquam iste, assumenda eos ratione accusamus quidem, quam, molestias consectetur ducimus quibusdam id. Facilis, aspernatur.</p>
                     </div>
                     <div className={styles.column}>
-                        <img src={image} alt="" />
+                        <img src={feature1} alt="" />
                     </div>
                 </div>
             </div>
