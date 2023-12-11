@@ -51,7 +51,6 @@ export const Detail = () => {
         <div className={styles.container}>
             <div className={styles.card}>
                 <div className={styles.row}>
-
                     <div className={styles.left}>
                         <img className={styles.img} src={pokemonImages[pokemon.id] || defaultImg} alt="" />
 

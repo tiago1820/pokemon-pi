@@ -1,6 +1,8 @@
 import styles from './Feature.module.css';
 import feature1 from '../../../images/feature1.png';
 import feature2 from '../../../images/feature2.png';
+import feature3 from '../../../images/feature3.png';
+
 
 
 export const Feature = () => {
@@ -39,7 +41,7 @@ export const Feature = () => {
                         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem non quisquam iste, assumenda eos ratione accusamus quidem, quam, molestias consectetur ducimus quibusdam id. Facilis, aspernatur.</p>
                     </div>
                     <div className={styles.column}>
-                        <img src={feature1} alt="" />
+                        <img src={feature3} alt="" />
                     </div>
                 </div>
             </div>
