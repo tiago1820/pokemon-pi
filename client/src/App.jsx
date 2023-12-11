@@ -97,7 +97,8 @@ export const App = () => {
         <div className={styles.appContainer}>
             {loading && <Loader />}
 
-            {isHomeRoute && isHomeRoute !== '/' && <Nav />}
+            {location.pathname && location.pathname !== '/' && <Nav />}
+
             {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (<SearchBar handleSearch={handleSearch} />)}
             <div className={styles.row}>
                 {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (
