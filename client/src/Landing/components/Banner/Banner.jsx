@@ -7,7 +7,6 @@ export const Banner = () => {
             <div className={styles.container}>
                 <div className={styles.row}>
                     <div className={styles.column}>
-                        <h1>banner</h1>
                         <a href="/app">Entrar</a>
                     </div>
                 </div>

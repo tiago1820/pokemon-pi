@@ -11,7 +11,6 @@
     margin: 0 auto;
 }
 
-
 h2 {
     color: #333;
     margin-bottom: 15px;
@@ -29,7 +28,6 @@ h2 {
     border-radius: 4px;
     box-sizing: border-box;
 }
-
 
 .label {
     margin-bottom: 8px;
@@ -51,13 +49,35 @@ h2 {
     margin-top: 20px;
 }
 
-.wrapper input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
+.btnPrev,
+.btnNext,
+.btnSub {
+    padding: 10px 15px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
     border-radius: 4px;
-    box-sizing: border-box;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btnPrev:hover,
+.btnNext:hover,
+.btnSub:hover {
+    background-color: #45a049;
+}
+
+.btnPrev {
+    background-color: #2196f3;
+}
+
+.btnSub {
+    background-color: #f44336;
+}
+
+.btnPrev,
+.btnNext {
+    margin-right: 10px;
 }
 
 input[type="checkbox"] {
@@ -67,18 +87,4 @@ input[type="checkbox"] {
 p {
     color: #ff0000;
     margin-top: 5px;
-}
-
-
-.btnNext .btnPrev .btnSub {
-    padding: 10px 15px;
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.btnNext:hover {
-    background-color: #45a049;
 }
