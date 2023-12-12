@@ -1,7 +1,7 @@
 import { Card, Pagination } from '../../components';
 import styles from './Cards.module.css';
 
-export const Cards = props => {
+export const Cards = (props) => {
     const {
         allPokemons,
         pokemons,
@@ -9,24 +9,26 @@ export const Cards = props => {
         isHomeRoute,
         currentPage,
         totalPages,
-        onPageChange
-
-
-
+        onPageChange,
     } = props;
+
+    const showPagination = pokemons.length === 0;
 
     return (
         <div className={styles.container}>
-            <Pagination
-                isHomeRoute={isHomeRoute}
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={onPageChange}
-            />
+            {showPagination && (
+                <Pagination
+                    isHomeRoute={isHomeRoute}
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={onPageChange}
+                />
+            )}
+
             <div className={styles.column}>
                 <div className={styles.row}>
                     {pokemons.length > 0 ? (
-                        pokemons.map(poke => (
+                        pokemons.map((poke) => (
                             <Card
                                 key={poke.id}
                                 id={poke.id}
@@ -43,7 +45,7 @@ export const Cards = props => {
                             />
                         ))
                     ) : (
-                        allPokemons.map(poke => (
+                        allPokemons.map((poke) => (
                             <Card
                                 key={poke.id}
                                 id={poke.id}
@@ -61,13 +63,14 @@ export const Cards = props => {
                     )}
                 </div>
             </div>
-
-            <Pagination
-                isHomeRoute={isHomeRoute}
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={onPageChange}
-            />
+            {showPagination && (
+                <Pagination
+                    isHomeRoute={isHomeRoute}
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={onPageChange}
+                />
+            )}
         </div>
     );
-}
+};
