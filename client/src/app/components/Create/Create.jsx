@@ -92,8 +92,12 @@ export const Create = props => {
 
         const hasErrors = Object.values(errors).some((error) => error !== '');
 
-        if (hasErrors) {
-            window.alert('Por favor, completa todos los campos correctamente antes de crear el Pokémon.');
+        const noTypesSelected = pokeData.types.length === 0;
+
+        if (hasErrors || noTypesSelected) {
+            window.alert(
+                'Por favor, completa todos los campos correctamente antes de crear el Pokémon.'
+            );
         } else {
             const allFieldsHaveData = Object.values(pokeData).every(
                 (value) => value !== '' && value !== null && value !== undefined
@@ -104,10 +108,13 @@ export const Create = props => {
                 navigate('/app');
                 dispatch(getAllPokemons());
             } else {
-                window.alert('Por favor, completa todos los campos antes de crear el Pokémon.');
+                window.alert(
+                    'Por favor, completa todos los campos antes de crear el Pokémon.'
+                );
             }
         }
     };
+
 
 
     return (

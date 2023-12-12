@@ -86,30 +86,32 @@ export const Edit = props => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
+      
         const hasErrors = Object.values(errors).some((error) => error !== '');
-
-        if (hasErrors) {
-            window.alert(
-                'Por favor, completa todos los campos correctamente antes de actualizar el Pokémon.'
-            );
+      
+        const noTypesSelected = pokeData.types.length === 0;
+      
+        if (hasErrors || noTypesSelected) {
+          window.alert(
+            'Por favor, completa todos los campos correctamente antes de actualizar el Pokémon.'
+          );
         } else {
-            const allFieldsHaveData = Object.values(pokeData).every(
-                (value) => value !== '' && value !== null && value !== undefined
+          const allFieldsHaveData = Object.values(pokeData).every(
+            (value) => value !== '' && value !== null && value !== undefined
+          );
+      
+          if (allFieldsHaveData) {
+            service.editPokemon(pokeData);
+            navigate('/app');
+            dispatch(getAllPokemons());
+          } else {
+            window.alert(
+              'Por favor, completa todos los campos antes de actualizar el Pokémon.'
             );
-
-            if (allFieldsHaveData) {
-                service.editPokemon(pokeData);
-                navigate('/app');
-                dispatch(getAllPokemons());
-            } else {
-                window.alert(
-                    'Por favor, completa todos los campos antes de actualizar el Pokémon.'
-                );
-            }
+          }
         }
-    };
-
+      };
+      
 
     return (
         <div className={styles.createContainer}>
