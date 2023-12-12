@@ -8,6 +8,7 @@ import validator from './validator';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getAllPokemons } from '../../redux/actions';
+import lab1 from '../../../images/lab1.jpg';
 
 
 export const Create = props => {
@@ -101,21 +102,29 @@ export const Create = props => {
     };
 
     return (
-        <div className={styles.container}>
-            <div>
-                <h2>Create your pokemon</h2>
+        <div className={styles.createContainer}>
+            <div className={styles.imgContainer}>
+                <img src={lab1} alt="" />
             </div>
-            <CreateForm
-                currentStep={currentStep}
-                pokeData={pokeData}
-                errors={errors}
-                allTypes={allTypes}
-                handleInput={handleInput}
-                handleCheckboxChange={handleCheckboxChange}
-                handleNext={handleNext}
-                handlePrevious={handlePrevious}
-                handleSubmit={handleSubmit}
-            />
+            <div className={styles.formContainer}>
+                <div>
+                    <h2>Create your pokemon</h2>
+                </div>
+                <div className={styles.right}>
+                    <CreateForm
+                        currentStep={currentStep}
+                        pokeData={pokeData}
+                        errors={errors}
+                        allTypes={allTypes}
+                        handleInput={handleInput}
+                        handleCheckboxChange={handleCheckboxChange}
+                        handleNext={handleNext}
+                        handlePrevious={handlePrevious}
+                        handleSubmit={handleSubmit}
+                    />
+                </div>
+
+            </div>
         </div>
     );
 
