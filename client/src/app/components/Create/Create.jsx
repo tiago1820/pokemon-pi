@@ -90,18 +90,25 @@ export const Create = props => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const allFieldsHaveData = Object.values(pokeData).every((value) => value !== '' && value !== null && value !== undefined);
+        const hasErrors = Object.values(errors).some((error) => error !== '');
 
-        if (allFieldsHaveData) {
-            service.createPokemon(pokeData);
-            navigate('/app');
-            dispatch(getAllPokemons());
-
+        if (hasErrors) {
+            window.alert('Por favor, completa todos los campos correctamente antes de crear el Pokémon.');
         } else {
-            window.alert('Por favor, completa todos los campos antes de crear el Pokémon.');
-        }
+            const allFieldsHaveData = Object.values(pokeData).every(
+                (value) => value !== '' && value !== null && value !== undefined
+            );
 
+            if (allFieldsHaveData) {
+                service.createPokemon(pokeData);
+                navigate('/app');
+                dispatch(getAllPokemons());
+            } else {
+                window.alert('Por favor, completa todos los campos antes de crear el Pokémon.');
+            }
+        }
     };
+
 
     return (
         <div className={styles.createContainer}>
