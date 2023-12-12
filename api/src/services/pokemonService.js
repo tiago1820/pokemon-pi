@@ -102,8 +102,6 @@ class PokemonService {
                     created: pokemonFromDB.created,
                 };
 
-
-
                 return formattedPokemon;
             }
         } catch (error) {
@@ -131,31 +129,49 @@ class PokemonService {
     getPokemonByName = async (name) => {
         try {
 
-            const apiResponse = await axios(`${this.URL}/${name}`);
-            const infoFromApi = apiResponse.data;
+            const response = await axios(`${this.URL}/${name}`);
 
-            const pokemonInfo = {
-                id: infoFromApi.id,
-                name: infoFromApi.name,
-                types: infoFromApi.types.map((t) => t.type.name),
-                img: infoFromApi.sprites.other['official-artwork'].front_default,
-                hp: infoFromApi.hp,
-                attack: infoFromApi.attack,
-                defense: infoFromApi.defense,
-                speed: infoFromApi.speed,
-                weight: infoFromApi.weight,
-                height: infoFromApi.height,
-            };
+            if (response.data) {
+                const infoFromApi = response.data;
 
-            return pokemonInfo;
+                const pokemonInfo = {
+                    id: infoFromApi.id,
+                    name: infoFromApi.name,
+                    types: infoFromApi.types.map((t) => t.type.name),
+                    img: infoFromApi.sprites.other['official-artwork'].front_default,
+                    hp: infoFromApi.stats[0].base_stat,
+                    attack: infoFromApi.stats[1].base_stat,
+                    defense: infoFromApi.stats[2].base_stat,
+                    speed: infoFromApi.stats[5].base_stat,
+                    weight: infoFromApi.weight,
+                    height: infoFromApi.height,
+                };
+
+                return pokemonInfo;
+            } else {
+
+            }
+
 
         } catch (apiError) {
-            try {
-                const pokemonFromDB = await this.getFromDataBaseByName(name);
-                return pokemonFromDB;
-            } catch (error) {
-                throw new Error('Pokemon not found');
-            }
+            const pokemonFromDB = await this.getFromDataBaseByName(name);
+
+            const formattedPokemon = {
+                id: pokemonFromDB.id,
+                name: pokemonFromDB.name,
+                types: pokemonFromDB.types ? pokemonFromDB.types.map(typeArr => typeArr.name) : [],
+                img: pokemonFromDB.img,
+                hp: pokemonFromDB.hp,
+                attack: pokemonFromDB.attack,
+                defense: pokemonFromDB.defense,
+                speed: pokemonFromDB.speed,
+                weight: pokemonFromDB.weight,
+                height: pokemonFromDB.height,
+                created: pokemonFromDB.created,
+            };
+
+            return formattedPokemon;
+
         }
     }
 
@@ -163,6 +179,7 @@ class PokemonService {
         try {
             const pokemonFromDB = await Pokemon.findOne({
                 where: { name: name },
+                include: [{ model: Type, through: 'pokemon_type' }],
             });
 
             if (!pokemonFromDB) {
@@ -173,7 +190,7 @@ class PokemonService {
         } catch (error) {
             throw error;
         }
+
     }
 }
-
 module.exports = PokemonService;
