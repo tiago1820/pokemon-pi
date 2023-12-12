@@ -1,5 +1,5 @@
 import { Service } from '../../../services';
-import EditForm from './EditForm/EditForm';
+import EditForm from './components/EditForm/EditForm';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import validator from './validator';
@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getAllPokemons } from '../../redux/actions';
 import { usePokemon } from '../../hooks/usePokemon';
+import styles from './Edit.module.css';
 
 export const Edit = props => {
     const service = new Service();
@@ -86,30 +87,49 @@ export const Edit = props => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const allFieldsHaveData = Object.values(pokeData).every((value) => value !== '' && value !== null && value !== undefined);
+        const hasErrors = Object.values(errors).some((error) => error !== '');
 
-        if (allFieldsHaveData) {
-            service.editPokemon(pokeData);
-            navigate('/app');
-            dispatch(getAllPokemons());
-
+        if (hasErrors) {
+            window.alert(
+                'Por favor, completa todos los campos correctamente antes de actualizar el Pokémon.'
+            );
         } else {
-            window.alert('Por favor, completa todos los campos antes de crear el Pokémon.');
-        }
+            const allFieldsHaveData = Object.values(pokeData).every(
+                (value) => value !== '' && value !== null && value !== undefined
+            );
 
+            if (allFieldsHaveData) {
+                service.editPokemon(pokeData);
+                navigate('/app');
+                dispatch(getAllPokemons());
+            } else {
+                window.alert(
+                    'Por favor, completa todos los campos antes de actualizar el Pokémon.'
+                );
+            }
+        }
     };
 
+
     return (
-        <EditForm
-            currentStep={currentStep}
-            pokeData={pokeData}
-            errors={errors}
-            allTypes={allTypes}
-            handleInput={handleInput}
-            handleCheckboxChange={handleCheckboxChange}
-            handleNext={handleNext}
-            handlePrevious={handlePrevious}
-            handleSubmit={handleSubmit}
-        />
+        <div className={styles.createContainer}>
+            <div className={styles.formContainer}>
+                <div>
+                    <h2>Edit your pokemon</h2>
+                </div>
+                <EditForm
+                    currentStep={currentStep}
+                    pokeData={pokeData}
+                    errors={errors}
+                    allTypes={allTypes}
+                    handleInput={handleInput}
+                    handleCheckboxChange={handleCheckboxChange}
+                    handleNext={handleNext}
+                    handlePrevious={handlePrevious}
+                    handleSubmit={handleSubmit}
+                />
+            </div>
+        </div>
+
     );
 }
