@@ -12,10 +12,7 @@ const EditForm = ({
     handleSubmit,
 }) => {
     return (
-        <form onSubmit={handleSubmit} className={styles.container}>
-            <div>
-                <h2>Edit your pokemon</h2>
-            </div>
+        <form onSubmit={handleSubmit}>
             {currentStep === 1 && (
                 <section className={styles.formSection}>
                     <div className={styles.wrapper}>
@@ -60,7 +57,6 @@ const EditForm = ({
                         {errors.height && <p>{errors.height}</p>}
                     </div>
                     <button className={styles.btnNext} type='button' onClick={handleNext}>Next</button>
-                    <button className={`${styles.btnNext}`} type='button' onClick={handleNext}>Next</button>
                 </section>
             )}
             {currentStep === 2 && (

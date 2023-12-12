@@ -68,7 +68,7 @@ export const CreateForm = ({
                         {allTypes.map((type) => (
                             <div key={type.id} className={styles.checkboxItem}>
                                 <input
-                                    onChange={handleCheckboxChange}  // Cambiar onInput a onChange
+                                    onChange={handleCheckboxChange} 
                                     type="checkbox"
                                     id={type.id}
                                     name={type.name}

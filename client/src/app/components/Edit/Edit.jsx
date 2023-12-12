@@ -1,5 +1,5 @@
 import { Service } from '../../../services';
-import EditForm from './EditForm/EditForm';
+import EditForm from './components/EditForm/EditForm';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import validator from './validator';
@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getAllPokemons } from '../../redux/actions';
 import { usePokemon } from '../../hooks/usePokemon';
+import styles from './Edit.module.css';
 
 export const Edit = props => {
     const service = new Service();
@@ -100,16 +101,24 @@ export const Edit = props => {
     };
 
     return (
-        <EditForm
-            currentStep={currentStep}
-            pokeData={pokeData}
-            errors={errors}
-            allTypes={allTypes}
-            handleInput={handleInput}
-            handleCheckboxChange={handleCheckboxChange}
-            handleNext={handleNext}
-            handlePrevious={handlePrevious}
-            handleSubmit={handleSubmit}
-        />
+        <div className={styles.createContainer}>
+            <div className={styles.formContainer}>
+                <div>
+                    <h2>Edit your pokemon</h2>
+                </div>
+                <EditForm
+                    currentStep={currentStep}
+                    pokeData={pokeData}
+                    errors={errors}
+                    allTypes={allTypes}
+                    handleInput={handleInput}
+                    handleCheckboxChange={handleCheckboxChange}
+                    handleNext={handleNext}
+                    handlePrevious={handlePrevious}
+                    handleSubmit={handleSubmit}
+                />
+            </div>
+        </div>
+
     );
 }

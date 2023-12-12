@@ -8,7 +8,6 @@ import validator from './validator';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getAllPokemons } from '../../redux/actions';
-import lab1 from '../../../images/lab1.jpg';
 
 
 export const Create = props => {
@@ -55,6 +54,7 @@ export const Create = props => {
         }));
     };
 
+
     const handleCheckboxChange = (e) => {
         const { name, checked } = e.target;
 
@@ -67,6 +67,7 @@ export const Create = props => {
             types: updatedTypes,
         }));
 
+        // Validación para la cantidad de checkboxes seleccionados
         if (updatedTypes.length === 0) {
             setErrors((prevErrors) => ({
                 ...prevErrors,
@@ -84,6 +85,7 @@ export const Create = props => {
             }));
         }
     };
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
