@@ -20,6 +20,10 @@ This is a Pokemon Wiki application based on React, Redux, Node, Express and Sequ
 ## Demo
 
 ![image](https://github.com/tiago1820/pokemon-pi/blob/main/client/public/images/feature1.png)
+![image](https://github.com/tiago1820/pokemon-pi/blob/main/client/src/images/feature2.png)
+![image](https://github.com/tiago1820/pokemon-pi/blob/main/client/public/images/feature3.png)
+
+
 
 ## Installation
 
