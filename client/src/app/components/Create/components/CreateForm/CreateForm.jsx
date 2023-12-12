@@ -56,7 +56,6 @@ export const CreateForm = ({
                         {errors.height && <p>{errors.height}</p>}
                     </div>
                     <button className={styles.btnNext} type='button' onClick={handleNext}>Next</button>
-                    <button className={styles.btnNext} type='button' onClick={handleNext}>Next</button>
                 </section>
             )}
             {currentStep === 2 && (

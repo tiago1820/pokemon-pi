@@ -103,9 +103,6 @@ export const Create = props => {
 
     return (
         <div className={styles.createContainer}>
-            <div className={styles.imgContainer}>
-                <img src={lab1} alt="" />
-            </div>
             <div className={styles.formContainer}>
                 <div>
                     <h2>Create your pokemon</h2>
