@@ -1,5 +1,6 @@
 .formSection {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    width: 100%;
 }
 
 .wrapper input {
@@ -41,6 +42,10 @@
     box-sizing: border-box;
 }
 
+.wrapper p {
+    font-size: 10px;
+}
+
 input[type="checkbox"] {
     margin-right: 8px;
 }
@@ -71,15 +76,12 @@ p {
 
 .btnPrev {
     background-color: #2196f3;
-    /* Cambia el color de fondo para el botón "Previous" */
 }
 
 .btnSub {
     background-color: #f44336;
-    /* Cambia el color de fondo para el botón "Create" */
 }
 
-/* Espacio entre los botones */
 .btnPrev,
 .btnNext {
     margin-right: 10px;

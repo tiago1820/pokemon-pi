@@ -1,18 +1,51 @@
-.container {
+.createContainer {
+    display: flex;
+    flex-direction: row;
+    margin: 1rem 18%;
+    height: 90%;
+}
+
+.formContainer {
+    flex: 1;
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: #f8f8f8;
-    border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 50%;
     margin: 0 auto;
 }
 
+.right {
+    width: 100%;
+}
+
+.imgContainer {
+    flex: 1; /* Ocupa el 40% del ancho disponible */
+}
+
+.imgContainer img {
+   width: 100%;
+   height: 100%;
+}
 
 h2 {
     color: #333;
     margin-bottom: 15px;
+}
+
+form {
+    width: 100%;
+    max-width: 400px; 
+    margin: 0 auto;
+}
+
+.imgContainer {
+
+}
+
+.imgContainer img {
+   width: 100%;
 }

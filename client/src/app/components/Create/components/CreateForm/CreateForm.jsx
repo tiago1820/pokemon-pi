@@ -18,9 +18,11 @@ export const CreateForm = ({
                     <div className={styles.wrapper}>
                         <label htmlFor="" className={styles.label}>Name</label>
                         <input onInput={handleInput} name='name' type="text" value={pokeData.name} />
-                        {errors.name1 && <p>{errors.name1}</p>}
-                        {errors.name2 && <p>{errors.name2}</p>}
-                        {errors.name3 && <p>{errors.name3}</p>}
+                        <div className={styles.error}>
+                            {errors.name1 && <p>{errors.name1}</p>}
+                            {errors.name2 && <p>{errors.name2}</p>}
+                            {errors.name3 && <p>{errors.name3}</p>}
+                        </div>
                     </div>
 
                     <div className={styles.wrapper}>
