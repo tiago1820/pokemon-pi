@@ -128,7 +128,6 @@ class PokemonService {
 
     getPokemonByName = async (name) => {
         try {
-
             const response = await axios(`${this.URL}/${name}`);
 
             if (response.data) {
@@ -149,29 +148,28 @@ class PokemonService {
 
                 return pokemonInfo;
             } else {
+                const pokemonFromDB = await this.getFromDataBaseByName(name);
 
+                const formattedPokemon = {
+                    id: pokemonFromDB.id,
+                    name: pokemonFromDB.name,
+                    types: pokemonFromDB.types ? pokemonFromDB.types.map(typeArr => typeArr.name) : [],
+                    img: pokemonFromDB.img,
+                    hp: pokemonFromDB.hp,
+                    attack: pokemonFromDB.attack,
+                    defense: pokemonFromDB.defense,
+                    speed: pokemonFromDB.speed,
+                    weight: pokemonFromDB.weight,
+                    height: pokemonFromDB.height,
+                    created: pokemonFromDB.created,
+                };
+
+                return formattedPokemon;
             }
 
 
-        } catch (apiError) {
-            const pokemonFromDB = await this.getFromDataBaseByName(name);
-
-            const formattedPokemon = {
-                id: pokemonFromDB.id,
-                name: pokemonFromDB.name,
-                types: pokemonFromDB.types ? pokemonFromDB.types.map(typeArr => typeArr.name) : [],
-                img: pokemonFromDB.img,
-                hp: pokemonFromDB.hp,
-                attack: pokemonFromDB.attack,
-                defense: pokemonFromDB.defense,
-                speed: pokemonFromDB.speed,
-                weight: pokemonFromDB.weight,
-                height: pokemonFromDB.height,
-                created: pokemonFromDB.created,
-            };
-
-            return formattedPokemon;
-
+        } catch (error) {
+            throw error; 
         }
     }
 
@@ -183,7 +181,7 @@ class PokemonService {
             });
 
             if (!pokemonFromDB) {
-                throw new Error('Pokemon not found in the database');
+                throw error;
             }
 
             return pokemonFromDB;

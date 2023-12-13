@@ -9,7 +9,8 @@ import {
     DELETE_POKEMON,
     CLEAN_APP,
     LOADING,
-    RELOAD
+    RELOAD,
+    REQUEST_ERROR
 } from "./action-types";
 
 const initialState = {
@@ -19,11 +20,17 @@ const initialState = {
     alteredList: [],
     loading: true,
     reload: false,
+    requestError: "",
 
 }
 
 const rootReducer = (state = initialState, { type, payload }) => {
     switch (type) {
+
+        case REQUEST_ERROR:
+            return {
+                ...state, requestError: payload
+            }
         case RELOAD:
             return {
                 ...state, reload: payload

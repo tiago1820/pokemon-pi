@@ -112,7 +112,7 @@ class PokemonController {
             this.handlePokemonResponse(pokemon, res);
 
         } catch (error) {
-            this.handleErrorResponse(error, res);
+            res.status(500).send("¡Pokemon no encontrado!");
         }
     }
 
@@ -135,9 +135,7 @@ class PokemonController {
         }
     }
 
-    handleErrorResponse(error, res) {
-        res.status(500).send(error.message);
-    }
+    
 
     postPokemon = async (req, res) => {
 
@@ -184,8 +182,8 @@ class PokemonController {
             return res.status(201).json(newPokemon);
 
         } catch (error) {
-            console.error(error);
-            return res.status(500).send(error.message);
+            // console.error(error);
+            return res.status(500).send("Error al crear pokemon.");
         }
     }
 

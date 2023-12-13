@@ -1,9 +1,13 @@
 import axios from 'axios';
+import { setRequestError } from '../app/redux/actions';
+import { useDispatch } from 'react-redux';
 
 export class Service {
     constructor() {
         this.IP = process.env.REACT_APP_IP;
     }
+
+    dispatch = useDispatch();
 
     async onSearch(name, pokemons, setPokemons) {
         try {
@@ -17,7 +21,8 @@ export class Service {
                 }
             }
         } catch (error) {
-            window.alert('¡No hay pokemons con este nombre!');
+            console.log("DSDSDS", error.response.data);
+           this.dispatch(setRequestError(error.response.data));
         }
     }
 

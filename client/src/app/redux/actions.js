@@ -11,10 +11,18 @@ import {
     DELETE_POKEMON,
     CLEAN_APP,
     LOADING,
-    RELOAD
+    RELOAD,
+    REQUEST_ERROR
 } from "./action-types";
 
 const IP = process.env.REACT_APP_IP;
+
+export const setRequestError = (message) => {
+    return {
+        type: REQUEST_ERROR,
+        payload: message
+    }
+}
 
 export const setReload = (boolean) => {
     return {
