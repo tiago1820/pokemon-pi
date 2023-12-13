@@ -9,10 +9,18 @@ import {
     ORIGIN,
     CLEAN_FILTERS,
     DELETE_POKEMON,
-    CLEAN_APP
+    CLEAN_APP,
+    LOADING
 } from "./action-types";
 
 const IP = process.env.REACT_APP_IP;
+
+export const setLoading = (boolean) => {
+    return {
+        type: LOADING,
+        payload: boolean,
+    };
+}
 
 export const getAllPokemons = () => {
     const endpoint = `${IP}:3001/pokemons`;
@@ -28,7 +36,6 @@ export const getAllPokemons = () => {
         }
     }
 }
-
 
 export const getAllTypes = () => {
     const endpoint = `${IP}:3001/types`;

@@ -3,7 +3,7 @@ import { Service } from './services/index';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { getAllPokemons, getAllTypes, cleanApp } from './app/redux/actions';
+import { getAllPokemons, getAllTypes, cleanApp, setLoader, setLoading } from './app/redux/actions';
 import { AppRoutes, Loader, Nav, SearchBar, FilterSelects } from './app/components';
 import styles from './App.module.css';
 
@@ -19,11 +19,12 @@ export const App = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pokemons, setPokemons] = useState([]);
     const [aux, setAux] = useState(false);
-    const [loading, setLoading] = useState(true);
+    // const [loading, setLoading] = useState(true);
 
     // global states
     const alteredList = useSelector(state => state.alteredList);
     const allTypes = useSelector(state => state.allTypes);
+    const loading = useSelector(state => state.loading);
 
     // othes
     const dispatch = useDispatch();
@@ -72,17 +73,18 @@ export const App = () => {
     // useEffects
     useEffect(() => {
         setSelectedOrder("");
-        setSelectedOrigin("API");
+        setSelectedOrigin("");
         setSelectedType("")
 
         const fetchData = async () => {
             try {
-                setLoading(true);
+                // setLoading(true);
                 await Promise.all([dispatch(getAllPokemons()), dispatch(getAllTypes())]);
             } catch (error) {
                 console.error('Error fetching data:', error);
             } finally {
-                setLoading(false);
+                dispatch(setLoading(false))
+                // setLoading(false);
             }
         };
 
@@ -91,7 +93,7 @@ export const App = () => {
         return () => {
             dispatch(cleanApp());
         };
-    }, []);
+    }, [location.pathname]);
 
     useEffect(() => {
         setCurrentPage(1);

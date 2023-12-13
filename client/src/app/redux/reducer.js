@@ -7,7 +7,8 @@ import {
     FILTER,
     CLEAN_FILTERS,
     DELETE_POKEMON,
-    CLEAN_APP
+    CLEAN_APP,
+    LOADING
 } from "./action-types";
 
 const initialState = {
@@ -15,10 +16,16 @@ const initialState = {
     allTypes: [],
     pokemonDetail: [],
     alteredList: [],
+    loading: true,
+
 }
 
 const rootReducer = (state = initialState, { type, payload }) => {
     switch (type) {
+        case LOADING:
+            return {
+                ...state, loading: payload
+            }
         case DELETE_POKEMON:
             return {
                 ...state, allPokemons: payload
