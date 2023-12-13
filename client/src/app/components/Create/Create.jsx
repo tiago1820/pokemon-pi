@@ -7,8 +7,7 @@ import { useSelector } from 'react-redux';
 import validator from './validator';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { getAllPokemons } from '../../redux/actions';
-
+import { getAllPokemons, cleanFilters } from '../../redux/actions';
 
 export const Create = props => {
     const service = new Service();
@@ -106,7 +105,8 @@ export const Create = props => {
             if (allFieldsHaveData) {
                 service.createPokemon(pokeData);
                 navigate('/app');
-                // dispatch(getAllPokemons());
+                dispatch(getAllPokemons());
+                dispatch(cleanFilters());
             } else {
                 window.alert(
                     'Por favor, completa todos los campos antes de crear el Pokémon.'
