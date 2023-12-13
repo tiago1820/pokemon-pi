@@ -15,3 +15,27 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+
+.error {
+    position: relative;
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.closeButton {
+    position: absolute;
+    top: -5px;
+    right: -15px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    color: #721c24;
+    /* border: 1px solid #721c24; */
+}
