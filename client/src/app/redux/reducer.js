@@ -5,7 +5,6 @@ import {
     ORDER,
     GET_ALL_TYPES,
     FILTER,
-    ORIGIN,
     CLEAN_FILTERS,
     DELETE_POKEMON,
     CLEAN_APP

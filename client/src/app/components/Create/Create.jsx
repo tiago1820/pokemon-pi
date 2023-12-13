@@ -106,7 +106,7 @@ export const Create = props => {
             if (allFieldsHaveData) {
                 service.createPokemon(pokeData);
                 navigate('/app');
-                dispatch(getAllPokemons());
+                // dispatch(getAllPokemons());
             } else {
                 window.alert(
                     'Por favor, completa todos los campos antes de crear el Pokémon.'
@@ -114,7 +114,6 @@ export const Create = props => {
             }
         }
     };
-
 
 
     return (

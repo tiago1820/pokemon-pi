@@ -14,7 +14,7 @@ export const App = () => {
     // local states
     const [selectedOrder, setSelectedOrder] = useState("");
     const [selectedType, setSelectedType] = useState("");
-    const [selectedOrigin, setSelectedOrigin] = useState("api");
+    const [selectedOrigin, setSelectedOrigin] = useState("API");
 
     const [currentPage, setCurrentPage] = useState(1);
     const [pokemons, setPokemons] = useState([]);
@@ -71,6 +71,10 @@ export const App = () => {
 
     // useEffects
     useEffect(() => {
+        setSelectedOrder("");
+        setSelectedOrigin("API");
+        setSelectedType("")
+
         const fetchData = async () => {
             try {
                 setLoading(true);
@@ -94,38 +98,47 @@ export const App = () => {
     }, [alteredList]);
 
     return (
-        <div className={styles.appContainer}>
+        <>
             {loading && <Loader />}
+            {loading === false &&
+                <div className={styles.appContainer}>
+                    {/* {loading && <Loader />} */}
 
-            {location.pathname && location.pathname !== '/' && <Nav />}
+                    {location.pathname && location.pathname !== '/' && <Nav />}
 
-            {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (<SearchBar handleSearch={handleSearch} />)}
-            <div className={styles.row}>
-                {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (
-                    <FilterSelects
-                        clearFilters={clearFilters}
-                        handleOrder={handleOrder}
-                        handleFilter={handleFilter}
-                        handleOrigin={handleOrigin}
-                        selectedOrder={selectedOrder}
-                        selectedType={selectedType}
-                        selectedOrigin={selectedOrigin}
-                        allTypes={allTypes}
-                    />
-                )}
+                    {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (<SearchBar handleSearch={handleSearch} />)}
+                    <div className={styles.row}>
+                        {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (
+                            <FilterSelects
+                                clearFilters={clearFilters}
+                                handleOrder={handleOrder}
+                                handleFilter={handleFilter}
+                                handleOrigin={handleOrigin}
+                                selectedOrder={selectedOrder}
+                                selectedType={selectedType}
+                                selectedOrigin={selectedOrigin}
+                                allTypes={allTypes}
+                            />
+                        )}
 
-                <AppRoutes
-                    currentPokemons={currentPokemons}
-                    pokemons={pokemons}
-                    onClose={onClose}
+                        <AppRoutes
+                            currentPokemons={currentPokemons}
+                            pokemons={pokemons}
+                            onClose={onClose}
 
-                    isHomeRoute={isHomeRoute}
-                    currentPage={currentPage}
-                    totalPages={Math.ceil(alteredList.length / pokemonsPerPage)}
-                    onPageChange={handlePageChange}
-                />
-            </div>
+                            isHomeRoute={isHomeRoute}
+                            currentPage={currentPage}
+                            totalPages={Math.ceil(alteredList.length / pokemonsPerPage)}
+                            onPageChange={handlePageChange}
+                        />
+                    </div>
 
-        </div>
+                </div>
+
+
+
+            }
+
+        </>
     );
 }
