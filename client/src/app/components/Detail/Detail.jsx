@@ -3,9 +3,8 @@ import { usePokemon } from '../../hooks/usePokemon';
 import pokemonImages from '../../../images/sprites/index';
 import defaultImg from '../../../images/default-img.png';
 import { useDispatch } from 'react-redux';
-import { removePokemon } from '../../redux/actions';
+import { removePokemon, setLoading, setReload, cleanFilters } from '../../redux/actions';
 import { useNavigate } from 'react-router-dom';
-import { getAllPokemons } from '../../redux/actions';
 import { Link } from 'react-router-dom';
 import editIcon from '../../../images/edit.png';
 import garbageIcon from '../../../images/garbageIcon.png';
@@ -38,9 +37,10 @@ export const Detail = () => {
 
     const handleDelete = () => {
         dispatch(removePokemon(pokemon.id));
+        dispatch(cleanFilters());
+        dispatch(setLoading(true));
+        dispatch(setReload(true));
         navigate('/app');
-        dispatch(getAllPokemons());
-
     }
 
     const closeCard = () => {

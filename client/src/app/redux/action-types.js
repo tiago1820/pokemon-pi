@@ -9,4 +9,6 @@ export const CLEAN_FILTERS = 'CLEAN_FILTERS';
 export const DELETE_POKEMON = 'DELETE_POKEMON';
 export const CLEAN_APP = 'CLEAN_APP';
 export const LOADING = 'LOADING';
+export const RELOAD = 'RELOAD   ';
+
 
