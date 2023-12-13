@@ -10,10 +10,18 @@ import {
     CLEAN_FILTERS,
     DELETE_POKEMON,
     CLEAN_APP,
-    LOADING
+    LOADING,
+    RELOAD
 } from "./action-types";
 
 const IP = process.env.REACT_APP_IP;
+
+export const setReload = (boolean) => {
+    return {
+        type: RELOAD,
+        payload: boolean,
+    };
+}
 
 export const setLoading = (boolean) => {
     return {

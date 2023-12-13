@@ -3,7 +3,7 @@ import { Service } from './services/index';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { getAllPokemons, getAllTypes, cleanApp, setLoader, setLoading } from './app/redux/actions';
+import { getAllPokemons, getAllTypes, cleanApp, setReload, setLoading } from './app/redux/actions';
 import { AppRoutes, Loader, Nav, SearchBar, FilterSelects } from './app/components';
 import styles from './App.module.css';
 
@@ -25,6 +25,8 @@ export const App = () => {
     const alteredList = useSelector(state => state.alteredList);
     const allTypes = useSelector(state => state.allTypes);
     const loading = useSelector(state => state.loading);
+    const reload = useSelector(state => state.reload);
+
 
     // othes
     const dispatch = useDispatch();
@@ -78,13 +80,12 @@ export const App = () => {
 
         const fetchData = async () => {
             try {
-                // setLoading(true);
                 await Promise.all([dispatch(getAllPokemons()), dispatch(getAllTypes())]);
             } catch (error) {
                 console.error('Error fetching data:', error);
             } finally {
-                dispatch(setLoading(false))
-                // setLoading(false);
+                dispatch(setReload(false));
+                dispatch(setLoading(false));
             }
         };
 
@@ -93,7 +94,7 @@ export const App = () => {
         return () => {
             dispatch(cleanApp());
         };
-    }, [location.pathname]);
+    }, [reload]);
 
     useEffect(() => {
         setCurrentPage(1);

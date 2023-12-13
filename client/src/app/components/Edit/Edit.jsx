@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import validator from './validator';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { getAllPokemons } from '../../redux/actions';
+import { setLoading, setReload, cleanFilters } from '../../redux/actions';
 import { usePokemon } from '../../hooks/usePokemon';
 import styles from './Edit.module.css';
 
@@ -86,32 +86,34 @@ export const Edit = props => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-      
+
         const hasErrors = Object.values(errors).some((error) => error !== '');
-      
+
         const noTypesSelected = pokeData.types.length === 0;
-      
+
         if (hasErrors || noTypesSelected) {
-          window.alert(
-            'Por favor, completa todos los campos correctamente antes de actualizar el Pokémon.'
-          );
-        } else {
-          const allFieldsHaveData = Object.values(pokeData).every(
-            (value) => value !== '' && value !== null && value !== undefined
-          );
-      
-          if (allFieldsHaveData) {
-            service.editPokemon(pokeData);
-            navigate('/app');
-            dispatch(getAllPokemons());
-          } else {
             window.alert(
-              'Por favor, completa todos los campos antes de actualizar el Pokémon.'
+                'Por favor, completa todos los campos correctamente antes de actualizar el Pokémon.'
             );
-          }
+        } else {
+            const allFieldsHaveData = Object.values(pokeData).every(
+                (value) => value !== '' && value !== null && value !== undefined
+            );
+
+            if (allFieldsHaveData) {
+                service.editPokemon(pokeData);
+                dispatch(cleanFilters());
+                dispatch(setLoading(true));
+                dispatch(setReload(true));
+                navigate('/app');
+            } else {
+                window.alert(
+                    'Por favor, completa todos los campos antes de actualizar el Pokémon.'
+                );
+            }
         }
-      };
-      
+    };
+
 
     return (
         <div className={styles.createContainer}>
