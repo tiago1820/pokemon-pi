@@ -83,7 +83,7 @@ class PokemonController {
             const pokemonToDelete = await this.dbService.getPokemonById(id);
 
             if (!pokemonToDelete) {
-                return res.status(404).send('Pokemon not found.');
+                return res.status(404).send('Pokemon no encontrado.');
             }
 
             const deletionResult = await this.dbService.deletePokemonById(id);
@@ -180,7 +180,6 @@ class PokemonController {
             return res.status(201).json(newPokemon);
 
         } catch (error) {
-            // console.error(error);
             return res.status(500).send("Error al crear pokemon.");
         }
     }

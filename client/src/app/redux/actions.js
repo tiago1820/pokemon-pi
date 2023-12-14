@@ -79,7 +79,7 @@ export const removePokemon = (id) => {
                 payload: id,
             });
         } catch (error) {
-            throw error;
+            dispatch(setRequestError(error.response.data));
         }
     }
 }
