@@ -2,6 +2,20 @@ const { Pokemon, Type } = require('../db');
 
 class DataBaseService {
 
+    deletePokemonById = async (id) => {
+        try {
+            const deletedRows = await Pokemon.destroy({
+                where: {
+                    id: id
+                }
+            });
+
+            return deletedRows > 0;
+        } catch (error) {
+            throw error;
+        }
+    }
+
     getPokemonById = async (id) => {
         try {
             const pokemonFromDB = await Pokemon.findByPk(id, {
@@ -9,29 +23,12 @@ class DataBaseService {
             });
 
             if (pokemonFromDB) {
-                const pokemonInfo = {
-                    id: pokemonFromDB.id,
-                    name: pokemonFromDB.name,
-                    types: pokemonFromDB.types ? pokemonFromDB.types.map(typeArr => typeArr.name) : [],
-                    img: pokemonFromDB.img,
-                    hp: pokemonFromDB.hp,
-                    attack: pokemonFromDB.attack,
-                    defense: pokemonFromDB.defense,
-                    speed: pokemonFromDB.speed,
-                    weight: pokemonFromDB.weight,
-                    height: pokemonFromDB.height,
-                    created: pokemonFromDB.created,
-                };
-
+                const pokemonInfo = this.formatPokemonInfo(pokemonFromDB);
                 return pokemonInfo;
             }
-
-
         } catch (error) {
             throw error;
-
         }
-
     }
 
     getAllPokemons = async () => {
@@ -68,20 +65,7 @@ class DataBaseService {
             });
 
             if (pokemonFromDB) {
-                const pokemonInfo = {
-                    id: pokemonFromDB.id,
-                    name: pokemonFromDB.name,
-                    types: pokemonFromDB.types ? pokemonFromDB.types.map(typeArr => typeArr.name) : [],
-                    img: pokemonFromDB.img,
-                    hp: pokemonFromDB.hp,
-                    attack: pokemonFromDB.attack,
-                    defense: pokemonFromDB.defense,
-                    speed: pokemonFromDB.speed,
-                    weight: pokemonFromDB.weight,
-                    height: pokemonFromDB.height,
-                    created: pokemonFromDB.created,
-                };
-
+                const pokemonInfo = this.formatPokemonInfo(pokemonFromDB);
                 return pokemonInfo;
             }
 
@@ -90,6 +74,22 @@ class DataBaseService {
             throw error;
         }
 
+    }
+
+    formatPokemonInfo = (pokemon) => {
+        return {
+            id: pokemon.id,
+            name: pokemon.name,
+            types: pokemon.types ? pokemon.types.map(typeArr => typeArr.name) : [],
+            img: pokemon.img,
+            hp: pokemon.hp,
+            attack: pokemon.attack,
+            defense: pokemon.defense,
+            speed: pokemon.speed,
+            weight: pokemon.weight,
+            height: pokemon.height,
+            created: pokemon.created,
+        };
     }
 
 }
