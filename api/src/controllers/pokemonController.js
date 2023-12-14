@@ -15,7 +15,7 @@ class PokemonController {
             await this.dbService.updatePokemon(req);
             await this.dbService.updateTypes(req);
 
-            return res.status(200).json("Pokemon actualizado con exito!");
+            return res.status(200).send("Pokemon actualizado con exito!");
         } catch (error) {
             console.log(error);
             return res.status(500).send("Error al actualizar el pokemon.");
@@ -75,7 +75,11 @@ class PokemonController {
     getPokemonByName = async (req, res) => {
         try {
             const { name } = req.query;
-            this.validateInput(name, res);
+
+            if(!name) {
+                res.status(400).send('Falta el nombre del pokemon.');
+            }
+
             let pokemonInfo = await this.apiService.getPokemonByName(name);
 
             if (!pokemonInfo) {
@@ -85,61 +89,16 @@ class PokemonController {
             res.status(200).json(pokemonInfo);
 
         } catch (error) {
+            console.log(error);
             res.status(404).send("¡Pokemon no encontrado!");
         }
     }
 
-    validateInput(name, res) {
-        if (!name) {
-            res.status(400).send('Pokemon name is required.');
-            throw new Error('Invalid input: Pokemon name is required.');
-        }
-    }
-
-    
     postPokemon = async (req, res) => {
-
         try {
-            const {
-                name,
-                types,
-                hp,
-                attack,
-                defense,
-                speed,
-                height,
-                weight,
-                img,
-                created
-            } = req.body;
-
-            const lowercaseName = name.toLowerCase();
-
-            const newPokemon = await Pokemon.create({
-                name: lowercaseName,
-                types,
-                image: img,
-                hp,
-                attack,
-                defense,
-                speed,
-                height,
-                weight,
-                created,
-            });
-
-            const typeInstances = [];
-            for (const typeName of types) {
-                const [type, created] = await Type.findOrCreate({
-                    where: { name: typeName },
-                    defaults: { name: typeName },
-                });
-                typeInstances.push(type);
-            }
-
-            await newPokemon.setTypes(typeInstances);
-
-            return res.status(201).json(newPokemon);
+            const newPokemon = await this.dbService.postPokemon(req);
+            await this.dbService.postType(req, newPokemon);
+            return res.status(200).send("Pokemon creado con exito.");
 
         } catch (error) {
             return res.status(500).send("Error al crear pokemon.");
