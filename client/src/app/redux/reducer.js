@@ -102,6 +102,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 alteredList: copy,
+                requestError: copy.length === 0 ? "La lista está vacía" : "",
             }
 
         case FILTER:
@@ -116,6 +117,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
                 return {
                     ...state,
                     alteredList: filteredList,
+                    requestError: filteredList.length === 0 ? "No hay pokemons con estas caracteristicas." : "",
                 };
             }
 

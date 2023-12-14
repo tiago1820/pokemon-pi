@@ -12,9 +12,9 @@ class PokemonController {
             const allTypes = await this.apiService.getTypesFromApi();
             const types = await this.dbService.insertTypesInDB(allTypes);
 
-            return res.json(types);
+            return types;
         } catch (error) {
-            return res.status(500).send(error.message);
+            throw error;
         }
     }
 
