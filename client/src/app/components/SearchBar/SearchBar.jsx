@@ -1,7 +1,7 @@
 import { Utils } from '../../../utils';
 import { useState } from 'react';
 import styles from './SearchBar.module.css';
-import searchIcon from '../../../images/searchIcon.png';
+import searchIcon from '../../../images/icons/searchIcon.png';
 
 export const SearchBar = props => {
     const utils = new Utils();

@@ -89,7 +89,7 @@ class ApiService {
                 const pokemonInfo = {
                     id: infoFromApi.id,
                     name: infoFromApi.name,
-                    types: infoFromApi.types.map((t) => t.type.name),
+                    types: infoFromApi.types ? infoFromApi.types.map((t) => t.type.name) : [],
                     img: infoFromApi.sprites.other['official-artwork'].front_default,
                     hp: infoFromApi.stats[0].base_stat,
                     attack: infoFromApi.stats[1].base_stat,
