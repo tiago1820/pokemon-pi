@@ -6,9 +6,9 @@ import { useDispatch } from 'react-redux';
 import { removePokemon, setLoading, setReload, cleanFilters } from '../../redux/actions';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import editIcon from '../../../images/edit.png';
-import garbageIcon from '../../../images/garbageIcon.png';
-import deleteIcon from '../../../images/delete.png';
+import editIcon from '../../../images/icons/edit.png';
+import garbageIcon from '../../../images/icons/garbageIcon.png';
+import deleteIcon from '../../../images/icons/delete.png';
 
 export const Detail = () => {
     const pokemon = usePokemon();
