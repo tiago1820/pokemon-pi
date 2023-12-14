@@ -84,7 +84,6 @@ export const removePokemon = (id) => {
     }
 }
 
-
 export const getPokemonDetail = id => {
     const endpoint = `${IP}:3001/pokemons/${id}`;
     return async (dispatch) => {
