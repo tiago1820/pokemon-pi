@@ -2,6 +2,63 @@ const { Pokemon, Type } = require('../db');
 
 class DataBaseService {
 
+    postPokemon = async (req) => {
+        try {
+            const {
+                name,
+                types,
+                hp,
+                attack,
+                defense,
+                speed,
+                height,
+                weight,
+                img,
+                created
+            } = req.body;
+
+            const lowercaseName = name.toLowerCase();
+
+            const newPokemon = await Pokemon.create({
+                name: lowercaseName,
+                types,
+                image: img,
+                hp,
+                attack,
+                defense,
+                speed,
+                height,
+                weight,
+                created,
+            });
+
+            return newPokemon;
+
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    postType = async (req, newPokemon) => {
+        try {
+            const { types } = req.body;
+
+            const typeInstances = [];
+            for (const typeName of types) {
+                const [type, created] = await Type.findOrCreate({
+                    where: { name: typeName },
+                    defaults: { name: typeName },
+                });
+                typeInstances.push(type);
+            }
+
+            await newPokemon.setTypes(typeInstances);
+            return newPokemon;
+        } catch (error) {
+            throw error;
+        }
+    }
+
     updatePokemon = async (req) => {
         try {
             const { id } = req.params;

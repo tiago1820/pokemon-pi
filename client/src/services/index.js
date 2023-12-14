@@ -44,8 +44,7 @@ export class Service {
 
             return response.data;
         } catch (error) {
-            console.error('Error al crear el Pokémon:', error);
-            throw error;
+            this.dispatch(setRequestError(error.response.data));
         }
     }
 
@@ -65,10 +64,9 @@ export class Service {
                 types,
             });
 
-            console.log('Pokemon editado:', response.data);
             return response.data;
         } catch (error) {
-            this.dispatch(setRequestError(error.response.data))
+            this.dispatch(setRequestError(error.response.data));
         }
     }
 }
