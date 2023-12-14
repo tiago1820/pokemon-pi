@@ -6,30 +6,6 @@ class TypeController {
         this.typeService = new TypeService('https://pokeapi.co/api/v2/type');
     }
 
-    updatePokemonTypes = async (pokemon, types) => {
-        const t = await Type.sequelize.transaction();
-
-        try {
-            await pokemon.setTypes([], { transaction: t });
-
-            const typeInstances = [];
-            for (const typeName of types) {
-                const [type, created] = await Type.findOrCreate({
-                    where: { name: typeName },
-                    defaults: { name: typeName },
-                    transaction: t,
-                });
-                typeInstances.push(type);
-            }
-
-            await pokemon.setTypes(typeInstances, { transaction: t });
-            await t.commit();
-        } catch (error) {
-            await t.rollback();
-            throw error;
-        }
-    }
-
     getAllTypesDB = async (req, res) => {
         try {
             const types = await this.typeService.getAllTypesDB();

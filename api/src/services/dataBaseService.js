@@ -2,6 +2,67 @@ const { Pokemon, Type } = require('../db');
 
 class DataBaseService {
 
+    updatePokemon = async (req) => {
+        try {
+            const { id } = req.params;
+
+            const { name, types, hp, attack, defense, speed, height, weight, img } = req.body;
+            const lowercaseName = name.toLowerCase();
+
+            const pokemon = await Pokemon.findByPk(id);
+
+            if (!pokemon) {
+                return res.status(404).send('Pokemon not found.');
+            }
+
+            pokemon.name = lowercaseName;
+            pokemon.types = types;
+            pokemon.image = img;
+            pokemon.hp = hp;
+            pokemon.attack = attack;
+            pokemon.defense = defense;
+            pokemon.speed = speed;
+            pokemon.height = height;
+            pokemon.weight = weight;
+
+            await pokemon.save();
+
+        } catch (error) {
+            throw error
+        }
+    }
+
+    updateTypes = async (req) => {
+        const t = await Type.sequelize.transaction();
+        const { id } = req.params;
+        const { types } = req.body;
+        const pokemon = await Pokemon.findByPk(id);
+
+        try {
+            await pokemon.setTypes([], { transaction: t });
+            if (!pokemon) {
+                return res.status(404).send('Pokemon not found.');
+            }
+
+            const typeInstances = [];
+            for (const typeName of types) {
+                const [type, created] = await Type.findOrCreate({
+                    where: { name: typeName },
+                    defaults: { name: typeName },
+                    transaction: t,
+                });
+                typeInstances.push(type);
+            }
+
+            await pokemon.setTypes(typeInstances, { transaction: t });
+            await t.commit();
+        } catch (error) {
+            await t.rollback();
+            throw error;
+        }
+
+    }
+
     deletePokemonById = async (id) => {
         try {
             const deletedRows = await Pokemon.destroy({

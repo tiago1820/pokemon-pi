@@ -22,7 +22,7 @@ export class Service {
             }
         } catch (error) {
             console.log("DSDSDS", error.response.data);
-           this.dispatch(setRequestError(error.response.data));
+            this.dispatch(setRequestError(error.response.data));
         }
     }
 
@@ -68,8 +68,7 @@ export class Service {
             console.log('Pokemon editado:', response.data);
             return response.data;
         } catch (error) {
-            console.error('Error al editar el Pokémon:', error);
-            throw error;
+            this.dispatch(setRequestError(error.response.data))
         }
     }
 }

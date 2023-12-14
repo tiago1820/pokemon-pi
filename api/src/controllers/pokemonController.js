@@ -12,39 +12,14 @@ class PokemonController {
 
     updatePokemon = async (req, res) => {
         try {
-            const { id } = req.params;
+            await this.dbService.updatePokemon(req);
+            await this.dbService.updateTypes(req);
 
-            const { name, types, hp, attack, defense, speed, height, weight, img } = req.body;
-            const lowercaseName = name.toLowerCase();
-
-            const updatedPokemon = await Pokemon.findByPk(id);
-
-            if (!updatedPokemon) {
-                return res.status(404).send('Pokemon not found.');
-            }
-
-            await this.updatePokemonData(updatedPokemon, { name: lowercaseName, types, hp, attack, defense, speed, height, weight, img });
-            await this.typeController.updatePokemonTypes(updatedPokemon, types);
-
-            return res.status(200).json(updatedPokemon);
+            return res.status(200).json("Pokemon actualizado con exito!");
         } catch (error) {
-            console.error(error);
-            return res.status(500).send(error.message);
+            console.log(error);
+            return res.status(500).send("Error al actualizar el pokemon.");
         }
-    }
-
-    async updatePokemonData(pokemon, data) {
-        pokemon.name = data.name;
-        pokemon.types = data.types;
-        pokemon.image = data.img;
-        pokemon.hp = data.hp;
-        pokemon.attack = data.attack;
-        pokemon.defense = data.defense;
-        pokemon.speed = data.speed;
-        pokemon.height = data.height;
-        pokemon.weight = data.weight;
-
-        await pokemon.save();
     }
 
     getAllPokemons = async (req, res) => {
@@ -121,20 +96,7 @@ class PokemonController {
         }
     }
 
-    async getPokemonByNameFromService(name) {
-        return await this.pokeService.getPokemonByName(name);
-    }
-
-    handlePokemonResponse(pokemon, res) {
-        if (pokemon.name) {
-            res.json(pokemon);
-        } else {
-            res.status(404).send('Pokemon not found.');
-        }
-    }
-
-
-
+    
     postPokemon = async (req, res) => {
 
         try {
