@@ -1,11 +1,13 @@
 const { Pokemon, Type } = require('../db.js');
-const PokemonService = require('../services/pokemonService');
+const ApiService = require('../services/apiService.js');
 const TypeController = require('./typeController');
+const DataBaseService = require('../services/dataBaseService.js')
 
 class PokemonController {
     constructor() {
-        this.pokeService = new PokemonService('https://pokeapi.co/api/v2/pokemon/');
         this.typeController = new TypeController();
+        this.apiService = new ApiService('https://pokeapi.co/api/v2/pokemon/');
+        this.dbService = new DataBaseService();
     }
 
     updatePokemon = async (req, res) => {
@@ -47,8 +49,8 @@ class PokemonController {
 
     getAllPokemons = async (req, res) => {
         try {
-            const pokemonExternos = await this.pokeService.getAllPokemons(25);
-            const pokemonDB = await this.pokeService.getAllPokemonFromDB();
+            const pokemonExternos = await this.apiService.getAllPokemons(25);
+            const pokemonDB = await this.dbService.getAllPokemons();
 
             return res.json([...pokemonExternos, ...pokemonDB]);
         } catch (error) {
@@ -61,13 +63,17 @@ class PokemonController {
         try {
             const { id } = req.params;
             const source = isNaN(id) ? 'bdd' : 'api';
-            const pokemon = await this.pokeService.getPokemonById(id, source);
 
-            return pokemon.name
-                ? res.json(pokemon)
-                : res.status(404).send('Pokemon not found.');
+            if (source === 'api') {
+                const pokemonInfo = await this.apiService.getPokemonById(id);
+                res.status(200).json(pokemonInfo);
+            } else if (source === 'bdd') {
+                const pokemonInfo = await this.dbService.getPokemonById(id);
+                res.status(200).json(pokemonInfo);
+            }
+
         } catch (error) {
-            return res.status(500).send(error.message);
+            res.status(404).send("¡Pokemon no encontrado!");
         }
     }
 
@@ -104,15 +110,17 @@ class PokemonController {
     getPokemonByName = async (req, res) => {
         try {
             const { name } = req.query;
-
             this.validateInput(name, res);
+            let pokemonInfo = await this.apiService.getPokemonByName(name);
 
-            const pokemon = await this.getPokemonByNameFromService(name);
+            if (!pokemonInfo) {
+                pokemonInfo = await this.dataBaseService.getPokemonByName(name);
+            }
 
-            this.handlePokemonResponse(pokemon, res);
+            res.status(200).json(pokemonInfo);
 
         } catch (error) {
-            res.status(500).send("¡Pokemon no encontrado!");
+            res.status(404).send("¡Pokemon no encontrado!");
         }
     }
 
@@ -135,7 +143,7 @@ class PokemonController {
         }
     }
 
-    
+
 
     postPokemon = async (req, res) => {
 
