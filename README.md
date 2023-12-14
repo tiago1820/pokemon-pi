@@ -1,6 +1,6 @@
 # Pokemon Wiki - Frontend and Backend
 
-This is a Pokemon Wiki application based on React, Redux, Node, Express and Sequelize.
+The Pokémon web application is complete and fully functional. Developed using NodeJS, Express, React, and Redux, the platform seamlessly integrates with the PokeAPI and a PostgreSQL database using Sequelize. Users can search, view, and filter Pokémon information, as well as create new Pokémon through an interactive form. The frontend provides an intuitive experience with home pages, detailed views, and a creation form. Advanced features, such as filtering and sorting, were implemented without relying on predefined API endpoints. Comprehensive testing was conducted to ensure the system's quality, covering frontend components, backend routes, and database models. These features and tests ensure a complete and robust Pokémon application for users.
 
 ## Table of Contents
 
