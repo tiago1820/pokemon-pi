@@ -80,32 +80,22 @@ class PokemonController {
     removePokemonById = async (req, res) => {
         try {
             const { id } = req.params;
-            const pokemonToDelete = await this.findPokemonById(id);
+            const pokemonToDelete = await this.dbService.getPokemonById(id);
 
             if (!pokemonToDelete) {
-                return res.status(404).send('Pokemon not found.');
+                return res.status(404).send('Pokemon no encontrado.');
             }
 
-            await this.deletePokemonById(id);
+            const deletionResult = await this.dbService.deletePokemonById(id);
 
-            return res.status(200).send('Pokemon successfully removed.');
+            if (deletionResult) {
+                return res.status(200).send('Pokemon elimindado con exito.');
+            }
         } catch (error) {
-            console.error(error);
-            return res.status(500).send('Internal Server Error');
+            return res.status(500).send('Error al eliminar pokemon.');
         }
     }
 
-    async findPokemonById(id) {
-        return await Pokemon.findByPk(id);
-    }
-
-    async deletePokemonById(id) {
-        await Pokemon.destroy({
-            where: {
-                id: id
-            }
-        });
-    }
 
     getPokemonByName = async (req, res) => {
         try {
@@ -190,7 +180,6 @@ class PokemonController {
             return res.status(201).json(newPokemon);
 
         } catch (error) {
-            // console.error(error);
             return res.status(500).send("Error al crear pokemon.");
         }
     }
