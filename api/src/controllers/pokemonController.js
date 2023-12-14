@@ -1,13 +1,20 @@
-const { Pokemon, Type } = require('../db.js');
 const ApiService = require('../services/apiService.js');
-const TypeController = require('./typeController');
 const DataBaseService = require('../services/dataBaseService.js')
 
 class PokemonController {
     constructor() {
-        this.typeController = new TypeController();
-        this.apiService = new ApiService('https://pokeapi.co/api/v2/pokemon/');
+        this.apiService = new ApiService('https://pokeapi.co/api/v2/pokemon/', 'https://pokeapi.co/api/v2/type');
         this.dbService = new DataBaseService();
+    }
+
+    getAllTypes = async (req, res) => {
+        try {
+            const allTypes = await this.dbService.getAllTypes();
+            return res.status(200).json(allTypes);
+        } catch (error) {
+            console.log("Types", error);
+            return res.status(500).send("Error al obtner los tipos.");
+        }
     }
 
     updatePokemon = async (req, res) => {
@@ -17,14 +24,13 @@ class PokemonController {
 
             return res.status(200).send("Pokemon actualizado con exito!");
         } catch (error) {
-            console.log(error);
             return res.status(500).send("Error al actualizar el pokemon.");
         }
     }
 
     getAllPokemons = async (req, res) => {
         try {
-            const pokemonExternos = await this.apiService.getAllPokemons(25);
+            const pokemonExternos = await this.apiService.getAllPokemons(40);
             const pokemonDB = await this.dbService.getAllPokemons();
 
             return res.json([...pokemonExternos, ...pokemonDB]);
@@ -76,7 +82,7 @@ class PokemonController {
         try {
             const { name } = req.query;
 
-            if(!name) {
+            if (!name) {
                 res.status(400).send('Falta el nombre del pokemon.');
             }
 

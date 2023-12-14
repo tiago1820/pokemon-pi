@@ -2,6 +2,15 @@ const { Pokemon, Type } = require('../db');
 
 class DataBaseService {
 
+    getAllTypes = async () => {
+        try {
+            const allTypes = await Type.findAll();
+            return allTypes;
+        } catch (error) {
+            throw error;
+        }
+    }
+
     postPokemon = async (req) => {
         try {
             const {

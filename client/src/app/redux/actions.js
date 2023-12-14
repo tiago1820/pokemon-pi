@@ -63,7 +63,7 @@ export const getAllTypes = () => {
                 payload: data,
             });
         } catch (error) {
-            throw error;
+            dispatch(setRequestError(error.response.data));
         }
     }
 }
