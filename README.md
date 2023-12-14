@@ -20,8 +20,8 @@ The Pokémon web application is complete and fully functional. Developed using N
 ## Demo
 
 ![image](https://github.com/tiago1820/pokemon-pi/blob/main/client/src/images/github-images/01.png)
-![image](https://github.com/tiago1820/pokemon-pi/blob/main/client/src/images/github-images/02.png)
 ![image](https://github.com/tiago1820/pokemon-pi/blob/main/client/src/images/github-images/03.png)
+![image](https://github.com/tiago1820/pokemon-pi/blob/main/client/src/images/github-images/02.png)
 
 
 
