@@ -3,8 +3,19 @@ const DataBaseService = require('../services/dataBaseService.js')
 
 class PokemonController {
     constructor() {
-        this.apiService = new ApiService('https://pokeapi.co/api/v2/pokemon/', 'https://pokeapi.co/api/v2/type');
+        this.apiService = new ApiService();
         this.dbService = new DataBaseService();
+    }
+
+    loadTypesInTable = async (req, res) => {
+        try {
+            const allTypes = await this.apiService.getTypesFromApi();
+            const types = await this.dbService.insertTypesInDB(allTypes);
+
+            return res.json(types);
+        } catch (error) {
+            return res.status(500).send(error.message);
+        }
     }
 
     getAllTypes = async (req, res) => {
