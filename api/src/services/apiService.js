@@ -2,13 +2,27 @@ const axios = require('axios');
 
 
 class ApiService {
-    constructor(URL) {
-        this.URL = URL;
+    constructor() {
+        this.URL_POKEMONS = 'https://pokeapi.co/api/v2/pokemon/';
+        this.URL_TYPES = 'https://pokeapi.co/api/v2/type';
+    }
+
+    getTypesFromApi = async () => {
+        try {
+            const response = await axios(this.URL_TYPES);
+            const allTypes = response.data.results;
+
+            return allTypes;
+
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
     }
 
     getPokemonById = async (id) => {
         try {
-            const response = await axios(`${this.URL}/${id}`);
+            const response = await axios(`${this.URL_POKEMONS}/${id}`);
             const infoFromApi = response.data;
 
             const pokemonInfo = {
@@ -34,7 +48,7 @@ class ApiService {
 
     getAllPokemons = async (limite) => {
         try {
-            const respuesta = await axios(`${this.URL}/?limit=${limite}`);
+            const respuesta = await axios(`${this.URL_POKEMONS}/?limit=${limite}`);
             const resultados = respuesta.data.results;
 
             const listaDePokemon = [];
@@ -67,7 +81,7 @@ class ApiService {
 
     getPokemonByName = async (name) => {
         try {
-            const response = await axios(`${this.URL}/${name}`);
+            const response = await axios(`${this.URL_POKEMONS}/${name}`);
 
             if (response.data) {
                 const infoFromApi = response.data;

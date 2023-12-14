@@ -13,6 +13,6 @@ router.delete('/pokemons/:id', (req, res) => pokeController.removePokemonById(re
 router.put('/pokemons/:id', (req, res) => pokeController.updatePokemon(req, res));
 
 router.get('/types', (req, res) => pokeController.getAllTypes(req, res));
-// router.get('/types/load', (req, res) => typeController.loadTypesTable(req, res));
+router.get('/types/load', (req, res) => pokeController.loadTypesInTable(req, res));
 
 module.exports = router;
