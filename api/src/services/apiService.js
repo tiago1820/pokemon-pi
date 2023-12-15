@@ -81,6 +81,11 @@ class ApiService {
 
     getPokemonByName = async (name) => {
         try {
+
+            if (!name) {
+                // Manejar el caso en el que no se proporciona un nombre
+                return null;
+            }
             const response = await axios(`${this.URL_POKEMONS}/${name}`);
 
             if (response.data) {
@@ -89,12 +94,12 @@ class ApiService {
                 const pokemonInfo = {
                     id: infoFromApi.id,
                     name: infoFromApi.name,
-                    types: infoFromApi.types ? infoFromApi.types.map((t) => t.type.name) : [],
-                    img: infoFromApi.sprites.other['official-artwork'].front_default,
-                    hp: infoFromApi.stats[0].base_stat,
-                    attack: infoFromApi.stats[1].base_stat,
-                    defense: infoFromApi.stats[2].base_stat,
-                    speed: infoFromApi.stats[5].base_stat,
+                    types: (infoFromApi.types && infoFromApi.types.length > 0) ? infoFromApi.types.map((t) => t.type.name) : [],
+                    img: infoFromApi.sprites && infoFromApi.sprites.other && infoFromApi.sprites.other['official-artwork'] ? infoFromApi.sprites.other['official-artwork'].front_default : null,
+                    hp: infoFromApi.stats[0]?.base_stat,
+                    attack: infoFromApi.stats[1]?.base_stat,
+                    defense: infoFromApi.stats[2]?.base_stat,
+                    speed: infoFromApi.stats[5]?.base_stat,
                     weight: infoFromApi.weight,
                     height: infoFromApi.height,
                 };

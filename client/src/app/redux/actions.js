@@ -63,7 +63,7 @@ export const getAllTypes = () => {
                 payload: data,
             });
         } catch (error) {
-            dispatch(setRequestError(error.response.data));
+            window.alert(error.response.data);
         }
     }
 }
@@ -79,7 +79,7 @@ export const removePokemon = (id) => {
                 payload: id,
             });
         } catch (error) {
-            dispatch(setRequestError(error.response.data));
+            window.alert(error.response.data);
         }
     }
 }

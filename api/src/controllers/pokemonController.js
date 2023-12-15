@@ -41,7 +41,7 @@ class PokemonController {
 
     getAllPokemons = async (req, res) => {
         try {
-            const pokemonExternos = await this.apiService.getAllPokemons(40);
+            const pokemonExternos = await this.apiService.getAllPokemons(15);
             const pokemonDB = await this.dbService.getAllPokemons();
 
             return res.json([...pokemonExternos, ...pokemonDB]);
@@ -100,7 +100,7 @@ class PokemonController {
             let pokemonInfo = await this.apiService.getPokemonByName(name);
 
             if (!pokemonInfo) {
-                pokemonInfo = await this.dataBaseService.getPokemonByName(name);
+                pokemonInfo = await this.dbService.getPokemonByName(name);
             }
 
             res.status(200).json(pokemonInfo);

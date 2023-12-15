@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { setRequestError } from '../app/redux/actions';
 import { useDispatch } from 'react-redux';
 
 export class Service {
@@ -11,6 +10,11 @@ export class Service {
 
     async onSearch(name, pokemons, setPokemons) {
         try {
+            if (!name.trim()) {
+                window.alert('¡Por favor, ingresa un nombre de Pokémon!');
+                return;
+            }
+
             const { data } = await axios(`${this.IP}:3001/pokemons/name?name=${name}`);
             if (data.name) {
                 const isDuplicate = pokemons.some(pokemon => pokemon.name === data.name);
@@ -21,8 +25,7 @@ export class Service {
                 }
             }
         } catch (error) {
-            console.log("DSDSDS", error.response.data);
-            this.dispatch(setRequestError(error.response.data));
+            window.alert(error.response.data);
         }
     }
 
@@ -44,7 +47,7 @@ export class Service {
 
             return response.data;
         } catch (error) {
-            this.dispatch(setRequestError(error.response.data));
+            window.alert(error.response.data);
         }
     }
 
@@ -66,7 +69,7 @@ export class Service {
 
             return response.data;
         } catch (error) {
-            this.dispatch(setRequestError(error.response.data));
+            window.alert(error.response.data);
         }
     }
 }
