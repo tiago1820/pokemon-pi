@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    margin: 0 auto;
 }
 
 .column {
@@ -37,5 +38,4 @@
     font-size: 18px;
     font-weight: bold;
     color: #721c24;
-    /* border: 1px solid #721c24; */
 }

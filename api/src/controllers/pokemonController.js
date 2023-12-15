@@ -100,7 +100,7 @@ class PokemonController {
             let pokemonInfo = await this.apiService.getPokemonByName(name);
 
             if (!pokemonInfo) {
-                pokemonInfo = await this.dataBaseService.getPokemonByName(name);
+                pokemonInfo = await this.dbService.getPokemonByName(name);
             }
 
             res.status(200).json(pokemonInfo);
