@@ -28,3 +28,48 @@ The Pokémon web application is complete and fully functional. Developed using N
 ## Installation
 
 To run this project locally, follow these steps:
+
+1. Clona este repositorio:
+
+```bash
+git clone https://github.com/tiago1820/pokemon-pi.git
+```
+
+2. In the api directory you must create a file called: .env that has the following form:
+    DB_USER=postgresuser
+    DB_PASSWORD=userpassword
+    DB_HOST=localhost
+
+3. Replace "postgresuser" and "userpassword" with your own credentials.
+
+4. You will need to create, from psql (shell or PGAdmin), a database called pokemon.
+
+5. Open the "api" directory in the terminal and run:
+```bash
+npm install
+npm run dev
+```
+6. In another terminal open the "client" directory and run:
+```bash
+npm install
+npm run dev
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
