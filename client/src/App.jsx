@@ -39,7 +39,7 @@ export const App = () => {
         try {
             await service.onSearch(name, pokemons, setPokemons);
         } catch (error) {
-            console.error('Error al buscar el Pokémon:', error);
+            window.alert(error.response.data);
         }
     };
 
@@ -82,7 +82,7 @@ export const App = () => {
             try {
                 await Promise.all([dispatch(getAllPokemons()), dispatch(getAllTypes())]);
             } catch (error) {
-                console.error('Error fetching data:', error);
+                window.alert("Error al cargar los pokemons.");
             } finally {
                 dispatch(setReload(false));
                 dispatch(setLoading(false));

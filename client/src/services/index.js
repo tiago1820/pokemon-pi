@@ -27,7 +27,7 @@ export class Service {
             }
            
         } catch (error) {
-            window.alert(error.response.data);
+            throw error;
         }
     }
 
