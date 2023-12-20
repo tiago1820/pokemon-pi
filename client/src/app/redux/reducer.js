@@ -87,7 +87,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
                 copy = [...state.alteredList].sort((a, b) => {
                     if (payload === 'A') {
                         return a.name.localeCompare(b.name);
-                    } else if (payload === 'D') {
+                    } else if (payload === 'Z') {
                         return b.name.localeCompare(a.name);
                     } else if (payload === 'hight') {
                         return b.attack - a.attack;

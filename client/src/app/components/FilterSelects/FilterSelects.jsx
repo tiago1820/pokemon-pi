@@ -29,14 +29,14 @@ export const FilterSelects = ({
                 value={selectedOrder}
                 title='Ordenar pokemons por: orden alfabetica y valor de ataque.'
             >
-                <option value="" disabled>Order By...</option>
+                <option value="" disabled>Ordenar por...</option>
                 <option
                     value="A"
                     title='Ordenar pokemons por nombre de A a Z.'
                 >A - Z</option>
 
                 <option
-                    value="D"
+                    value="Z"
                     title='Ordenar pokemons por nombre de Z a A.'
                 >Z - A</option>
                 <option
@@ -55,7 +55,7 @@ export const FilterSelects = ({
                 value={selectedType}
                 title='Muestra todos los pokemon de un determinado tipo elegido.'
             >
-                <option value="" disabled>Filter by types</option>
+                <option value="" disabled>Filtrar por tipo</option>
                 {allTypes.map(type => (
                     <option key={type.id} value={type.name}>
                         {type.name}
@@ -69,7 +69,7 @@ export const FilterSelects = ({
                 value={selectedOrigin}
                 title='Filtra los pokemons que son originales del universo Pokemon y los pokemons son creados por el usuario.'
             >
-                <option value="" disabled>Filter by origin</option>
+                <option value="" disabled>Filtrar por origen</option>
                 <option value="API">Originals</option>
                 <option value="db">Creados</option>
             </select>
