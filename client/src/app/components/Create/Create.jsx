@@ -7,9 +7,9 @@ import { useSelector } from 'react-redux';
 import validator from './validator';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { getAllPokemons, cleanFilters, setLoading, setReload } from '../../redux/actions';
+import { cleanFilters, setLoading, setReload } from '../../redux/actions';
 
-export const Create = props => {
+export const Create = () => {
     const service = new Service();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -66,7 +66,6 @@ export const Create = props => {
             types: updatedTypes,
         }));
 
-        // Validación para la cantidad de checkboxes seleccionados
         if (updatedTypes.length === 0) {
             setErrors((prevErrors) => ({
                 ...prevErrors,

@@ -18,7 +18,6 @@ export const AppRoutes = ({
                     allPokemons={currentPokemons}
                     pokemons={pokemons}
                     onClose={onClose}
-
                     isHomeRoute={isHomeRoute}
                     currentPage={currentPage}
                     totalPages={totalPages}
