@@ -48,6 +48,7 @@ export const Edit = props => {
         }));
 
         const validationErrors = validator({ ...pokeData, [fieldName]: value });
+        
         setErrors((prevErrors) => ({
             ...prevErrors,
             ...validationErrors,

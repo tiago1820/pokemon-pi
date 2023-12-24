@@ -91,18 +91,11 @@ export const Detail = () => {
                                         <img className={styles.garbageIcon} src={garbageIcon} />
                                     </button>
                                 </>
-                            )
-
-                            }
-
+                            )}
                         </div>
-
                     </div>
                 </div>
-
-
             </div>
-
         </div>
     )
 }
