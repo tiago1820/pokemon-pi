@@ -10,7 +10,7 @@ export const Nav = props => {
             <div className={styles.left}>
                 <Link to={'/app'}>
                     <img
-                        src={homeIcon}na
+                        src={homeIcon}
                         alt="Pokemon logo"
                         className={styles.homeIcon}
                         title='Vuelve al inicio.'
@@ -38,11 +38,6 @@ export const Nav = props => {
                     >Crear</button>
                 </Link>
             </div>
-
         </nav>
-
     )
-
-
-
 }
