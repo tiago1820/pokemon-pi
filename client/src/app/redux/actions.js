@@ -39,7 +39,7 @@ export const setLoading = (boolean) => {
 }
 
 export const getAllPokemons = () => {
-    const endpoint = `${IP}:3001/pokemons`;
+    const endpoint = `${IP}/pokemons`;
     return async (dispatch) => {
         try {
             const { data } = await axios.get(endpoint);
@@ -54,7 +54,7 @@ export const getAllPokemons = () => {
 }
 
 export const getAllTypes = () => {
-    const endpoint = `${IP}:3001/types`;
+    const endpoint = `${IP}/types`;
     return async (dispatch) => {
         try {
             const { data } = await axios.get(endpoint);
@@ -69,7 +69,7 @@ export const getAllTypes = () => {
 }
 
 export const removePokemon = (id) => {
-    const endpoint = `${IP}:3001/pokemons/${id}`;
+    const endpoint = `${IP}/pokemons/${id}`;
     return async (dispatch) => {
         try {
             await axios.delete(endpoint);
@@ -85,7 +85,7 @@ export const removePokemon = (id) => {
 }
 
 export const getPokemonDetail = id => {
-    const endpoint = `${IP}:3001/pokemons/${id}`;
+    const endpoint = `${IP}/pokemons/${id}`;
     return async (dispatch) => {
         try {
             const { data } = await axios.get(endpoint);

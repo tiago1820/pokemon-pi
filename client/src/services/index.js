@@ -15,7 +15,7 @@ export class Service {
                 return;
             }
 
-            const { data } = await axios(`${this.IP}:3001/pokemons/name?name=${name}`);
+            const { data } = await axios(`${this.IP}/pokemons/name?name=${name}`);
             if (data.name) {
                 const isDuplicate = pokemons.some(pokemon => pokemon.name === data.name);
                 if (isDuplicate) {
@@ -33,7 +33,7 @@ export class Service {
     async createPokemon(pokeData) {
         try {
             const { name, hp, attack, defense, speed, weight, height, types } = pokeData;
-            const URL = `${this.IP}:3001/pokemons`;
+            const URL = `${this.IP}/pokemons`;
 
             const response = await axios.post(URL, {
                 name,
@@ -55,7 +55,7 @@ export class Service {
     async editPokemon(pokeData) {
         try {
             const { id, name, hp, attack, defense, speed, weight, height, types } = pokeData;
-            const URL = `${this.IP}:3001/pokemons/${id}`;
+            const URL = `${this.IP}/pokemons/${id}`;
 
             const response = await axios.put(URL, {
                 name,
