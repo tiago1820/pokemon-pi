@@ -15,7 +15,6 @@ class ApiService {
             return allTypes;
 
         } catch (error) {
-            console.log(error);
             throw error;
         }
     }
