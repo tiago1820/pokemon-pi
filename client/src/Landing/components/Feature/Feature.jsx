@@ -3,8 +3,6 @@ import feature1 from '../../../images/landing-page/feature1.png';
 import feature2 from '../../../images/landing-page/feature2.png';
 import feature3 from '../../../images/landing-page/feature3.png';
 
-
-
 export const Feature = () => {
     return <>
         <section id='feature' className={styles.feature}>

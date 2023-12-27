@@ -17,7 +17,6 @@ export class Service {
 
             const { data } = await axios(`${this.IP}:3001/pokemons/name?name=${name}`);
             if (data.name) {
-                
                 const isDuplicate = pokemons.some(pokemon => pokemon.name === data.name);
                 if (isDuplicate) {
                     window.alert('¡No puedes buscar Pokémon repetido!');
