@@ -27,7 +27,6 @@ export const App = () => {
     const loading = useSelector(state => state.loading);
     const reload = useSelector(state => state.reload);
 
-
     // othes
     const dispatch = useDispatch();
     const location = useLocation();
@@ -37,7 +36,9 @@ export const App = () => {
     // utils and services functions
     const handleSearch = async (name) => {
         try {
-            await service.onSearch(name, pokemons, setPokemons);
+            const formattedName = name.toLowerCase().replace(/\s/g, '');
+
+            await service.onSearch(formattedName, pokemons, setPokemons);
         } catch (error) {
             window.alert(error.response.data);
         }
