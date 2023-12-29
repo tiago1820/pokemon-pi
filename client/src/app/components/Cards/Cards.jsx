@@ -1,12 +1,10 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { Card, Pagination } from '../../components';
 import styles from './Cards.module.css';
-import { setRequestError } from '../../redux/actions';
+import { useCards } from '../../hooks/useCards';
 
 export const Cards = (props) => {
     const {
         allPokemons,
-        pokemons,
         onClose,
         isHomeRoute,
         currentPage,
@@ -14,17 +12,12 @@ export const Cards = (props) => {
         onPageChange,
     } = props;
 
-    const searchResult = useSelector(state => state.searchResult);
-    const showPagination = searchResult.length === 0;
-    const requestError = useSelector(state => state.requestError);
-
-    console.log("AQUI", searchResult)
-
-    const dispatch = useDispatch();
-
-    const handleRequestError = () => {
-        dispatch(setRequestError(""));
-    }
+    const {
+        searchResult,
+        showPagination,
+        requestError,
+        handleRequestError,
+    } = useCards();
 
     return (
         <div className={styles.container}>

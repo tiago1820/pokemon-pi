@@ -1,13 +1,10 @@
 import styles from './Card.module.css';
 import { Link } from 'react-router-dom';
 import defaultImg from '../../../images/default-img.png';
+import { capitalizeFirstLetter } from '../../helpers';
 
 export const Card = props => {
     const { id, name, image, types, onClose } = props;
-
-    const capitalizeFirstLetter = word => {
-        return word.charAt(0).toUpperCase() + word.slice(1);
-    };
 
     return (
         <div className={styles.container}>
