@@ -12,6 +12,7 @@ import {
     RELOAD,
     REQUEST_ERROR,
     SEARCH_RESULT,
+    SEARCH_UPDATE
 } from "./action-types";
 
 const initialState = {
@@ -45,6 +46,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
             return {
                 ...state, allPokemons: payload
             };
+
+        case SEARCH_UPDATE:
+            return {
+                ...state, searchResult: payload
+            }
 
         case SEARCH_RESULT:
 

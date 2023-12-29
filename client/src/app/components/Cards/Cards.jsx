@@ -14,8 +14,12 @@ export const Cards = (props) => {
         onPageChange,
     } = props;
 
-    const showPagination = pokemons.length === 0;
+    const searchResult = useSelector(state => state.searchResult);
+    const showPagination = searchResult.length === 0;
     const requestError = useSelector(state => state.requestError);
+
+    console.log("AQUI", searchResult)
+
     const dispatch = useDispatch();
 
     const handleRequestError = () => {
@@ -42,8 +46,8 @@ export const Cards = (props) => {
 
                     <div className={styles.column}>
                         <div className={styles.row}>
-                            {pokemons.length > 0 ? (
-                                pokemons.map((poke) => (
+                            {searchResult.length > 0 ? (
+                                searchResult.map((poke) => (
                                     <Card
                                         key={poke.id}
                                         id={poke.id}

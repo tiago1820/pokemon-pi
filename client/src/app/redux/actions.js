@@ -13,12 +13,11 @@ import {
     LOADING,
     RELOAD,
     REQUEST_ERROR,
-    SEARCH_RESULT
+    SEARCH_RESULT,
+    SEARCH_UPDATE
 } from "./action-types";
 
 const IP = process.env.REACT_APP_IP;
-
-
 
 export const setRequestError = (message) => {
     return {
@@ -39,6 +38,13 @@ export const setLoading = (boolean) => {
         type: LOADING,
         payload: boolean,
     };
+}
+
+export const searchUpdate = (data) => {
+    return {
+        type: SEARCH_UPDATE,
+        payload: data,
+    }
 }
 
 export const getPokemonByName = (name) => {

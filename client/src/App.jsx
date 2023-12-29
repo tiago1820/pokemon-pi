@@ -1,15 +1,13 @@
 import { Utils } from './utils';
-import { Service } from './services/index';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { getAllPokemons, getAllTypes, cleanApp, setReload, setLoading } from './app/redux/actions';
+import { getAllPokemons, getAllTypes, cleanApp, setReload, setLoading, searchUpdate } from './app/redux/actions';
 import { AppRoutes, Loader, Nav, SearchBar, FilterSelects } from './app/components';
 import styles from './App.module.css';
 
 export const App = () => {
     const utils = new Utils();
-    const service = new Service();
 
     // local states
     const [selectedOrder, setSelectedOrder] = useState("");
@@ -17,9 +15,7 @@ export const App = () => {
     const [selectedOrigin, setSelectedOrigin] = useState("");
 
     const [currentPage, setCurrentPage] = useState(1);
-    // const [pokemons, setPokemons] = useState([]);
     const [aux, setAux] = useState(false);
-    // const [loading, setLoading] = useState(true);
 
     // global states
     const alteredList = useSelector(state => state.alteredList);
@@ -28,25 +24,11 @@ export const App = () => {
     const reload = useSelector(state => state.reload);
     const searchResult = useSelector(state => state.searchResult);
 
-    console.log("searchResult", searchResult)
-
-
     // othes
     const dispatch = useDispatch();
     const location = useLocation();
     const pokemonsPerPage = 12;
     const isHomeRoute = location.pathname === '/app';
-
-    // utils and services functions
-    // const handleSearch = async (name) => {
-    //     try {
-    //         const formattedName = name.toLowerCase().replace(/\s/g, '');
-
-    //         await service.onSearch(formattedName, pokemons, setPokemons);
-    //     } catch (error) {
-    //         window.alert(error.response.data);
-    //     }
-    // };
 
     const handleOrder = (e) => {
         utils.handleOrderChange(e, dispatch, setSelectedOrder, setAux);
@@ -64,9 +46,14 @@ export const App = () => {
         utils.clearAllFilters(dispatch, setSelectedOrder, setSelectedType, setSelectedOrigin, setAux);
     };
 
-    // const onClose = (id) => {
-    //     utils.closePokemon(id, setPokemons);
-    // };
+    
+    const onClose = (id) => {
+        const updatedList = searchResult.filter((poke) => {
+            return poke.id !== id;
+        })
+
+        dispatch(searchUpdate(updatedList))
+    }
 
     // pagination
     const indexOfLastPokemon = currentPage * pokemonsPerPage;
@@ -110,8 +97,6 @@ export const App = () => {
             {loading && <Loader />}
             {loading === false &&
                 <div className={styles.appContainer}>
-                    {/* {loading && <Loader />} */}
-
                     {location.pathname && location.pathname !== '/' && <Nav />}
 
                     {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (<SearchBar />)}
@@ -132,7 +117,7 @@ export const App = () => {
                         <AppRoutes
                             currentPokemons={currentPokemons}
                             pokemons={searchResult}
-                            // onClose={onClose}
+                            onClose={onClose}
 
                             isHomeRoute={isHomeRoute}
                             currentPage={currentPage}
@@ -142,8 +127,6 @@ export const App = () => {
                     </div>
 
                 </div>
-
-
 
             }
 
