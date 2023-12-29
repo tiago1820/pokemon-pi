@@ -12,10 +12,13 @@ import {
     CLEAN_APP,
     LOADING,
     RELOAD,
-    REQUEST_ERROR
+    REQUEST_ERROR,
+    SEARCH_RESULT
 } from "./action-types";
 
 const IP = process.env.REACT_APP_IP;
+
+
 
 export const setRequestError = (message) => {
     return {
@@ -38,6 +41,30 @@ export const setLoading = (boolean) => {
     };
 }
 
+export const getPokemonByName = (name) => {
+    const formattedName = name.toLowerCase().replace(/\s/g, '');
+
+    const endpoint = `${IP}/pokemons/name?name=${formattedName}`;
+    return async (dispatch) => {
+        try {
+            if (!formattedName.trim()) {
+                window.alert('¡Por favor, ingresa un nombre de Pokémon!');
+                return;
+            }
+
+            const { data } = await axios.get(endpoint);
+            
+            return dispatch({
+                type: SEARCH_RESULT,
+                payload: data,
+            });
+        } catch (error) {
+            window.alert(error.response.data);
+        }
+    }
+
+}
+
 export const getAllPokemons = () => {
     const endpoint = `${IP}/pokemons`;
     return async (dispatch) => {
@@ -48,7 +75,7 @@ export const getAllPokemons = () => {
                 payload: data,
             });
         } catch (error) {
-            throw error;
+            window.alert(error.response.data);
         }
     }
 }

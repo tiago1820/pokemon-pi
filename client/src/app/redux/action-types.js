@@ -11,3 +11,4 @@ export const CLEAN_APP = 'CLEAN_APP';
 export const LOADING = 'LOADING';
 export const RELOAD = 'RELOAD   ';
 export const REQUEST_ERROR = 'REQUEST_ERROR';
+export const SEARCH_RESULT = "SEARCH_RESULT";

@@ -1,19 +1,22 @@
-import { Utils } from '../../../utils';
 import { useState } from 'react';
 import styles from './SearchBar.module.css';
 import searchIcon from '../../../images/icons/searchIcon.png';
+import { getPokemonByName } from '../../redux/actions';
+import { useDispatch } from 'react-redux';
+
 
 export const SearchBar = props => {
-    const utils = new Utils();
-    const { handleSearch } = props;
+    const dispatch = useDispatch();
     const [name, setName] = useState('');
 
     const handleKeyPress = e => {
-        utils.handleKeyPress(e, handleSearch, name);
+        if (e.key === 'Enter') {
+            dispatch(getPokemonByName(name));
+        }
     }
 
     const handleChange = e => {
-        utils.handleChange(e, setName);
+        setName(e.target.value);
     }
 
     return (
@@ -31,7 +34,7 @@ export const SearchBar = props => {
                     />
                     <button
                         className={styles.button}
-                        onClick={() => handleSearch(name)}
+                        onClick={() => dispatch(getPokemonByName(name))}
                         title='Inicia la busqueda del pokemon por nombre.'
                     ><img className={styles.searchIcon} src={searchIcon} /></button>
 

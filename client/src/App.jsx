@@ -17,7 +17,7 @@ export const App = () => {
     const [selectedOrigin, setSelectedOrigin] = useState("");
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [pokemons, setPokemons] = useState([]);
+    // const [pokemons, setPokemons] = useState([]);
     const [aux, setAux] = useState(false);
     // const [loading, setLoading] = useState(true);
 
@@ -26,6 +26,10 @@ export const App = () => {
     const allTypes = useSelector(state => state.allTypes);
     const loading = useSelector(state => state.loading);
     const reload = useSelector(state => state.reload);
+    const searchResult = useSelector(state => state.searchResult);
+
+    console.log("searchResult", searchResult)
+
 
     // othes
     const dispatch = useDispatch();
@@ -34,15 +38,15 @@ export const App = () => {
     const isHomeRoute = location.pathname === '/app';
 
     // utils and services functions
-    const handleSearch = async (name) => {
-        try {
-            const formattedName = name.toLowerCase().replace(/\s/g, '');
+    // const handleSearch = async (name) => {
+    //     try {
+    //         const formattedName = name.toLowerCase().replace(/\s/g, '');
 
-            await service.onSearch(formattedName, pokemons, setPokemons);
-        } catch (error) {
-            window.alert(error.response.data);
-        }
-    };
+    //         await service.onSearch(formattedName, pokemons, setPokemons);
+    //     } catch (error) {
+    //         window.alert(error.response.data);
+    //     }
+    // };
 
     const handleOrder = (e) => {
         utils.handleOrderChange(e, dispatch, setSelectedOrder, setAux);
@@ -60,9 +64,9 @@ export const App = () => {
         utils.clearAllFilters(dispatch, setSelectedOrder, setSelectedType, setSelectedOrigin, setAux);
     };
 
-    const onClose = (id) => {
-        utils.closePokemon(id, setPokemons);
-    };
+    // const onClose = (id) => {
+    //     utils.closePokemon(id, setPokemons);
+    // };
 
     // pagination
     const indexOfLastPokemon = currentPage * pokemonsPerPage;
@@ -110,7 +114,7 @@ export const App = () => {
 
                     {location.pathname && location.pathname !== '/' && <Nav />}
 
-                    {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (<SearchBar handleSearch={handleSearch} />)}
+                    {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (<SearchBar />)}
                     <div className={styles.row}>
                         {isHomeRoute && isHomeRoute !== '/app/create' && isHomeRoute !== '/app/detail' && (
                             <FilterSelects
@@ -127,8 +131,8 @@ export const App = () => {
 
                         <AppRoutes
                             currentPokemons={currentPokemons}
-                            pokemons={pokemons}
-                            onClose={onClose}
+                            pokemons={searchResult}
+                            // onClose={onClose}
 
                             isHomeRoute={isHomeRoute}
                             currentPage={currentPage}
