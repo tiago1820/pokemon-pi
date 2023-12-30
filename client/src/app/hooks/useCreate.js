@@ -10,6 +10,7 @@ export const useCreate = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const allTypes = useSelector(state => state.allTypes);
+    const allPokemons = useSelector(state => state.allPokemons);
 
     const [currentStep, setCurrentStep] = useState(1);
     const [pokeData, setPokeData] = useState({
@@ -94,7 +95,13 @@ export const useCreate = () => {
                 (value) => value !== '' && value !== null && value !== undefined
             );
 
-            if (allFieldsHaveData) {
+            const existPokemon = allPokemons.some((pokemon) => pokemon.name === pokeData.name);
+
+            if(existPokemon) {
+                window.alert('¡Ya existe un pokemon con este nombre! Por favor, elige otro.');
+            }
+
+            if (allFieldsHaveData && !existPokemon) {
                 service.createPokemon(pokeData);
                 dispatch(cleanFilters());
                 dispatch(setLoading(true));
@@ -104,6 +111,8 @@ export const useCreate = () => {
                 window.alert(
                     'Por favor, completa todos los campos antes de crear el Pokémon.'
                 );
+
+                return;
             }
         }
     };
