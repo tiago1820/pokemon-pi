@@ -76,6 +76,8 @@ export const getAllPokemons = () => {
     return async (dispatch) => {
         try {
             const { data } = await axios.get(endpoint);
+
+            console.log(data);
             return dispatch({
                 type: GET_ALL_POKEMONS,
                 payload: data,
