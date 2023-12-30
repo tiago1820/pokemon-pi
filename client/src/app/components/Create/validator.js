@@ -1,4 +1,4 @@
-const validator = data => {
+export const validator = data => {
     let errors = {};
 
     if (!data.name) {
@@ -31,6 +31,3 @@ const validator = data => {
 
     return errors;
 };
-
-export default validator;
-

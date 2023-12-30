@@ -1,51 +1,14 @@
 import styles from './Detail.module.css';
-import { usePokemon } from '../../hooks/usePokemon';
 import pokemonImages from '../../../images/sprites/index';
 import defaultImg from '../../../images/default-img.png';
-import { useDispatch } from 'react-redux';
-import { removePokemon, setLoading, setReload, cleanFilters } from '../../redux/actions';
-import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import editIcon from '../../../images/icons/edit.png';
 import garbageIcon from '../../../images/icons/garbageIcon.png';
 import deleteIcon from '../../../images/icons/delete.png';
+import { useDetail } from '../../hooks/useDetail';
 
 export const Detail = () => {
-    const pokemon = usePokemon();
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-
-    const capitalizeFirstLetter = (word) => {
-        if (typeof word === 'string' && word.length > 0) {
-            return word.charAt(0).toUpperCase() + word.slice(1);
-        }
-        return '';
-    };
-
-    const renderBar = (label, value) => {
-        const width = (value / 100) * 100; // Rango: 0 a 100
-        return (
-            <div className={styles.barContainer} key={label}>
-                <div className={styles.barLabel}>{label}</div>
-                <div className={styles.bar}>
-                    <div className={styles.barFill} style={{ width: `${width}%` }} />
-                    <div className={styles.barValue}>{value}</div>
-                </div>
-            </div>
-        );
-    };
-
-    const handleDelete = () => {
-        dispatch(removePokemon(pokemon.id));
-        dispatch(cleanFilters());
-        dispatch(setLoading(true));
-        dispatch(setReload(true));
-        navigate('/app');
-    }
-
-    const closeCard = () => {
-        navigate('/app');
-    }
+    const { pokemon, capitalizeFirstLetter, renderBar, handleDelete, closeCard } = useDetail();
 
     return (
         <div className={styles.container}>
