@@ -12,7 +12,9 @@ import {
     CLEAN_APP,
     LOADING,
     RELOAD,
-    REQUEST_ERROR
+    REQUEST_ERROR,
+    SEARCH_RESULT,
+    SEARCH_UPDATE
 } from "./action-types";
 
 const IP = process.env.REACT_APP_IP;
@@ -38,17 +40,50 @@ export const setLoading = (boolean) => {
     };
 }
 
+export const searchUpdate = (data) => {
+    return {
+        type: SEARCH_UPDATE,
+        payload: data,
+    }
+}
+
+export const getPokemonByName = (name) => {
+    const formattedName = name.toLowerCase().replace(/\s/g, '');
+
+    const endpoint = `${IP}/pokemons/name?name=${formattedName}`;
+    return async (dispatch) => {
+        try {
+            if (!formattedName.trim()) {
+                window.alert('¡Por favor, ingresa un nombre de Pokémon!');
+                return;
+            }
+
+            const { data } = await axios.get(endpoint);
+            
+            return dispatch({
+                type: SEARCH_RESULT,
+                payload: data,
+            });
+        } catch (error) {
+            window.alert(error.response.data);
+        }
+    }
+
+}
+
 export const getAllPokemons = () => {
     const endpoint = `${IP}/pokemons`;
     return async (dispatch) => {
         try {
             const { data } = await axios.get(endpoint);
+
+            console.log(data);
             return dispatch({
                 type: GET_ALL_POKEMONS,
                 payload: data,
             });
         } catch (error) {
-            throw error;
+            window.alert(error.response.data);
         }
     }
 }

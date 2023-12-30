@@ -10,7 +10,9 @@ import {
     CLEAN_APP,
     LOADING,
     RELOAD,
-    REQUEST_ERROR
+    REQUEST_ERROR,
+    SEARCH_RESULT,
+    SEARCH_UPDATE
 } from "./action-types";
 
 const initialState = {
@@ -21,6 +23,7 @@ const initialState = {
     loading: true,
     reload: false,
     requestError: "",
+    searchResult: [],
 
 }
 
@@ -43,6 +46,32 @@ const rootReducer = (state = initialState, { type, payload }) => {
             return {
                 ...state, allPokemons: payload
             };
+
+        case SEARCH_UPDATE:
+            return {
+                ...state, searchResult: payload
+            }
+
+        case SEARCH_RESULT:
+
+            if (payload) {
+                const isDuplicate = state.searchResult.some(result => result.name === payload.name);
+
+                if (!isDuplicate) {
+                    return {
+                        ...state,
+                        searchResult: [...state.searchResult, payload]
+                    };
+                } else {
+                    window.alert('¡No puedes buscar Pokémon repetido!');
+                }
+
+                return {
+                    ...state
+                }
+
+            }
+
         case GET_ALL_POKEMONS:
             return {
                 ...state, allPokemons: payload, alteredList: payload,

@@ -36,13 +36,4 @@ export class Utils {
         setAux(!setAux);
     }
 
-    handleChange(e, setName) {
-        setName(e.target.value);
-    }
-
-    handleKeyPress(e, handleSearch, name) {
-        if (e.key === 'Enter') {
-            handleSearch(name);
-        }
-    }
 }
