@@ -40,7 +40,7 @@ class PokemonController {
 
     getAllPokemons = async (req, res) => {
         try {
-            const pokemonExternos = await this.apiService.getAllPokemons(40);
+            const pokemonExternos = await this.apiService.getAllPokemons(100);
             const pokemonDB = await this.dbService.getAllPokemons();
 
             return res.json([...pokemonExternos, ...pokemonDB]);
@@ -86,7 +86,6 @@ class PokemonController {
             return res.status(500).send('Error al eliminar pokemon.');
         }
     }
-
 
     getPokemonByName = async (req, res) => {
         try {

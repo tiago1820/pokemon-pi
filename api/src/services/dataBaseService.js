@@ -2,11 +2,10 @@ const { Pokemon, Type } = require('../db');
 
 class DataBaseService {
 
-
     insertTypesInDB = async (allTypes) => {
         try {
             const typePromises = allTypes.map(async (apiType) => {
-                const [type, created] = await Type.findOrCreate({
+                const [type] = await Type.findOrCreate({
                     where: { name: apiType.name },
                     defaults: { name: apiType.name },
                 });
@@ -17,6 +16,7 @@ class DataBaseService {
             const types = await Promise.all(typePromises);
 
             return types;
+
         } catch (error) {
             throw error;
         }
