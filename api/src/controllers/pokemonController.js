@@ -87,26 +87,32 @@ class PokemonController {
         }
     }
 
-    getPokemonByName = async (req, res) => {
-        try {
-            const { name } = req.query;
+    getPokemonByName(req, res) {
+        const { name } = req.query;
+        let message = "";
 
-            if (!name) {
-                res.status(400).send('Falta el nombre del pokemon.');
-            }
-
-            let pokemonInfo = await this.apiService.getPokemonByName(name);
-
-            if (!pokemonInfo) {
-                pokemonInfo = await this.dbService.getPokemonByName(name);
-            }
-
-            res.status(200).json(pokemonInfo);
-
-        } catch (error) {
-            console.log(error);
-            res.status(404).send("¡Pokemon no encontrado!");
+        if (!name) {
+            message = "Falta el nombre del pokemon.";
+            res.status(400).send(message);
+            return Promise.reject(message);
         }
+
+        return this.apiService.getPokemonByName(name)
+            .then(pokemonInfo => {
+                if (!pokemonInfo) {
+                    return this.dbService.getPokemonByName(name);
+                }
+                return pokemonInfo;
+            })
+            .then(pokemonInfo => {
+                res.status(200).json(pokemonInfo);
+                return Promise.resolve(pokemonInfo);
+            })
+            .catch(error => {
+                message = "¡Pokemon no encontrado!";
+                res.status(404).send(message);
+                return Promise.reject(message);
+            });
     }
 
     postPokemon = async (req, res) => {
