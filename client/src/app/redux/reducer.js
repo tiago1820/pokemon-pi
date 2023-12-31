@@ -15,6 +15,9 @@ import {
     SEARCH_UPDATE
 } from "./action-types";
 
+import { Utils } from "../../utils";
+const utils = new Utils();
+
 const initialState = {
     allPokemons: [],
     allTypes: [],
@@ -53,24 +56,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
             }
 
         case SEARCH_RESULT:
-
-            if (payload) {
-                const isDuplicate = state.searchResult.some(result => result.name === payload.name);
-
-                if (!isDuplicate) {
-                    return {
-                        ...state,
-                        searchResult: [...state.searchResult, payload]
-                    };
-                } else {
-                    window.alert('¡No puedes buscar Pokémon repetido!');
-                }
-
-                return {
-                    ...state
-                }
-
-            }
+            return utils.updateSearchResult(state, payload);
 
         case GET_ALL_POKEMONS:
             return {
@@ -106,27 +92,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
             };
 
         case ORDER:
-            let copy;
-            if (payload === 'all') {
-                return {
-                    ...state,
-                    alteredList: [...state.allPokemons],
-                };
-            } else {
-                copy = [...state.alteredList].sort((a, b) => {
-                    if (payload === 'A') {
-                        return a.name.localeCompare(b.name);
-                    } else if (payload === 'Z') {
-                        return b.name.localeCompare(a.name);
-                    } else if (payload === 'hight') {
-                        return b.attack - a.attack;
-                    } else if (payload === 'low') {
-                        return a.attack - b.attack
-                    } else {
-                        return 0;
-                    }
-                });
-            }
+            const copy = utils.sortPokemons(state.alteredList, payload);
 
             return {
                 ...state,
@@ -136,50 +102,14 @@ const rootReducer = (state = initialState, { type, payload }) => {
 
         case FILTER:
             const { type, origin, order } = payload;
-            let filteredList;
-
-            if (type && origin) {
-                filteredList = state.allPokemons.filter(pokemon =>
-                    pokemon.types && pokemon.types.includes(type) &&
-                    (origin === 'API' ? !pokemon.created : pokemon.created)
-                );
-            } else if (type) {
-                filteredList = state.allPokemons.filter(pokemon =>
-                    pokemon.types && pokemon.types.includes(type)
-                );
-            } else if (origin) {
-                filteredList = state.allPokemons.filter(pokemon =>
-                    (origin === 'API' ? !pokemon.created : pokemon.created)
-                );
-            }
-
-            // Aplicar ordenación a la lista filtrada
-            let copy2;
-            if (order === 'all') {
-                copy2 = [...state.allPokemons];
-            } else {
-                copy2 = [...filteredList].sort((a, b) => {
-                    if (order === 'A') {
-                        return a.name.localeCompare(b.name);
-                    } else if (order === 'Z') {
-                        return b.name.localeCompare(a.name);
-                    } else if (order === 'hight') {
-                        return b.attack - a.attack;
-                    } else if (order === 'low') {
-                        return a.attack - b.attack
-                    } else {
-                        return 0;
-                    }
-                });
-            }
+            const filteredList = utils.filterPokemons(state.allPokemons, { type, origin });
+            const copy2 = utils.sortPokemons(filteredList, order);
 
             return {
                 ...state,
                 alteredList: copy2,
                 requestError: copy2.length === 0 ? "La lista está vacía" : "",
             };
-
-
 
         default:
             return {
