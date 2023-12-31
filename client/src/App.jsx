@@ -35,18 +35,18 @@ export const App = () => {
     };
 
     const handleFilter = (e) => {
-        utils.handleFilterChange(e, setSelectedType, dispatch, selectedOrigin, setAux);
+        utils.handleFilterChange(e, setSelectedType, dispatch, selectedOrigin, selectedOrder, setAux);
     };
 
     const handleOrigin = (e) => {
-        utils.handleOriginChange(e, setSelectedOrigin, dispatch, selectedType, setAux);
+        utils.handleOriginChange(e, setSelectedOrigin, dispatch, selectedType, selectedOrder, setAux);
     };
 
     const clearFilters = () => {
         utils.clearAllFilters(dispatch, setSelectedOrder, setSelectedType, setSelectedOrigin, setAux);
     };
 
-    
+
     const onClose = (id) => {
         const updatedList = searchResult.filter((poke) => {
             return poke.id !== id;
