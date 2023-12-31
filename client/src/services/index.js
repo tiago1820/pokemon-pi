@@ -8,28 +8,6 @@ export class Service {
 
     dispatch = useDispatch();
 
-    async onSearch(name, pokemons, setPokemons) {
-        try {
-            if (!name.trim()) {
-                window.alert('¡Por favor, ingresa un nombre de Pokémon!');
-                return;
-            }
-
-            const { data } = await axios(`${this.IP}/pokemons/name?name=${name}`);
-            if (data.name) {
-                const isDuplicate = pokemons.some(pokemon => pokemon.name === data.name);
-                if (isDuplicate) {
-                    window.alert('¡No puedes buscar Pokémon repetido!');
-                } else {
-                    setPokemons(oldPokemons => [...oldPokemons, data]);
-                }
-            }
-           
-        } catch (error) {
-            throw error;
-        }
-    }
-
     async createPokemon(pokeData) {
         try {
             const { name, hp, attack, defense, speed, weight, height, types } = pokeData;
