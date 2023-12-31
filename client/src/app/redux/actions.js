@@ -154,10 +154,10 @@ export const orderCards = order => {
     };
 };
 
-export const filterCards = (type, origin) => {
+export const filterCards = (type, origin, order) => {
     return {
         type: FILTER,
-        payload: { type, origin },
+        payload: { type, origin, order },
     };
 };
 

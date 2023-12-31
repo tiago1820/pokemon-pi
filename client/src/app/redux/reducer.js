@@ -135,42 +135,50 @@ const rootReducer = (state = initialState, { type, payload }) => {
             }
 
         case FILTER:
-            const { type, origin } = payload;
+            const { type, origin, order } = payload;
+            let filteredList;
 
             if (type && origin) {
-                const filteredList = state.allPokemons.filter(pokemon =>
+                filteredList = state.allPokemons.filter(pokemon =>
                     pokemon.types && pokemon.types.includes(type) &&
                     (origin === 'API' ? !pokemon.created : pokemon.created)
                 );
-
-                return {
-                    ...state,
-                    alteredList: filteredList,
-                    requestError: filteredList.length === 0 ? "No hay pokemons con estas caracteristicas." : "",
-                };
-            }
-
-            if (type) {
-                const filteredList = state.allPokemons.filter(pokemon =>
+            } else if (type) {
+                filteredList = state.allPokemons.filter(pokemon =>
                     pokemon.types && pokemon.types.includes(type)
                 );
-
-                return {
-                    ...state,
-                    alteredList: filteredList,
-                };
-            }
-
-            if (origin) {
-                const filteredList = state.allPokemons.filter(pokemon =>
+            } else if (origin) {
+                filteredList = state.allPokemons.filter(pokemon =>
                     (origin === 'API' ? !pokemon.created : pokemon.created)
                 );
-
-                return {
-                    ...state,
-                    alteredList: filteredList,
-                };
             }
+
+            // Aplicar ordenación a la lista filtrada
+            let copy2;
+            if (order === 'all') {
+                copy2 = [...state.allPokemons];
+            } else {
+                copy2 = [...filteredList].sort((a, b) => {
+                    if (order === 'A') {
+                        return a.name.localeCompare(b.name);
+                    } else if (order === 'Z') {
+                        return b.name.localeCompare(a.name);
+                    } else if (order === 'hight') {
+                        return b.attack - a.attack;
+                    } else if (order === 'low') {
+                        return a.attack - b.attack
+                    } else {
+                        return 0;
+                    }
+                });
+            }
+
+            return {
+                ...state,
+                alteredList: copy2,
+                requestError: copy2.length === 0 ? "La lista está vacía" : "",
+            };
+
 
 
         default:

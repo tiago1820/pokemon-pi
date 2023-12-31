@@ -16,15 +16,15 @@ export class Utils {
         setAux(!setAux);
     }
 
-    handleFilterChange(e, setSelectedType, dispatch, selectedOrigin, setAux) {
+    handleFilterChange(e, setSelectedType, dispatch, selectedOrigin, selectedOrder, setAux) {
         setSelectedType(e.target.value);
-        dispatch(filterCards(e.target.value, selectedOrigin));
+        dispatch(filterCards(e.target.value, selectedOrigin, selectedOrder));
         setAux(!setAux);
     }
 
-    handleOriginChange(e, setSelectedOrigin, dispatch, selectedType, setAux) {
+    handleOriginChange(e, setSelectedOrigin, dispatch, selectedType, selectedOrder, setAux) {
         setSelectedOrigin(e.target.value);
-        dispatch(filterCards(selectedType, e.target.value));
+        dispatch(filterCards(selectedType, e.target.value, selectedOrder));
         setAux(!setAux);
     }
 
