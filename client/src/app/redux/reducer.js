@@ -15,7 +15,7 @@ import {
     SEARCH_UPDATE
 } from "./action-types";
 
-import { sortPokemons, filterPokemons, updateSearchResult } from "../../utils";
+import { sortPokemons, filterPokemons, updateSearchResult } from "../utils";
 
 const initialState = {
     allPokemons: [],

@@ -1,4 +1,4 @@
-import { orderCards, filterCards, cleanFilters } from "../app/redux/actions";
+import { orderCards, filterCards, cleanFilters } from "../redux/actions";
 
 export const sortPokemons = (list, order) => {
     if (order === 'all') {
