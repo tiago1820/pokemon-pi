@@ -15,8 +15,7 @@ import {
     SEARCH_UPDATE
 } from "./action-types";
 
-import { Utils } from "../../utils";
-const utils = new Utils();
+import { sortPokemons, filterPokemons, updateSearchResult } from "../utils";
 
 const initialState = {
     allPokemons: [],
@@ -56,7 +55,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
             }
 
         case SEARCH_RESULT:
-            return utils.updateSearchResult(state, payload);
+            return updateSearchResult(state, payload);
 
         case GET_ALL_POKEMONS:
             return {
@@ -92,7 +91,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
             };
 
         case ORDER:
-            const copy = utils.sortPokemons(state.alteredList, payload);
+            const copy = sortPokemons(state.alteredList, payload);
 
             return {
                 ...state,
@@ -102,8 +101,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
 
         case FILTER:
             const { type, origin, order } = payload;
-            const filteredList = utils.filterPokemons(state.allPokemons, { type, origin });
-            const copy2 = utils.sortPokemons(filteredList, order);
+            const filteredList = filterPokemons(state.allPokemons, { type, origin });
+            const copy2 = sortPokemons(filteredList, order);
 
             return {
                 ...state,

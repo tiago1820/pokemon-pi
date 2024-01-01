@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { cleanFilters, setLoading, setReload } from '../redux/actions';
 import { usePokemon } from '../../app/hooks/usePokemon';
 import validator from "../components/Edit/validator";
-import { editPokemon } from '../../services';
+import { editPokemon } from '../services';
 
 export const useEdit = () => {
     const pokemon = usePokemon();
