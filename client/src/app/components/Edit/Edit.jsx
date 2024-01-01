@@ -1,4 +1,4 @@
-import { Service } from '../../../services';
+import { editPokemon } from '../../../services';
 import EditForm from './components/EditForm/EditForm';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -10,7 +10,6 @@ import { usePokemon } from '../../hooks/usePokemon';
 import styles from './Edit.module.css';
 
 export const Edit = props => {
-    const service = new Service();
     const pokemon = usePokemon();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -102,7 +101,7 @@ export const Edit = props => {
             );
 
             if (allFieldsHaveData) {
-                service.editPokemon(pokeData);
+                editPokemon(pokeData);
                 dispatch(cleanFilters());
                 dispatch(setLoading(true));
                 dispatch(setReload(true));

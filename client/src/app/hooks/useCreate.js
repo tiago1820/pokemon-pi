@@ -2,11 +2,10 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { cleanFilters, setLoading, setReload } from '../redux/actions';
-import { Service } from '../../services';
+import { createPokemon } from '../../services';
 import { validator } from "../../../src/app/components/Create/validator";
 
 export const useCreate = () => {
-    const service = new Service();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const allTypes = useSelector(state => state.allTypes);
@@ -97,12 +96,12 @@ export const useCreate = () => {
 
             const existPokemon = allPokemons.some((pokemon) => pokemon.name === pokeData.name);
 
-            if(existPokemon) {
+            if (existPokemon) {
                 window.alert('¡Ya existe un pokemon con este nombre! Por favor, elige otro.');
             }
 
             if (allFieldsHaveData && !existPokemon) {
-                service.createPokemon(pokeData);
+                createPokemon(pokeData);
                 dispatch(cleanFilters());
                 dispatch(setLoading(true));
                 dispatch(setReload(true));
