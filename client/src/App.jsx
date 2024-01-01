@@ -1,5 +1,5 @@
-import { Utils } from './utils';
 import { useEffect, useState } from 'react';
+import { handleOrderChange, handleFilterChange, handleOriginChange, clearAllFilters } from './utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { getAllPokemons, getAllTypes, cleanApp, setReload, setLoading, searchUpdate } from './app/redux/actions';
@@ -7,43 +7,38 @@ import { AppRoutes, Loader, Nav, SearchBar, FilterSelects } from './app/componen
 import styles from './App.module.css';
 
 export const App = () => {
-    const utils = new Utils();
 
-    // local states
     const [selectedOrder, setSelectedOrder] = useState("");
     const [selectedType, setSelectedType] = useState("");
     const [selectedOrigin, setSelectedOrigin] = useState("");
-
     const [currentPage, setCurrentPage] = useState(1);
     const [aux, setAux] = useState(false);
 
-    // global states
     const alteredList = useSelector(state => state.alteredList);
     const allTypes = useSelector(state => state.allTypes);
     const loading = useSelector(state => state.loading);
     const reload = useSelector(state => state.reload);
     const searchResult = useSelector(state => state.searchResult);
 
-    // othes
     const dispatch = useDispatch();
     const location = useLocation();
     const pokemonsPerPage = 12;
     const isHomeRoute = location.pathname === '/app';
 
     const handleOrder = (e) => {
-        utils.handleOrderChange(e, dispatch, setSelectedOrder, setAux);
+        handleOrderChange(e, dispatch, setSelectedOrder, setAux);
     };
 
     const handleFilter = (e) => {
-        utils.handleFilterChange(e, setSelectedType, dispatch, selectedOrigin, selectedOrder, setAux);
+        handleFilterChange(e, setSelectedType, dispatch, selectedOrigin, selectedOrder, setAux);
     };
 
     const handleOrigin = (e) => {
-        utils.handleOriginChange(e, setSelectedOrigin, dispatch, selectedType, selectedOrder, setAux);
+        handleOriginChange(e, setSelectedOrigin, dispatch, selectedType, selectedOrder, setAux);
     };
 
     const clearFilters = () => {
-        utils.clearAllFilters(dispatch, setSelectedOrder, setSelectedType, setSelectedOrigin, setAux);
+        clearAllFilters(dispatch, setSelectedOrder, setSelectedType, setSelectedOrigin, setAux);
     };
 
 
@@ -55,7 +50,6 @@ export const App = () => {
         dispatch(searchUpdate(updatedList))
     }
 
-    // pagination
     const indexOfLastPokemon = currentPage * pokemonsPerPage;
     const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
     const currentPokemons = alteredList.slice(indexOfFirstPokemon, indexOfLastPokemon);
@@ -64,7 +58,6 @@ export const App = () => {
         setCurrentPage(pageNumber);
     }
 
-    // useEffects
     useEffect(() => {
         setSelectedOrder("");
         setSelectedOrigin("");
