@@ -69,27 +69,27 @@ The project follows a specific structure to organize its files and directories. 
 
 ```bash
 .Backend
-├── index.js
-├── package.json
-├── package-lock.json
+├── index.js                                # It starts the Express.js server
+├── package.json                            # Contains metadata about the project and lists dependencies.
 ├── src
-│   ├── app.js
+│   ├── app.js                              # It sets up the Express.js server.
 │   ├── controllers
-│   │   └── pokemonController.js
-│   ├── db.js
+│   │   └── pokemonController.js            # Communicates with the models to retrieve or manipulate data.
+│   ├── db.js                               # It establishes a connection to the database
 │   ├── models
-│   │   ├── Pokemon.js
-│   │   └── Type.js
+│   │   ├── Pokemon.js                      # Define the data models for Pokémon
+│   │   └── Type.js                         # Define the data models for Types
 │   ├── routes
-│   │   └── index.js
+│   │   └── index.js                        # Defines the routers.
 │   └── services
-│       ├── apiService.js
-│       └── dataBaseService.js
+│       ├── apiService.js                   # Contain services that interact with external APIs
+│       └── dataBaseService.js              # Contain services that interact with the database.
 └── tests
     ├── models
-    │   └── pokemon.spec.js
+    │   └── pokemonModel.test.js            # Contain unit tests for the data models 
     └── routes
-        └── pokemon.spec.js
+        └── pokemonRoutes.test.js           # Contain unit tests for the routes 
+
 
 ```
 
@@ -106,7 +106,7 @@ The project follows a specific structure to organize its files and directories. 
 └── src                                               # Source code directory
     ├── app                                           # Pokémon APP source code directory
     │   ├── components                                # React components
-    │   │   ├── Card                   
+    │   │   ├── Card
     │   │   │   ├── Card.jsx                          # Card component
     │   │   │   └── Card.module.css                   # Styles for the Card component
     │   │   ├── Cards
@@ -114,7 +114,7 @@ The project follows a specific structure to organize its files and directories. 
     │   │   │   └── Cards.module.css                  # Styles for the Cards component
     │   │   ├── Create
     │   │   │   ├── components
-    │   │   │   │   └── CreateForm      
+    │   │   │   │   └── CreateForm
     │   │   │   │       ├── CreateForm.jsx            # CreateForm component
     │   │   │   │       └── CreateForm.module.css     # Styles for the CreateForm component
     │   │   │   ├── Create.jsx                        # Create component
@@ -164,7 +164,7 @@ The project follows a specific structure to organize its files and directories. 
     │   │   ├── action-types.js                       # Actions types file
     │   │   ├── reducer.js                            # Reducers file
     │   │   └── store.js                              # Store file
-    │   ├── services                                  
+    │   ├── services
     │   │   └── index.js                              # File with functions that make requests to the backend
     │   └── utils
     │       ├── index.js                              # It contains several functions that help the components.
@@ -185,7 +185,7 @@ The project follows a specific structure to organize its files and directories. 
     │   │   │   ├── Footer.jsx                        # Footer component
     │   │   │   └── Footer.module.css                 # Styles for the Footer component
     │   │   ├── index.js
-    │   │   └── Menu                                  
+    │   │   └── Menu
     │   │       ├── Menu.jsx                          # Menu component
     │   │       └── Menu.module.css                   # Styles for the Menu component
     │   ├── Landing.jsx                               # Landing component
