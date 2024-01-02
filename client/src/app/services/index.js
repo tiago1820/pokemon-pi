@@ -2,12 +2,12 @@ import axios from "axios";
 
 const IP = process.env.REACT_APP_IP;
 
-export const createPokemon = async (pokeData) => {
-    try {
-        const { name, hp, attack, defense, speed, weight, height, types } = pokeData;
-        const URL = `${IP}/pokemons`;
+export const createPokemon = (pokeData) => {
+    const { name, hp, attack, defense, speed, weight, height, types } = pokeData;
+    const URL = `${IP}/pokemons`;
 
-        const response = await axios.post(URL, {
+    return axios
+        .post(URL, {
             name,
             hp,
             attack,
@@ -16,20 +16,21 @@ export const createPokemon = async (pokeData) => {
             weight,
             height,
             types,
+        })
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            window.alert(error.response.data);
         });
-
-        return response.data;
-    } catch (error) {
-        window.alert(error.response.data);
-    }
 };
 
-export const editPokemon = async (pokeData) => {
-    try {
-        const { id, name, hp, attack, defense, speed, weight, height, types } = pokeData;
-        const URL = `${IP}/pokemons/${id}`;
+export const editPokemon = (pokeData) => {
+    const { id, name, hp, attack, defense, speed, weight, height, types } = pokeData;
+    const URL = `${IP}/pokemons/${id}`;
 
-        const response = await axios.put(URL, {
+    return axios
+        .put(URL, {
             name,
             hp,
             attack,
@@ -38,10 +39,11 @@ export const editPokemon = async (pokeData) => {
             weight,
             height,
             types,
+        })
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            window.alert(error.response.data);
         });
-
-        return response.data;
-    } catch (error) {
-        window.alert(error.response.data);
-    }
 };
