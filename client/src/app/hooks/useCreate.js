@@ -101,7 +101,7 @@ export const useCreate = () => {
             }
 
             if (allFieldsHaveData && !existPokemon) {
-                createPokemon(pokeData);
+                createPokemon(pokeData, allPokemons);
                 dispatch(cleanFilters());
                 dispatch(setLoading(true));
                 dispatch(setReload(true));
