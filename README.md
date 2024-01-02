@@ -23,8 +23,6 @@ The Pokémon web application is complete and fully functional. Developed using N
 ![image](https://github.com/tiago1820/pokemon-pi/blob/main/client/src/images/github-images/02.png)
 ![image](https://github.com/tiago1820/pokemon-pi/blob/main/client/src/images/github-images/03.png)
 
-
-
 ## Installation
 
 To run this project locally, follow these steps:
@@ -40,8 +38,9 @@ git clone https://github.com/tiago1820/pokemon-pi.git
 ```
 
 3. In the api directory you must create a file called: .env that has the following form:
+
 ```bash
-    DB_USER=postgresuser        
+    DB_USER=postgresuser
     DB_PASSWORD=userpassword
     DB_HOST=localhost
 ```
@@ -51,11 +50,14 @@ git clone https://github.com/tiago1820/pokemon-pi.git
 4. You will need to create, from psql (shell or PGAdmin), a database called pokemon.
 
 5. Open the "api" directory in the terminal and run:
+
 ```bash
 npm install
 npm run dev
 ```
+
 6. In another terminal open the "client" directory and run:
+
 ```bash
 npm install
 npm run dev
@@ -64,6 +66,7 @@ npm run dev
 ## Project Structure
 
 The project follows a specific structure to organize its files and directories. Below is an overview of the main components:
+
 ```bash
 .Backend
 ├── index.js
@@ -88,127 +91,113 @@ The project follows a specific structure to organize its files and directories. 
     └── routes
         └── pokemon.spec.js
 
-``` 
 ```
-.Frontend
-├── package.json
-├── package-lock.json
-├── public
+
+```
+.
+├── package.json                                      # Node.js project configuration
+├── public                                            # Public directory for static files
 │   ├── favicon.ico
-│   ├── fonts
-│   │   └── Oswald-Regular.ttf
-│   ├── index.html
-│   ├── manifest.json
-│   └── robots.txt
-└── src
-    ├── app
-    │   ├── components
-    │   │   ├── Card
-    │   │   │   ├── Card.jsx
-    │   │   │   └── Card.module.css
+│   ├── fonts                                         # project sources directory
+│   │   └── Oswald-Regular.ttf                        # Oswald font
+│   ├── index.html                                    # Main HTML file
+│   ├── manifest.json                                 # Manifest.json file
+│   └── robots.txt                                    # Robots file
+└── src                                               # Source code directory
+    ├── app                                           # Pokémon APP source code directory
+    │   ├── components                                # React components
+    │   │   ├── Card                   
+    │   │   │   ├── Card.jsx                          # Card component
+    │   │   │   └── Card.module.css                   # Styles for the Card component
     │   │   ├── Cards
-    │   │   │   ├── Cards.jsx
-    │   │   │   └── Cards.module.css
+    │   │   │   ├── Cards.jsx                         # Cards component
+    │   │   │   └── Cards.module.css                  # Styles for the Cards component
     │   │   ├── Create
     │   │   │   ├── components
-    │   │   │   │   └── CreateForm
-    │   │   │   │       ├── CreateForm.jsx
-    │   │   │   │       └── CreateForm.module.css
-    │   │   │   ├── Create.jsx
-    │   │   │   ├── Create.module.css
-    │   │   │   └── validator.js
+    │   │   │   │   └── CreateForm      
+    │   │   │   │       ├── CreateForm.jsx            # CreateForm component
+    │   │   │   │       └── CreateForm.module.css     # Styles for the CreateForm component
+    │   │   │   ├── Create.jsx                        # Create component
+    │   │   │   └── Create.module.css                 # Styles for the Create component
     │   │   ├── Detail
-    │   │   │   ├── Detail.jsx
-    │   │   │   └── Detail.module.css
+    │   │   │   ├── Detail.jsx                        # Detail component
+    │   │   │   └── Detail.module.css                 # Styles for the Detail component
     │   │   ├── Edit
     │   │   │   ├── components
     │   │   │   │   └── EditForm
-    │   │   │   │       ├── EditForm.jsx
-    │   │   │   │       └── EditForm.module.css
-    │   │   │   ├── Edit.jsx
-    │   │   │   ├── Edit.module.css
-    │   │   │   └── validator.js
+    │   │   │   │       ├── EditForm.jsx              # EditForm component
+    │   │   │   │       └── EditForm.module.css       # Styles for the EditForm component
+    │   │   │   ├── Edit.jsx                          # Edit component
+    │   │   │   └── Edit.module.css                   # Styles for the Edit component
     │   │   ├── FilterSelects
-    │   │   │   ├── FilterSelects.jsx
-    │   │   │   └── FilterSelects.module.css
+    │   │   │   ├── FilterSelects.jsx                 # FilterSelects component
+    │   │   │   └── FilterSelects.module.css          # Styles for the FilterSelects component
     │   │   ├── index.js
     │   │   ├── Loader
-    │   │   │   ├── Loader.jsx
-    │   │   │   └── Loader.module.css
+    │   │   │   ├── Loader.jsx                        # Loader component
+    │   │   │   └── Loader.module.css                 # Styles for the Loader component
     │   │   ├── Nav
-    │   │   │   ├── Nav.jsx
-    │   │   │   └── Nav.module.css
+    │   │   │   ├── Nav.jsx                           # Nav component
+    │   │   │   └── Nav.module.css                    # Styles for the Nav component
     │   │   ├── Pagination
-    │   │   │   ├── Pagination.jsx
-    │   │   │   └── Pagination.module.css
+    │   │   │   ├── Pagination.jsx                    # Pagination component
+    │   │   │   └── Pagination.module.css             # Styles for the Pagination component
     │   │   ├── Routes
-    │   │   │   ├── AppRoutes.jsx
-    │   │   │   └── AppRoutes.module.css
+    │   │   │   ├── AppRoutes.jsx                     # AppRoutes component
+    │   │   │   └── AppRoutes.module.css              # Styles for the AppRoutes component
     │   │   ├── SearchBar
-    │   │   │   ├── SearchBar.jsx
-    │   │   │   └── SearchBar.module.css
+    │   │   │   ├── SearchBar.jsx                     # SearchBar component
+    │   │   │   └── SearchBar.module.css              # Styles for the SearchBar component
     │   │   └── tests
-    │   │       └── SearchBar.test.js
+    │   │       └── Nav.test.js                       # Nav component test file.
     │   ├── hooks
-    │   │   └── usePokemon.js
-    │   └── redux
-    │       ├── actions.js
-    │       ├── action-types.js
-    │       ├── reducer.js
-    │       └── store.js
-    ├── App.jsx
-    ├── App.module.css
-    ├── App.test.js
-    ├── images
-    │   ├── default-img.png
-    │   ├── github-images
-    │   │   ├── 01.png
-    │   │   ├── 02.png
-    │   │   └── 03.png
-    │   ├── icons
-    │   │   ├── delete.png
-    │   │   ├── edit.png
-    │   │   ├── garbageIcon.png
-    │   │   ├── home.png
-    │   │   ├── previous.png
-    │   │   └── searchIcon.png
-    │   ├── landing-page
-    │   │   ├── feature1.png
-    │   │   ├── feature2.png
-    │   │   ├── feature3.png
-    │   │   └── pokemon3.jpg
-    │   ├── pokeball.gif
-    │   └── pokemon-logo.png
-    ├── index.css
-    ├── index.js
-    ├── Landing
-    │   ├── components
+    │   │   ├── useApp.js                             # useApp hook
+    │   │   ├── useCards.js                           # useCards hook
+    │   │   ├── useCreate.js                          # useCreate hook
+    │   │   ├── useDetail.js                          # useDetail hook
+    │   │   ├── useEdit.js                            # useEdit hook
+    │   │   ├── usePagination.js                      # usePagination hook
+    │   │   ├── usePokemon.js                         # usePokemon hook
+    │   │   └── useSearchBar.js                       # useSearchBar hook
+    │   ├── redux
+    │   │   ├── actions.js                            # Actions file
+    │   │   ├── action-types.js                       # Actions types file
+    │   │   ├── reducer.js                            # Reducers file
+    │   │   └── store.js                              # Store file
+    │   ├── services                                  
+    │   │   └── index.js                              # File with functions that make requests to the backend
+    │   └── utils
+    │       ├── index.js                              # It contains several functions that help the components.
+    │       └── validator.util.js                     # Checks for errors in the data on the forms.
+    ├── App.jsx                                       # Brings together all the components necessary to assemble the application
+    ├── App.module.css                                # Root CSS
+    ├── index.css                                     # Body CSS
+    ├── index.js                                      # Main component
+    ├── Landing                                       # Landing page directory
+    │   ├── components                                # React components
     │   │   ├── Banner
-    │   │   │   ├── Banner.jsx
-    │   │   │   └── Banner.module.css
+    │   │   │   ├── Banner.jsx                        # Banner component
+    │   │   │   └── Banner.module.css                 # Styles for the Banner component
     │   │   ├── Feature
-    │   │   │   ├── Feature.jsx
-    │   │   │   └── Feature.module.css
+    │   │   │   ├── Feature.jsx                       # Feature component
+    │   │   │   └── Feature.module.css                # Styles for the Feature component
     │   │   ├── Footer
-    │   │   │   ├── Footer.jsx
-    │   │   │   └── Footer.module.css
+    │   │   │   ├── Footer.jsx                        # Footer component
+    │   │   │   └── Footer.module.css                 # Styles for the Footer component
     │   │   ├── index.js
-    │   │   └── Menu
-    │   │       ├── Menu.jsx
-    │   │       └── Menu.module.css
-    │   ├── Landing.jsx
-    │   └── Landing.module.css
+    │   │   └── Menu                                  
+    │   │       ├── Menu.jsx                          # Menu component
+    │   │       └── Menu.module.css                   # Styles for the Menu component
+    │   ├── Landing.jsx                               # Landing component
+    │   └── Landing.module.css                        # Styles for the Landing component
     ├── reportWebVitals.js
-    ├── services
-    │   └── index.js
-    ├── setupTests.js
-    └── utils
-        └── index.js
+    └── setupTests.js
+
 
 ```
 
 ## License
 
-This project is licensed under the MIT LICENSE - see the [LICENSE](/LICENSE) file for details. 
+This project is licensed under the MIT LICENSE - see the [LICENSE](/LICENSE) file for details.
 
- If you find this project helpful or interesting, please give it a ⭐️.
+If you find this project helpful or interesting, please give it a ⭐️.

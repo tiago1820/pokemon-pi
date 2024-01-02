@@ -10,13 +10,6 @@ export const useDetail = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const capitalizeFirstLetter = (word) => {
-        if (typeof word === 'string' && word.length > 0) {
-            return word.charAt(0).toUpperCase() + word.slice(1);
-        }
-        return '';
-    };
-
     const renderBar = (label, value) => {
         const width = (value / 100) * 100; // Rango: 0 a 100
         return (
@@ -44,7 +37,6 @@ export const useDetail = () => {
 
     return {
         pokemon,
-        capitalizeFirstLetter,
         renderBar,
         handleDelete,
         closeCard,

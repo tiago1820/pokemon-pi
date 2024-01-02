@@ -1,7 +1,7 @@
 import styles from './Card.module.css';
 import { Link } from 'react-router-dom';
 import defaultImg from '../../../images/default-img.png';
-import { capitalizeFirstLetter } from '../../helpers';
+import { capitalizeFirstLetter } from '../../utils';
 
 export const Card = props => {
     const { id, name, image, types, onClose } = props;

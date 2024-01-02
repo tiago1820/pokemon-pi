@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { cleanFilters, setLoading, setReload } from '../redux/actions';
 import { usePokemon } from '../../app/hooks/usePokemon';
-import validator from "../components/Edit/validator";
+import { validator } from "../utils/validator.util";
 import { editPokemon } from '../services';
 
 export const useEdit = () => {
