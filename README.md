@@ -93,8 +93,9 @@ The project follows a specific structure to organize its files and directories. 
 
 ```
 
-```
-.
+```bash
+
+.Frontend
 ├── package.json                                      # Node.js project configuration
 ├── public                                            # Public directory for static files
 │   ├── favicon.ico
