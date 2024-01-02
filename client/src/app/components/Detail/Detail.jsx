@@ -6,9 +6,10 @@ import editIcon from '../../../images/icons/edit.png';
 import garbageIcon from '../../../images/icons/garbageIcon.png';
 import deleteIcon from '../../../images/icons/delete.png';
 import { useDetail } from '../../hooks/useDetail';
+import { capitalizeFirstLetter } from "../../utils";
 
 export const Detail = () => {
-    const { pokemon, capitalizeFirstLetter, renderBar, handleDelete, closeCard } = useDetail();
+    const { pokemon, renderBar, handleDelete, closeCard } = useDetail();
 
     return (
         <div className={styles.container}>
