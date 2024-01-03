@@ -102,7 +102,7 @@ export const useEdit = () => {
                 editPokemon(pokeData);
                 dispatch(cleanFilters());
                 dispatch(setLoading(true));
-                dispatch(setReload(true));
+                dispatch(setReload(+1));
                 navigate('/app');
             } else {
                 window.alert(

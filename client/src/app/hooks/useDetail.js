@@ -27,7 +27,7 @@ export const useDetail = () => {
         dispatch(removePokemon(pokemon.id));
         dispatch(cleanFilters());
         dispatch(setLoading(true));
-        dispatch(setReload(true));
+        dispatch(setReload(+1));
         navigate('/app');
     };
 

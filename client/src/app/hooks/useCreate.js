@@ -104,7 +104,7 @@ export const useCreate = () => {
                 createPokemon(pokeData, allPokemons);
                 dispatch(cleanFilters());
                 dispatch(setLoading(true));
-                dispatch(setReload(true));
+                dispatch(setReload(+1));
                 navigate('/app');
             } else {
                 window.alert(

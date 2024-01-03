@@ -40,10 +40,10 @@ class PokemonController {
 
     getAllPokemons = async (req, res) => {
         try {
-            const pokemonExternos = await this.apiService.getAllPokemons(50);
+            const externalPokemons = await this.apiService.getAllPokemons(100);
             const pokemonDB = await this.dbService.getAllPokemons();
 
-            return res.json([...pokemonExternos, ...pokemonDB]);
+            return res.json([...externalPokemons, ...pokemonDB]);
         } catch (error) {
             console.error(error);
             return res.status(500).send('Internal Server Error');

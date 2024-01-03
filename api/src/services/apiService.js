@@ -47,14 +47,14 @@ class ApiService {
 
     getAllPokemons = async (limite) => {
         try {
-            const respuesta = await axios(`${this.URL_POKEMONS}/?limit=${limite}`);
-            const resultados = respuesta.data.results;
+            const response = await axios(`${this.URL_POKEMONS}/?limit=${limite}`);
+            const results = response.data.results;
 
-            const listaDePokemon = [];
+            const pokemonList = [];
 
-            for (const pokemon of resultados) {
-                const respuestaPokemon = await axios(pokemon.url);
-                const infoFromApi = respuestaPokemon.data;
+            for (const pokemon of results) {
+                const responsePokemon = await axios(pokemon.url);
+                const infoFromApi = responsePokemon.data;
 
                 const infoPokemon = {
                     id: infoFromApi.id,
@@ -69,10 +69,10 @@ class ApiService {
                     height: infoFromApi.height,
                 };
 
-                listaDePokemon.push(infoPokemon);
+                pokemonList.push(infoPokemon);
             }
 
-            return listaDePokemon;
+            return pokemonList;
         } catch (error) {
             throw error;
         }
@@ -82,7 +82,6 @@ class ApiService {
         try {
 
             if (!name) {
-                // Manejar el caso en el que no se proporciona un nombre
                 return null;
             }
             const response = await axios(`${this.URL_POKEMONS}/${name}`);
