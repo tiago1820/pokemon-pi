@@ -13,7 +13,6 @@ export const App = () => {
         alteredList,
         allTypes,
         loading,
-        reload,
         searchResult,
         isHomeRoute,
         handleOrder,

@@ -25,6 +25,7 @@ class DataBaseService {
     getAllTypes = async () => {
         try {
             const allTypes = await Type.findAll();
+            
             return allTypes;
         } catch (error) {
             throw error;
@@ -124,12 +125,14 @@ class DataBaseService {
         const { types } = req.body;
         const pokemon = await Pokemon.findByPk(id);
 
-        try {
-            await pokemon.setTypes([], { transaction: t });
-            if (!pokemon) {
-                return res.status(404).send('Pokemon not found.');
-            }
+        if (!pokemon) {
+            return res.status(404).send('Pokemon not found.');
+        }
 
+        try {
+            
+            await pokemon.setTypes([], { transaction: t });
+            
             const typeInstances = [];
             for (const typeName of types) {
                 const [type, created] = await Type.findOrCreate({

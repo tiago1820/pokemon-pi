@@ -27,6 +27,8 @@ export const useApp = () => {
     const allTypes = useSelector((state) => state.allTypes);
     const loading = useSelector((state) => state.loading);
     const reload = useSelector((state) => state.reload);
+
+    console.log("RELOAD", reload);
     const searchResult = useSelector((state) => state.searchResult);
 
     const dispatch = useDispatch();
@@ -74,7 +76,7 @@ export const useApp = () => {
             } catch (error) {
                 window.alert('Error al cargar los pokemons.');
             } finally {
-                dispatch(setReload(false));
+                // dispatch(setReload(false));
                 dispatch(setLoading(false));
             }
         };
@@ -100,7 +102,6 @@ export const useApp = () => {
         alteredList,
         allTypes,
         loading,
-        reload,
         searchResult,
         isHomeRoute,
         handleOrder,

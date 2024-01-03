@@ -23,7 +23,7 @@ const initialState = {
     pokemonDetail: [],
     alteredList: [],
     loading: true,
-    reload: false,
+    reload: -9999,
     requestError: "",
     searchResult: [],
 
@@ -38,8 +38,9 @@ const rootReducer = (state = initialState, { type, payload }) => {
             }
         case RELOAD:
             return {
-                ...state, reload: payload
-            }
+                ...state,
+                reload: state.reload + payload,
+            };
         case LOADING:
             return {
                 ...state, loading: payload
