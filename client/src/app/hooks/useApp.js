@@ -28,7 +28,6 @@ export const useApp = () => {
     const loading = useSelector((state) => state.loading);
     const reload = useSelector((state) => state.reload);
 
-    console.log("RELOAD", reload);
     const searchResult = useSelector((state) => state.searchResult);
 
     const dispatch = useDispatch();
