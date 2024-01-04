@@ -2,7 +2,7 @@ import { orderCards, filterCards, cleanFilters } from "../redux/actions";
 
 export const checkDuplicate = (name, allPokemons) => {
     const formattedName = name.toLowerCase().trim();
-    return allPokemons.some(pokemon => pokemon.name.toLowerCase().trim() === formattedName);
+    return allPokemons.some(pokemon => pokemon.name === formattedName);
 };
 
 export const capitalizeFirstLetter = (word) => {
