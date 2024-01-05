@@ -11,5 +11,6 @@ router.post('/pokemons', (req, res) => pokeController.postPokemon(req, res));
 router.put('/pokemons/:id', (req, res) => pokeController.updatePokemon(req, res));
 router.delete('/pokemons/:id', (req, res) => pokeController.removePokemonById(req, res));
 router.get('/types', (req, res) => pokeController.getAllTypes(req, res));
+router.post('/types', (req, res) => pokeController.postType(req, res));
 
 module.exports = router;

@@ -25,7 +25,7 @@ class DataBaseService {
     getAllTypes = async () => {
         try {
             const allTypes = await Type.findAll();
-            
+
             return allTypes;
         } catch (error) {
             throw error;
@@ -89,6 +89,22 @@ class DataBaseService {
         }
     }
 
+    addNewType = async (req) => {
+        try {
+            const { type } = req.body;
+
+            const newType = await Type.create({
+                name: type
+            })
+
+            console.log("NewType", newType);
+            return newType;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
+
     updatePokemon = async (req) => {
         try {
             const { id } = req.params;
@@ -130,9 +146,9 @@ class DataBaseService {
         }
 
         try {
-            
+
             await pokemon.setTypes([], { transaction: t });
-            
+
             const typeInstances = [];
             for (const typeName of types) {
                 const [type, created] = await Type.findOrCreate({
