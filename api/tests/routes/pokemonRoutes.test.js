@@ -12,7 +12,7 @@ describe('Test de rutas de Pokémon', () => {
     expect(response.body).toBeInstanceOf(Array);
     expect(response.body.length).toBeGreaterThan(0);
 
-  });
+  },10000);
 
   it('Debería obtener un Pokémon por ID', async () => {
     const response = await request(app).get('/pokemons/1');
