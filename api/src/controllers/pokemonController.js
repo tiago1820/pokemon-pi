@@ -126,6 +126,15 @@ class PokemonController {
         }
     }
 
+    postType = async (req, res) => {
+        try {
+            const newType = await this.dbService.addNewType(req);
+            return res.status(200).send("Typo creado con exito.")
+        } catch (error) {
+            return res.status(500).send("Error al crear un nuevo typo.");
+        }
+    }
+
 }
 
 module.exports = PokemonController;
