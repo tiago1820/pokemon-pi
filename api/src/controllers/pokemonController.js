@@ -91,6 +91,8 @@ class PokemonController {
         const { name } = req.query;
         let message = "";
 
+        console.log(name);
+
         if (!name) {
             message = "Falta el nombre del pokemon.";
             res.status(400).send(message);
@@ -109,6 +111,7 @@ class PokemonController {
                 return Promise.resolve(pokemonInfo);
             })
             .catch(error => {
+                console.log("Error: ", error);
                 message = "¡Pokemon no encontrado!";
                 res.status(404).send(message);
                 return Promise.reject(message);
