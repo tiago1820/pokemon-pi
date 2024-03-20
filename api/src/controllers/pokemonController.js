@@ -91,8 +91,6 @@ class PokemonController {
         const { name } = req.query;
         let message = "";
 
-        console.log(name);
-
         if (!name) {
             message = "Falta el nombre del pokemon.";
             res.status(400).send(message);
