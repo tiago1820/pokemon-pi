@@ -11,7 +11,6 @@ class PokemonController {
         try {
             const allTypes = await this.apiService.getTypesFromApi();
             const types = await this.dbService.insertTypesInDB(allTypes);
-
             return types;
         } catch (error) {
             throw error;
@@ -31,7 +30,6 @@ class PokemonController {
         try {
             await this.dbService.updatePokemon(req);
             await this.dbService.updateTypes(req);
-
             return res.status(200).send("Pokemon actualizado con exito!");
         } catch (error) {
             return res.status(500).send("Error al actualizar el pokemon.");
@@ -42,10 +40,8 @@ class PokemonController {
         try {
             const externalPokemons = await this.apiService.getAllPokemons(50);
             const pokemonDB = await this.dbService.getAllPokemons();
-
             return res.json([...externalPokemons, ...pokemonDB]);
         } catch (error) {
-            console.error(error);
             return res.status(500).send('Internal Server Error');
         }
     }
