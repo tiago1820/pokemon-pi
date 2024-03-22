@@ -1,6 +1,5 @@
 const { Router } = require('express');
 const router = Router();
-
 const PokemonController = require('../controllers/pokemonController');
 const pokeController = new PokemonController()
 
