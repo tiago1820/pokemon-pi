@@ -1,6 +1,5 @@
 const axios = require('axios');
 
-
 class ApiService {
     constructor() {
         this.URL_POKEMONS = 'https://pokeapi.co/api/v2/pokemon/';
@@ -11,9 +10,7 @@ class ApiService {
         try {
             const response = await axios(this.URL_TYPES);
             const allTypes = response.data.results;
-
             return allTypes;
-
         } catch (error) {
             throw error;
         }
@@ -23,7 +20,6 @@ class ApiService {
         try {
             const response = await axios(`${this.URL_POKEMONS}/${id}`);
             const infoFromApi = response.data;
-
             const pokemonInfo = {
                 id: infoFromApi.id,
                 name: infoFromApi.name,
@@ -36,12 +32,9 @@ class ApiService {
                 weight: infoFromApi.weight,
                 height: infoFromApi.height,
             };
-
             return pokemonInfo;
-
         } catch (error) {
             throw error;
-
         }
     }
 
@@ -49,13 +42,10 @@ class ApiService {
         try {
             const response = await axios(`${this.URL_POKEMONS}/?limit=${limite}`);
             const results = response.data.results;
-
             const pokemonList = [];
-
             for (const pokemon of results) {
                 const responsePokemon = await axios(pokemon.url);
                 const infoFromApi = responsePokemon.data;
-
                 const infoPokemon = {
                     id: infoFromApi.id,
                     name: infoFromApi.name,
@@ -68,10 +58,8 @@ class ApiService {
                     weight: infoFromApi.weight,
                     height: infoFromApi.height,
                 };
-
                 pokemonList.push(infoPokemon);
             }
-
             return pokemonList;
         } catch (error) {
             throw error;
@@ -80,15 +68,12 @@ class ApiService {
 
     getPokemonByName = async (name) => {
         try {
-
             if (!name) {
                 return null;
             }
             const response = await axios(`${this.URL_POKEMONS}/${name}`);
-
             if (response.data) {
                 const infoFromApi = response.data;
-
                 const pokemonInfo = {
                     id: infoFromApi.id,
                     name: infoFromApi.name,
@@ -101,15 +86,12 @@ class ApiService {
                     weight: infoFromApi.weight,
                     height: infoFromApi.height,
                 };
-
                 return pokemonInfo;
             }
-
         } catch (error) {
             throw error;
         }
     }
-
 }
 
 module.exports = ApiService;
