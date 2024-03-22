@@ -8,7 +8,6 @@ module.exports = (sequelize) => {
             allowNull: false,
             primaryKey: true
         },
-
         name: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -18,27 +17,22 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: true,
         },
-
         hp: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-
         attack: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-
         defense: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-
         speed: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-
         height: {
             type: DataTypes.INTEGER,
             allowNull: false
