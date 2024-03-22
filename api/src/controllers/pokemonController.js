@@ -50,7 +50,6 @@ class PokemonController {
         try {
             const { id } = req.params;
             const source = isNaN(id) ? 'bdd' : 'api';
-
             if (source === 'api') {
                 const pokemonInfo = await this.apiService.getPokemonById(id);
                 res.status(200).json(pokemonInfo);
@@ -58,7 +57,6 @@ class PokemonController {
                 const pokemonInfo = await this.dbService.getPokemonById(id);
                 res.status(200).json(pokemonInfo);
             }
-
         } catch (error) {
             res.status(404).send("¡Pokemon no encontrado!");
         }
@@ -68,13 +66,10 @@ class PokemonController {
         try {
             const { id } = req.params;
             const pokemonToDelete = await this.dbService.getPokemonById(id);
-
             if (!pokemonToDelete) {
                 return res.status(404).send('Pokemon no encontrado.');
             }
-
             const deletionResult = await this.dbService.deletePokemonById(id);
-
             if (deletionResult) {
                 return res.status(200).send('Pokemon elimindado con exito.');
             }
@@ -86,13 +81,11 @@ class PokemonController {
     getPokemonByName(req, res) {
         const { name } = req.query;
         let message = "";
-
         if (!name) {
             message = "Falta el nombre del pokemon.";
             res.status(400).send(message);
             return Promise.reject(message);
         }
-
         return this.apiService.getPokemonByName(name)
             .then(pokemonInfo => {
                 if (!pokemonInfo) {
@@ -117,7 +110,6 @@ class PokemonController {
             const newPokemon = await this.dbService.postPokemon(req);
             await this.dbService.postType(req, newPokemon);
             return res.status(200).send("Pokemon creado con exito.");
-
         } catch (error) {
             return res.status(500).send("Error al crear pokemon.");
         }
@@ -131,7 +123,6 @@ class PokemonController {
             return res.status(500).send("Error al crear un nuevo typo.");
         }
     }
-
 }
 
 module.exports = PokemonController;
