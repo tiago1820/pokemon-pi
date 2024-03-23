@@ -6,11 +6,9 @@ export const useCards = () => {
     const showPagination = searchResult.length === 0;
     const requestError = useSelector((state) => state.requestError);
     const dispatch = useDispatch();
-
     const handleRequestError = () => {
         dispatch(setRequestError(''));
     };
-
     return {
         searchResult,
         showPagination,
