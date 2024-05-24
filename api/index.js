@@ -23,7 +23,7 @@ const PokemonController = require('./src/controllers/pokemonController.js');
 const pokeController = new PokemonController();
 
 // Syncing all the models at once.
-conn.sync({ force: false }).then(() => {
+conn.sync({ alter: false }).then(() => {
   server.listen(3001, () => {
     pokeController.loadTypesInTable();
     console.log('%s listening at 3001'); // eslint-disable-line no-console
